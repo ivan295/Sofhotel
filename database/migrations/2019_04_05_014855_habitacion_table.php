@@ -21,8 +21,8 @@ class HabitacionTable extends Migration
             $table->time('tiempo_limpieza');
             $table->string('ip_arduino',50);
 
-            //$table->integer('id_estado')->unsigned()->index();
-            //$table->foreign('id_estado')->references('id')->on('estado_habitacion');
+            $table->integer('id_estado')->unsigned()->index();
+            $table->foreign('id_estado')->references('id')->on('estado_habitacion');
         });
     }
 

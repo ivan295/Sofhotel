@@ -14,10 +14,12 @@ class UsuarioTable extends Migration
     public function up()
     {
         Schema::create('usuario', function (Blueprint $table){
-            $table->increments('id');
-            $table->string('nombres',100);
-            $table->string('apellidos',100);
+            $table->bigIncrements('id');
+            $table->string('nombre',100);
+            $table->string('apellido',100);
             $table->string('cedula',10)->unique();
+            $table->string('usuario',100);
+            $table->string('password',100);
             $table->string('direccion',100);
             $table->string('telefono',10);
 

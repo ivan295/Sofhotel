@@ -23,7 +23,7 @@ class FacturaCompraTable extends Migration
             $table->integer('id_proveedor')->unsigned()->index();
             $table->foreign('id_proveedor')->references('id')->on('proveedor');
 
-            $table->integer('id_usuario')->unsigned()->index();
+            $table->bigInteger('id_usuario')->unsigned()->index();
             $table->foreign('id_usuario')->references('id')->on('usuario');
 
         });

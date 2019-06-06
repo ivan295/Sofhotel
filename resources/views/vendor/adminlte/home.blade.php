@@ -4,16 +4,26 @@
 {{ trans('adminlte_lang::message.home') }}
 @endsection
 
-
 @section('main-content')
-
+<?php $estado = DB::table('estado_habitacion')->get(); ?>
+@foreach($estado as $estado)
+<?php
+if ($estado->estado == 1) {
+        $color = "bg-blue";
+} elseif ($estado->estado == 2) {
+    $color = "bg-red";
+} else {
+    $color = "bg-aqua";
+}
+?>
+@endforeach
 <div class="container-fluid spark-screen">
-	<div class="row">
+		<div class="row">
+		@foreach($NuevaH as $NuevaH)
 		<div class="col-md-3 col-md-offset-0">
-			<div class="small-box bg-aqua">
+			<div class="small-box <?php echo($color)?>">
 				<div class="inner">
-					
-					<h3>#</h3>
+					<h3># {{$NuevaH->numero_habitacion}}</h3>
 					<p>Fecha:</p>
 					<p>Hora de ingreso:</p>
 					<p>Hora de salida:</p>
@@ -37,20 +47,22 @@
 							</div>
 						</div>
 					</div>
-					<!-- {{-- cuadro de dialogo al dar click en SI --}} -->	
-
+					
+					</div>
+					<!--barra de carga-->	
 					<div class="contenedor ">
 						<progress value=0 max=100 id="barra" class="barraStyle" style="width:100%" ></progress>
 						{{-- <input type="button" value="cargar" id="cargar" onclick="setInterval('cargar()',1800)"/>  --}}
 					</div>
-					
-				</div>
 				<div class="icon">
               <i class="fa fa-hotel"></i>
             </div>
+           
 			</div>
-
+ 				
 		</div>
+		@endforeach
 	</div>
 </div>
+
 @endsection

@@ -10,12 +10,12 @@
     <div id="app">
         <div class="register-box">
             <div class="register-logo">
-                <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
+                <a href="{{ url('/home') }}">HOTEL</a>
             </div>
 
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
-                    <strong>Whoops!</strong> {{ trans('adminlte_lang::message.someproblems') }}<br><br>
+                    <strong>Whoops!</strong> Existen algunos problemas con tu registro<br><br>
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -25,23 +25,23 @@
             @endif
 
             <div class="register-box-body">
-                <p class="login-box-msg">{{ trans('adminlte_lang::message.registermember') }}</p>
+                <p class="login-box-msg">Registro de nuevo usuario</p>
                 <form action="{{ url('/register') }}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="{{ trans('adminlte_lang::message.fullname') }}" name="name" value="{{ old('name') }}"/>
+                        <input type="text" class="form-control" placeholder="Nombre" name="name" value="{{ old('name') }}"required/>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="email" class="form-control" placeholder="{{ trans('adminlte_lang::message.email') }}" name="email" value="{{ old('email') }}"/>
+                        <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}"required/>
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="{{ trans('adminlte_lang::message.password') }}" name="password"/>
+                        <input type="password" class="form-control" placeholder="Contraseña" name="password"required/>
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="{{ trans('adminlte_lang::message.retrypepassword') }}" name="password_confirmation"/>
+                        <input type="password" class="form-control" placeholder="Confirmar Contraseña" name="password_confirmation"required/>
                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                     </div>
                     <div class="row">
@@ -56,18 +56,18 @@
                         </div><!-- /.col -->
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <button type="button" class="btn btn-block btn-flat" data-toggle="modal" data-target="#termsModal">{{ trans('adminlte_lang::message.terms') }}</button>
+                                <button type="button" class="btn btn-block btn-flat" data-toggle="modal" data-target="#termsModal">Aceptar Términos</button>
                             </div>
                         </div><!-- /.col -->
                         <div class="col-xs-4 col-xs-push-1">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">{{ trans('adminlte_lang::message.register') }}</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Registrar</button>
                         </div><!-- /.col -->
                     </div>
                 </form>
 
                 @include('adminlte::auth.partials.social_login')
 
-                <a href="{{ url('/login') }}" class="text-center">{{ trans('adminlte_lang::message.membreship') }}</a>
+                <!-- <a href="{{ url('/login') }}" class="text-center">{{ trans('adminlte_lang::message.membreship') }}</a> -->
             </div><!-- /.form-box -->
         </div><!-- /.register-box -->
     </div>

@@ -21,7 +21,7 @@ class CajaTable extends Migration
             $table->float('saldo_inicial');
             $table->float('saldo_final');
 
-            $table->integer('id_usuario')->unsigned()->index();
+            $table->bigInteger('id_usuario')->unsigned()->index();
             $table->foreign('id_usuario')->references('id')->on('usuario');
 
         });

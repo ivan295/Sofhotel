@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Estado_habitacion;
 use Illuminate\Http\Request;
+use App\Estado_habitacion;
 class estadoHabitacionController extends Controller
 {
     /**
@@ -22,9 +23,8 @@ class estadoHabitacionController extends Controller
      */
     public function index()
     {	
-        $Estado= new Estado_habitacion;
-        $Estado->descripcion = $request->input('estado_habitacion');
-        $Estado->save();
+         $estadoH = \DB::table('estado_habitacion')->get();
+        return view('adminlte::home', compact('estadoH'));
         
 
     }

@@ -34,8 +34,11 @@
             <li class="header">OPCIONES</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='glyphicon glyphicon-home'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
-            <li><a href="#"><i class='glyphicon glyphicon-wrench'></i> <span>opcion</span></a></li>
+            <li><a href="#"><i class='glyphicon glyphicon-asterisk'></i> <span>opcion</span></a></li>
             <li><a href="{{ url('/Habitacion') }}"><i class='glyphicon glyphicon-wrench'></i> <span>crear habitacion</span></a></li>
+            <li><a href="{{ url('/gastos') }}"><i class='glyphicon glyphicon-usd'></i> <span>Gastos</span></a></li>
+            <li><a href="{{ url('/tipouser') }}"><i class='fa fa-users'></i> <span>Tipo de Usuario</span></a></li>
+            <li><a href="{{ url('/nuevouser') }}"><i class='fa fa-user-plus'></i> <span>Crear Usuario</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">

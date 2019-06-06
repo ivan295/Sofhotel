@@ -21,7 +21,7 @@ class AlquilerTable extends Migration
             $table->time('tiempo_alquiler');
             $table->integer('numero de personas');
 
-            $table->integer('id_usuario')->unsigned()->index();
+            $table->bigInteger('id_usuario')->unsigned()->index();
             $table->foreign('id_usuario')->references('id')->on('usuario');
 
             $table->integer('id_habitacion')->unsigned()->index();

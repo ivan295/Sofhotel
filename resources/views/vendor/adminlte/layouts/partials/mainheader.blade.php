@@ -6,14 +6,14 @@
         HOTEL
     </a>
     <?php
-   date_default_timezone_set('America/Guayaquil');
+    date_default_timezone_set('America/Guayaquil');
 
-   ?>
+    ?>
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
         <!-- Sidebar toggle button-->
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">{{ trans('adminlte_lang::message.togglenav') }}</span>
+            <span class="sr-only"></span>
         </a>
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
@@ -21,113 +21,78 @@
                 <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown messages-menu">
                     <!-- Menu toggle button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-envelope-o"></i>
-                        <span class="label label-success">4</span>
-                    </a>
                     <!-- inner menu: contains the messages -->
                     <ul class="dropdown-menu">
 
 
-                            <ul class="menu">
-                                <li><!-- start message -->
-                                    <a href="#">
-                                        <div class="pull-left">
-                                            <!-- User Image -->
-                                            <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image"/>
-                                        </div>
-                                        <!-- Message title and timestamp -->
-                                        <h4>
+                        <ul class="menu">
+                            <li><!-- start message -->
+                                <a href="#">
+                                    <div class="pull-left">
+                                        <!-- User Image -->
+                                        <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image"/>
+                                    </div>
+                                    <!-- Message title and timestamp -->
 
-                                        </h4>
-                                        <!-- The message -->
-                                    </a>
-                                </li><!-- end message -->
-                            </ul>
-                        </li><!-- /.menu -->
-                        <li class="footer"><a href="#">c</a></li>
-                    </ul>
-                </li><!-- /.messages-menu -->
+                                    <!-- The message -->
+                                </a>
+                            </li><!-- end message -->
+                        </ul>
+                    </li><!-- /.menu -->
 
-                <!-- Notifications Menu -->
-                <li class="dropdown notifications-menu">
-                    <!-- Menu toggle button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">10</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">{{ trans('adminlte_lang::message.notifications') }}</li>
-                        <li>
-                            <!-- Inner Menu: contains the notifications -->
-                            <ul class="menu">
-                                <li><!-- start notification -->
-                                    <a href="#">
-                                        <i class="fa fa-users text-aqua"></i> {{ trans('adminlte_lang::message.newmembers') }}
-                                    </a>
-                                </li><!-- end notification -->
-                            </ul>
-                        </li>
-                        <li class="footer"><a href="#">{{ trans('adminlte_lang::message.viewall') }}</a></li>
-                    </ul>
-                </li>
-                <!-- Tasks Menu -->
-                <li class="dropdown tasks-menu">
-                    <!-- Menu Toggle Button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-flag-o"></i>
-                        <span class="label label-danger">9</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">{{ trans('adminlte_lang::message.tasks') }}</li>
-                        <li>
-                            <!-- Inner menu: contains the tasks -->
-                            <ul class="menu">
-                                <li><!-- Task item -->
-                                    <a href="#">
-                                        <!-- Task title and progress text -->
-                                        <h3>
-                                            {{ trans('adminlte_lang::message.tasks') }}
-                                            <small class="pull-right">20%</small>
-                                        </h3>
-                                        <!-- The progress bar -->
-                                        <div class="progress xs">
-                                            <!-- Change the css width attribute to simulate progress -->
-                                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">20% {{ trans('adminlte_lang::message.complete') }}</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li><!-- end task item -->
-                            </ul>
-                        </li>
-                        <li class="footer">
-                            <a href="#">{{ trans('adminlte_lang::message.alltasks') }}</a>
-                        </li>
-                    </ul>
-                </li>
-                @if (Auth::guest())
-                    <li><a href="{{ url('/register') }}">{{ trans('adminlte_lang::message.register') }}</a></li>
-                    <li><a href="{{ url('/login') }}">{{ trans('adminlte_lang::message.login') }}</a></li>
-                @else
-                    <!-- User Account Menu -->
-                    <li class="dropdown user user-menu">
-                        <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <!-- The user image in the navbar-->
-                            <img src="{{ Gravatar::get($user->email) }}" class="user-image" alt="User Image"/>
-                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">{{ Auth::user()->name }}</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- The user image in the menu -->
-                            <li class="user-header">
-                                <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image" />
-                                <p>
-                                    {{ Auth::user()->name }}
-                                    <small>{{ trans('adminlte_lang::message.login') }} <?=date(' d/m/Y  g:i a ')?></small>
-                                </p>
-                            </li>
+                </ul>
+            </li><!-- /.messages-menu -->
+
+            <!-- Notifications Menu -->
+            <li class="dropdown notifications-menu">
+                <!-- Menu toggle button -->
+            </li>
+            <!-- Tasks Menu -->
+            <li class="dropdown tasks-menu">
+                <!-- Menu Toggle Button -->
+
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <!-- Inner menu: contains the tasks -->
+                        <ul class="menu">
+                            <li><!-- Task item -->
+                                <a href="#">
+                                    <!-- Task title and progress text -->
+                                    <h3>
+
+                                    </h3>
+                                    <!-- The progress bar -->
+
+                                </a>
+                            </li><!-- end task item -->
+                        </ul>
+                    </li>
+
+                </ul>
+            </li>
+            @if (Auth::guest())
+            <li><a href="{{ url('/register') }}">{{ trans('adminlte_lang::message.register') }}</a></li>
+            <li><a href="{{ url('/login') }}">{{ trans('adminlte_lang::message.login') }}</a></li>
+            @else
+            <!-- User Account Menu -->
+            <li class="dropdown user user-menu">
+                <!-- Menu Toggle Button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <!-- The user image in the navbar-->
+                    <img src="{{ Gravatar::get($user->email) }}" class="user-image" alt="User Image"/>
+                    <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                    <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- The user image in the menu -->
+                    <li class="user-header">
+                        <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image" />
+                        <p>
+                            {{ Auth::user()->name }}
+                            <small><?=date(' d/m/Y  g:i a ')?></small>
+                        </p>
+                    </li>
                             <!-- Menu Body
                             <li class="user-body">
                                 <div class="col-xs-4 text-center">
@@ -140,7 +105,7 @@
                                     <a href="#">{{ trans('adminlte_lang::message.friends') }}</a>
                                 </div>
                             </li>
-                             Menu Footer-->
+                            Menu Footer-->
                             <li class="user-footer">
                               <!--
                                 <div class="pull-left">
@@ -148,26 +113,24 @@
                                 </div>-->
                                 <div class="pull-right">
                                     <a href="{{ url('/logout') }}" class="btn btn-default btn-flat"
-                                       onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        {{ trans('adminlte_lang::message.signout') }}
-                                    </a>
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    Cerrar Sesión
+                                </a>
 
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                        <input type="submit" value="logout" style="display: none;">
-                                    </form>
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                    <input type="submit" value="logout" style="display: none;">
+                                </form>
 
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
                 @endif
 
                 <!-- Control Sidebar Toggle Button -->
-                <li>
-                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                </li>
+
             </ul>
         </div>
     </nav>

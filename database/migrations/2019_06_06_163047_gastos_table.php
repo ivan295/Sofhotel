@@ -13,17 +13,15 @@ class GastosTable extends Migration
      */
     public function up()
     {
-         Schema::create('gastos', function (Blueprint $table){
-            $table->increments('id');
+        Schema::create('gastos', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
             $table->string('descripcion',100);
             $table->float('gasto_total');
             $table->time('hora_gasto');
             $table->datetime('fecha_gasto');
-            
-            $table->integer('id_usuario')->unsigned()->index();
-            $table->foreign('id_usuario')->references('id')->on('usuario');
-
-
+           $table->bigInteger('id_usuario')->unsigned();
+           $table->foreign('id_usuario')->references('id')->on('usuario');
         });
     }
 

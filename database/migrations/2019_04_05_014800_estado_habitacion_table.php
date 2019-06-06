@@ -15,7 +15,7 @@ class EstadoHabitacionTable extends Migration
     {
         Schema::create('estado_habitacion', function (Blueprint $table){
             $table->increments('id');
-            $table->boolean('descripcion');
+            $table->integer('estado');
         });
     }
 

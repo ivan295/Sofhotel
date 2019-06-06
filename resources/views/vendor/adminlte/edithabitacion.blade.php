@@ -39,6 +39,7 @@
         </div>
         <div class="box-footer">
           <button type="submit" class="btn btn-success">Modificar</button>
+          <button type="submit" class="btn btn-danger" onclick="vendor/adminlte/nuevahabitacion.php">Salir</button>
         </div>
       </form>
     </div>

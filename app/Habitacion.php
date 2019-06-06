@@ -8,5 +8,5 @@ class Habitacion extends Model
 {
 	public $timestamps = false;
     protected $table = 'habitacion';
-  protected $fillable = ['numero_habitacion', 'tipo_habitacion', 'precio', 'tiempo_limpieza','ip_arduino'];
+  protected $fillable = ['numero_habitacion', 'tipo_habitacion', 'precio', 'tiempo_limpieza','ip_arduino','id_estado'];
 }

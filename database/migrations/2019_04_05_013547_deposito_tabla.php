@@ -19,7 +19,7 @@ class DepositoTabla extends Migration
             $table->float('total_deposito');
             $table->datetime('fecha_deposito');
 
-            $table->integer('id_Usuario')->unsigned()->index();
+            $table->bigInteger('id_Usuario')->unsigned()->index();
             $table->foreign('id_Usuario')->references('id')->on('usuario');
 
             $table->integer('id_Cuenta')->unsigned()->index();

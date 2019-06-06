@@ -46,9 +46,9 @@
              <!-- remember me-->
                 {{-- <div class="col-xs-8">
                     <div class="checkbox icheck">
-                        <label>
+                        <!-- <label>
                             <input type="checkbox" name="remember"> {{ trans('adminlte_lang::message.remember') }}
-                        </label>
+                        </label> -->
                     </div>
                 </div> --}}
 
