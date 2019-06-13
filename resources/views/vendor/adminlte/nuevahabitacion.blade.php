@@ -12,7 +12,7 @@
       <div class="box-header with-border">
         <h3 class="box-title">Crear Habitaciones</h3>
       </div>
-      <form method="post"  action="{{route('habitacion.create')}}" target="request">
+    <form method="post"  action="{{route('habitacion.create')}}" target="request">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="box-body">
           <label for="numerohabitacion">Número de Habitación</label>
@@ -44,11 +44,7 @@
               </div>
             </div>
           </div>
-          <label for="iparduino">Dirección IP de placa Arduino</label>
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa fa-laptop "></i></span>
-            <input type="text" class="form-control" name="ip_arduino" id="ip_arduino" placeholder="IP de placa Arduino" required>
-          </div>
+          <input type="hidden" name="estado" value="3">
         </div>
         <div class="box-footer">
           <button type="submit"class="btn btn-success">Crear</button>
@@ -64,7 +60,6 @@
       <i class="fa fa-picture-o"></i>
       <h3 class="box-title" align="text-center">Mapa de Habitaciones</h3>
       <div class="box-tools pull-right">
-        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
       </div>
     </div>
     <!-- recuadro de habitacion -->

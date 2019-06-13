@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<script src="{{asset('js/app.js')}}" defer></script>
 <body class="hold-transition login-page">
     <div id="app">
         <div class="login-box">
@@ -28,7 +29,11 @@
         <form action="{{ url('/login') }}" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="{{ trans('adminlte_lang::message.email') }}" name="email"/>
+                <input id="txtemail" type="hidden" class="form-control" placeholder="{{ trans('adminlte_lang::message.email') }}" name="email" / >
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input onkeyup="llenar()" id="txtusuario" type="text" class="form-control" placeholder="Usuario" name="usuario"/>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
@@ -75,3 +80,16 @@
 </body>
 
 @endsection
+
+<script>
+    
+    $("#txtusuario").keyup(function(){
+        $("#txtemail").val($("#txtusuario").val());
+    });
+
+    function llenar(){
+        //alert("ffgfg");
+        $("#txtemail").val($("#txtusuario").val()+'@sistema.com');
+    }
+
+</script>

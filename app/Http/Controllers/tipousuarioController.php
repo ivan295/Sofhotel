@@ -9,7 +9,9 @@ class tipousuarioController extends Controller
 {
 	public function index()
     {
-        $Nuevotipouser = DB::table('tipousuario')->get();
+        $Nuevotipouser = DB::table('tipousuario')
+        ->orderBy('id', 'desc')
+        ->paginate(10);
         return view('vendor.adminlte.tipousuario',compact('Nuevotipouser'));
     }
 

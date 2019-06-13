@@ -25,31 +25,14 @@
             <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
             <input type="text" class="form-control" name="gasto_total" id="gasto_total" placeholder="Total a Pagar">
           </div>
-          <br>
-          <label for="preciohabitacion">Hora de Pago</label>
-          <div class="input-group">
-           <div class="input-group-addon">
-            <i class="fa fa-clock-o"></i>
-          </div>
-          <input type="text" class="form-control timepicker" name="hora_gasto" id="hora_gasto" placeholder="Hora de Pago">                 
-        </div>
-        <br>
-        <label for="fechagasto">Fecha de Pago</label>
-        <div class="input-group date">
-          <div class="input-group-addon">
-            <i class="fa fa-calendar"></i>
-          </div>
-          <input type="text" class="form-control datepicker" name="fecha_gasto" id="fecha_gasto" placeholder="Fecha de Pago">
-        </div>
       </div>
       <div class="input-group">
-            <input type="hidden" class="form-control" name="usuario" id="usuario" value="{{Auth::user()->name}}">
+            <input type="hidden" class="form-control" name="id_usuario" id="id_usuario" value="{{Auth::user()->id}}">
           </div>
       <div class="box-footer">
         <button type="submit"class="btn btn-success">Registrar Pago</button>
       </div>
     </form>
-
   </div>
 </div>
 </div>
@@ -69,32 +52,30 @@
         <th class='text-center'>#</th>
         <th class='text-center'>Descripcion</th>
         <th class='text-center'>Total de Pago</th>
-        <th class="text-center">Hora del pago</th>
-        <th class="text-center">Fecha del Pago</th>
+        <th class="text-center">Fecha y hora del Pago</th>
         <th class="text-center">Usuario</th>
         <th class="text-center">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr></tr>
-      @foreach($NuevoGasto as $NuevoGasto)
+      @foreach($NuevoGasto as $Nuevogasto)
       <tr class='text-center'>
-        <td>{{$NuevoGasto->id}}</td>
-        <td>{{$NuevoGasto->descripcion}}</td>
-        <td>$ {{$NuevoGasto->gasto_total}}</td>
-        <td>{{$NuevoGasto->hora_gasto}}</td>
-        <td>{{$NuevoGasto->fecha_gasto}}</td>
-        <td>{{$NuevoGasto->id_usuario}}</td>
+        <td>{{$Nuevogasto->id}}</td>
+        <td>{{$Nuevogasto->descripcion}}</td>
+        <td>$ {{$Nuevogasto->gasto_total}}</td>
+        <td>{{$Nuevogasto->created_at}}</td>
+        <td>{{$Nuevogasto->name}}</td>
         <td class="text-center">
           <div class="row">
             <div class="col-md-3 col-md-offset-2">
-             <form action="{{route ('gastos.editar', $NuevoGasto->id)}}" method="post">
+             <form action="{{route ('gastos.editar', $Nuevogasto->id)}}" method="post">
               {{csrf_field()}}
 
               <button type="submit" class="btn btn-warning btn-xs">Editar</button></form>
             </div>
             <div class="col-md-6 text-left">
-              <form action="{{route('gastos.delete', $NuevoGasto->id)}}" method="post">
+              <form action="{{route('gastos.delete', $Nuevogasto->id)}}" method="post">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-danger btn-xs">Borrar</button>
@@ -107,9 +88,7 @@
     @endforeach
   </tbody>
 </table>
-
-
-
+{{ $NuevoGasto->links() }}
 </div>
 </div>
 

@@ -78,8 +78,8 @@
           <div class="form-group">
             <label>Tipo de Usuario</label>
             <select class="form-control" name="idtipouser" id="consulta_tipo" onchange="consultar()">                    
-              <option value="0"><?php echo $Nuevousuario->tipousuario; ?></option>
-              <?php $tipousuario = DB::table('tipousuario')->get(); ?>
+              <option value="0"></option>
+              <?php $tipousuario = DB::table('tipousuario')->get();?>
               @foreach($tipousuario as $tipouser)
               <option value="<?php  echo $tipouser->id ; ?>"> <?php echo $tipouser->descripcion; ?>  </option>
               @endforeach

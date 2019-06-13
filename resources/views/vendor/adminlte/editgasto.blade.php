@@ -4,7 +4,6 @@
 {{ trans('adminlte_lang::message.home') }}
 @endsection
 
-
 @section('main-content')
 <!-- box con input para registrar gasto -->
 <div class="row">
@@ -29,25 +28,8 @@
             <input type="text" class="form-control" name="gasto_total" id="gasto_total" value="<?php echo $gasto->gasto_total; ?>">
           </div>
           <br>
-          <label for="preciohabitacion">Hora de Pago</label>
-          <div class="input-group">
-           <div class="input-group-addon">
-            <i class="fa fa-clock-o"></i>
-          </div>
-          <input type="text" class="form-control timepicker" name="hora_gasto" id="hora_gasto" value="<?php echo $gasto->hora_gasto; ?>">                 
-        </div>
-        <br>
-          <label for="fechagasto">Fecha de Pago</label>
-          <div class="input-group date">
-            <div class="input-group-addon">
-              <i class="fa fa-calendar"></i>
-            </div>
-            <input type="text" class="form-control datepicker" name="fecha_gasto" id="fecha_gasto" value="<?php echo $gasto->fecha_gasto; ?>">
-          </div>
-        </div>
-        <div class="box-footer" >
-        <button type="submit"class="btn btn-success">Editar Pago</button>
-        <button type="submit" class="btn btn-danger" onclick="vendor/adminlte/nuevousuario.php">Salir</button>
+          <div class="box-footer">
+          <button type="submit"class="btn btn-success">Modificar</button>
         </div>
       </form>
       

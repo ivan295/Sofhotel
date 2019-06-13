@@ -15,11 +15,10 @@ class HabitacionTable extends Migration
     {
         Schema::create('habitacion', function (Blueprint $table){
             $table->increments('id');
-            $table->integer('numero_habitacion');
+            $table->integer('numero_habitacion')->unique();
             $table->string('tipo_habitacion', 100);
             $table->float('precio');
             $table->time('tiempo_limpieza');
-            $table->string('ip_arduino',50);
 
             $table->integer('id_estado')->unsigned()->index();
             $table->foreign('id_estado')->references('id')->on('estado_habitacion');

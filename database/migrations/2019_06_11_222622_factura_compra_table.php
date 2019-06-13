@@ -13,18 +13,17 @@ class FacturaCompraTable extends Migration
      */
     public function up()
     {
-        Schema::create('factura_compra', function (Blueprint $table){
-            $table->increments('id');
+        Schema::create('factura_compra', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
             $table->string('descripcion',100);
             $table->float('total_pagar');
-            $table->datetime('fecha_compra');
-            $table->time('hora_compra');
 
             $table->integer('id_proveedor')->unsigned()->index();
             $table->foreign('id_proveedor')->references('id')->on('proveedor');
 
             $table->bigInteger('id_usuario')->unsigned()->index();
-            $table->foreign('id_usuario')->references('id')->on('usuario');
+            $table->foreign('id_usuario')->references('id')->on('users');
 
         });
     }

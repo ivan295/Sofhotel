@@ -33,7 +33,7 @@
           <label for="apellido">Apellido</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Tipo de Habitación" >
+            <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" >
           </div>
           </div>
           <div class="col-md-6">
@@ -128,7 +128,7 @@
         <td>{{$Nuevousuario->usuario}}</td>
         <td>{{$Nuevousuario->direccion}}</td>
         <td>{{$Nuevousuario->telefono}}</td>
-        <td>{{$Nuevousuario->TipoUser}}</td>
+        <td>{{$Nuevousuario->tipousuario->descripcion}}</td>
         <td class="text-center">
           <div class="row">
           </div>

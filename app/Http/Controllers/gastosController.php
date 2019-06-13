@@ -16,9 +16,10 @@ class gastosController extends Controller
      public function index()
      {
      	$NuevoGasto = DB::table('gastos')
-        //->join('usuario','usuario.id','=','gastos.id_usuario')
-        //->select('gastos.*','usuario.nombre as user')
-        ->get();
+        ->join('users','users.id','=','gastos.id_usuario')
+        ->select('gastos.*','users.nombre as name')
+        ->orderBy('id', 'desc')
+        ->paginate(10);
         return view('vendor.adminlte.gastos', compact('NuevoGasto'));
 
      }
@@ -29,9 +30,7 @@ class gastosController extends Controller
      	$NuevoGasto                    = new Gastos;
      	$NuevoGasto->descripcion = $request->descripcion;
      	$NuevoGasto->gasto_total = $request->gasto_total;
-     	$NuevoGasto->hora_gasto  = $request->hora_gasto;
-     	$NuevoGasto->fecha_gasto = $request->fecha_gasto;
-        $NuevoGasto->id_usuario = $request->usuario;
+        $NuevoGasto->id_usuario = $request->id_usuario;
      	$NuevoGasto->save();
      	return redirect('/gastos');
      }
@@ -61,8 +60,6 @@ class gastosController extends Controller
         $NuevoGasto = Gastos::find($id);
         $NuevoGasto->descripcion = $request->descripcion;
      	$NuevoGasto->gasto_total = $request->gasto_total;
-     	$NuevoGasto->hora_gasto  = $request->hora_gasto;
-     	$NuevoGasto->fecha_gasto = $request->fecha_gasto;
         $NuevoGasto->save();
         return redirect('/gastos');
     }

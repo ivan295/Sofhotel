@@ -5,26 +5,37 @@
 @endsection
 
 @section('main-content')
-<?php $estado = DB::table('estado_habitacion')->get(); ?>
-@foreach($estado as $estado)
-<?php
-if ($estado->estado == 1) {
-        $color = "bg-blue";
-} elseif ($estado->estado == 2) {
-    $color = "bg-red";
-} else {
-    $color = "bg-aqua";
-}
-?>
-@endforeach
-<div class="container-fluid spark-screen">
-		<div class="row">
+
+<script type="text/javascript">
+    $(document).on('ready', function(){
+           setTimeout(refrescarvista, 5000); //Se llamará cada 5 segundos y se refrescarán los datos de dicha tabla que se cargan mediante la función LOAD de JQuery.
+    });
+
+    function refrescarvista(){
+        $('#row').load('home.php', function(){
+               //Realizar las funciones pertinentes
+        });
+    }
+</script>
+
+
+<div class="container-fluid spark-screen" id="contenido">
+	<div class="row">
 		@foreach($NuevaH as $NuevaH)
+		<?php
+		if ($NuevaH->id_estado == 4) {
+			$color = "bg-blue";
+		} elseif ($NuevaH->id_estado == 3) {
+			$color = "bg-red";
+		} else {
+			$color = "bg-aqua";
+		}
+		?>
 		<div class="col-md-3 col-md-offset-0">
 			<div class="small-box <?php echo($color)?>">
 				<div class="inner">
 					<h3># {{$NuevaH->numero_habitacion}}</h3>
-					<p>Fecha:</p>
+					<p>Fecha: </p>
 					<p>Hora de ingreso:</p>
 					<p>Hora de salida:</p>
 					<p>Total a pagar:</p>
@@ -48,18 +59,18 @@ if ($estado->estado == 1) {
 						</div>
 					</div>
 					
-					</div>
-					<!--barra de carga-->	
-					<div class="contenedor ">
-						<progress value=0 max=100 id="barra" class="barraStyle" style="width:100%" ></progress>
-						{{-- <input type="button" value="cargar" id="cargar" onclick="setInterval('cargar()',1800)"/>  --}}
-					</div>
+				</div>
+				<!--barra de carga-->	
+				<div class="contenedor ">
+					<progress value=0 max=100 id="barra" class="barraStyle" style="width:100%" ></progress>
+					{{-- <input type="button" value="cargar" id="cargar" onclick="setInterval('cargar()',1800)"/>  --}}
+				</div>
 				<div class="icon">
-              <i class="fa fa-hotel"></i>
-            </div>
-           
+					<i class="fa fa-hotel"></i>
+				</div>
+
 			</div>
- 				
+
 		</div>
 		@endforeach
 	</div>

@@ -10,30 +10,37 @@
     document.getElementById('id_proveedor').value = dato;
   }
 </script>
-
 <div class="row">
   <div class="col-md-5 col-md-offset-3" >
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">Factura Compra</h3>
+        <h3 class="box-title">Producto</h3>
       </div>
-      <form method="post"  action="{{route('factura_compra.create')}}" >
+      <form method="post"  action="{{route('productos.create')}}" >
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="box-body">
-          <label for="numerohabitacion">Descripción</label>
+          <br>
+          <label for="numerohabitacion">Descripcion</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-file-o"></i></span>
-            <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción">
+            <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion">
           </div>
-          <label for="tipohabitacion">Total a Pagar</label>
+          <label for="numerohabitacion">Precio de Venta</label>
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-            <input type="text" class="form-control" name="total_pagar" id="total_pagar" placeholder="Total a Pagar">
+            <span class="input-group-addon"><i class="fa fa-file-o"></i></span>
+            <input type="text" class="form-control" name="precio_venta" id="precio_venta" placeholder="Precio de Venta">
           </div>
-        <div class="input-group">
-          <input type="hidden" class="form-control" name="id_usuario" id="id_usuario" value="{{Auth::user()->id}}">
-        </div>
-        <div class="form-group">
+          <label for="numerohabitacion">Stock</label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-file-o"></i></span>
+            <input type="text" class="form-control" name="stock" id="stock" placeholder="Cédula">
+          </div>
+          <label for="numerohabitacion">Precio de Compra</label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-file-o"></i></span>
+            <input type="text" class="form-control" name="precio_compra" id="precio_compra" placeholder="Precio de Compra">
+          </div>
+          <div class="form-group">
           <label>Proveedor</label>
           <select class="form-control" name="id_proveedor" id="consulta_proveedor" onchange="consultar()" required>                    
             <option value="0">Seleccionar Proveedor</option>
@@ -44,20 +51,20 @@
           </select>
         </div>
         <input type="hidden" id="id_proveedor" name="id_proveedor" required>
-         </div>
-        <div class="box-footer">
-          <button type="submit"class="btn btn-success">Crear compra</button>
         </div>
-      </form>
-    </div>
+      <div class="box-footer">
+        <button type="submit"class="btn btn-success">Crear</button>
+      </div>
+    </form>
   </div>
+</div>
 </div>
 <!-- box para mostrar tabla con datos -->
 <div class="col-md-14">
   <div class="box box-primary">
    <div class="box-header with-border">
     <i class="fa fa-bar-chart"></i>
-    <h3 class="box-title" align="text-center">Facturas de Compra</h3>
+    <h3 class="box-title" align="text-center">Productos</h3>
     <div class="box-tools pull-right">
     </div>
   </div>
@@ -67,23 +74,22 @@
       <tr>
         <th class='text-center'>#</th>
         <th class='text-center'>Descripcion</th>
-        <th class='text-center'>Total de Pago</th>
-        <th class="text-center">Fecha y hora del Pago</th>
+        <th class='text-center'>Precio de Venta</th>
+        <th class="text-center">Stock</th>
+        <th class="text-center">Precio de Compra</th>
         <th class="text-center">Proveedor</th>
-        <th class="text-center">Usuario</th>
         <th class="text-center">Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr></tr>
-      @foreach($NuevaCompra as $NuevaCompra)
+      @foreach($NuevoProducto as $NuevoProd)
       <tr class='text-center'>
-        <td>{{$NuevaCompra->id}}</td>
-        <td>{{$NuevaCompra->descripcion}}</td>
-        <td>$ {{$NuevaCompra->total_pagar}}</td>
-        <td>{{$NuevaCompra->created_at}}</td>
-        <td>{{$NuevaCompra->Empresa}}</td>
-        <td>{{$NuevaCompra->name}}</td>
+        <td>{{$NuevoProd->id}}</td>
+        <td>{{$NuevoProd->descripcion}}</td>
+        <td>$ {{$NuevoProd->precio_venta}}</td>
+        <td>{{$NuevoProd->stock}}</td>
+        <td>$ {{$NuevoProd->precio_compra}}</td>
+        <td>{{$NuevoProd->Empresa}}</td>
         <td class="text-center">
           <div class="row">
             <div class="col-md-3 col-md-offset-2">
@@ -93,7 +99,7 @@
               <button type="submit" class="btn btn-warning btn-xs">Editar</button></form>
             </div>
             <div class="col-md-6 text-left">
-              <form action="{{route('factura_compra.delete', $NuevaCompra->id)}}" method="post">
+              <form action="{{route('productos.delete', $NuevoProd->id)}}" method="post">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-danger btn-xs">Borrar</button>
@@ -103,9 +109,10 @@
         </div>
       </td>
     </tr>
-    @endforeach
+   @endforeach
   </tbody>
 </table>
+{{ $NuevoProducto->links() }}
 </div>
 </div>
 

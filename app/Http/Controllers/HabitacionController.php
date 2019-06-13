@@ -12,8 +12,8 @@ class HabitacionController extends Controller
     public function index()
     {
         $NuevaHabitacion = DB::table('habitacion')
-        //->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
-        //->select('habitacion.*','estado_habitacion.estado as estado')
+        ->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
+        ->select('habitacion.*','estado_habitacion.estado as estado')
         ->get();
         //dd($NuevaHabitacion);        
         return view('vendor.adminlte.nuevahabitacion', compact('NuevaHabitacion'));
@@ -27,13 +27,13 @@ class HabitacionController extends Controller
 
     public function store(Request $request)
     {
-         //dd($request->all());
+            //dd($request->all());
         $NuevaHabitacion                    = new Habitacion;
         $NuevaHabitacion->numero_habitacion = $request->numero_habitacion;
         $NuevaHabitacion->tipo_habitacion   = $request->tipo_habitacion;
         $NuevaHabitacion->precio            = $request->precio;
         $NuevaHabitacion->tiempo_limpieza   = $request->tiempo_limpieza;
-        $NuevaHabitacion->ip_arduino        = $request->ip_arduino;
+        $NuevaHabitacion->id_estado   = $request->estado;
         $NuevaHabitacion->save();
         return redirect('/Habitacion');
     }
@@ -75,7 +75,6 @@ class HabitacionController extends Controller
         $NuevaHabitacion->tipo_habitacion = $request->tipo_habitacion;
         $NuevaHabitacion->precio = $request->precio;    
         $NuevaHabitacion->tiempo_limpieza = $request->tiempo_limpieza;
-        $NuevaHabitacion->ip_arduino = $request->ip_arduino;
         $NuevaHabitacion->save();
         return redirect('/Habitacion');
     }

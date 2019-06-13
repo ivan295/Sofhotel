@@ -38,29 +38,38 @@ Route::get('/nuevouser/nuevousuario', function () {
 Route::get('/factura_compra/facturaCompra',function(){
 	return view('/vendor/adminlte/facturaCompra');
 });
-
-
-Route::post('/hab_mod', function () {
-  return view('/vendor/adminlte/edithabitacion');
+//proveedor
+Route::get('/proveedor/proveedor',function(){
+	return view('/vendor/adminlte/nuevoproveedor');
+});
+//productos
+Route::get('/productos/productos',function(){
+	return view('/vendor/adminlte/nuevoproducto');
+});
+//detalle_compra
+Route::get('/detalle_compra/detalle_compra',function(){
+	return view('/vendor/adminlte/detalleCompra');
+});
+//alquiler
+Route::get('/alquiler/alquiler',function(){
+    return view('/vendor/adminlte/Alquiler');
 });
 
-Route::post('/gast_mod', function () {
-  return view('/vendor/adminlte/editgasto');
-});
-Route::post('/tipousuario_mod', function () {
-  return view('/vendor/adminlte/tipousuarioedit');
-});
-Route::post('/nuevouser', function () {
-  return view('/vendor/adminlte/nuevousuario');
-});
 
 
-
+//rutas index
 Route::get('/Habitacion', 'HabitacionController@index');
 Route::get('/gastos', 'gastosController@index');
 Route::get('/tipouser', 'tipousuarioController@index');
 Route::get('/nuevouser', 'usuarioController@index');
 Route::get('/factura_compra','facturacompraController@index');
+Route::get('/proveedor','proveedorController@index');
+Route::get('/productos','productosController@index');
+Route::get('/detalle_compra','detalleCompraController@index');
+Route::get('/alquiler','alquilerController@index');
+
+
+
 
 
 //nueva habitacion
@@ -74,9 +83,6 @@ Route::put('Habitacion/{id}', ['as' => 'habitacion.update', 'uses'=>'HabitacionC
 
 Route::post('Habitacion/crear', ['as' => 'habitacion.create', 'uses'=>'HabitacionController@store']);
 
-//arduino
-Route::get('arduino/{humedad}/{temperatura}', 'HomeController@store');
-//Route::get('arduino/{humedad}/{temperatura}', 'HomeController@store');
 
 //gastos/////////////////
 Route::post('gastos/crear', ['as' => 'gastos.create', 'uses'=>'gastosController@store']);
@@ -114,7 +120,7 @@ Route::post('factura_compra/{id}/edit', ['as' => 'factura_compra.editar', 'uses'
 
 Route::put('factura_compra/{id}', ['as' => 'factura_compra.update', 'uses'=>'facturacompraController@update']);
 
-//rutas
+//Arduino
 Route::get('/iniciarestado', function () {
     return view('/vendor/adminlte/iniciarestado');
 });
@@ -124,4 +130,48 @@ Route::get('/estado/{t}', 'EstadoController@add');
 Route::get('/modificar_estado/{t}', 'EstadoController@mod');
 
 Route::get('modestados', 'EstadoController@actualizar');
+
+
+//proveedor
+Route::post('proveedor/crear', ['as' => 'proveedor.create', 'uses'=>'proveedorController@store']);
+
+Route::delete('proveedor/{id}/eliminar', ['as'=> 'proveedor.delete', 'uses' =>'proveedorController@destroy']);
+
+Route::post('proveedor/{id}/edit', ['as' => 'proveedor.editar', 'uses' => 'proveedorController@edit']);
+
+Route::put('proveedor/{id}', ['as' => 'proveedor.update', 'uses'=>'proveedorController@update']);
+
+
+//productos
+Route::post('productos/crear', ['as' => 'productos.create', 'uses'=>'productosController@store']);
+
+Route::delete('productos/{id}/eliminar', ['as'=> 'productos.delete', 'uses' =>'productosController@destroy']);
+
+Route::post('productos/{id}/edit', ['as' => 'productos.editar', 'uses' => 'productosController@edit']);
+
+Route::put('productos/{id}', ['as' => 'productos.update', 'uses'=>'productosController@update']);
+
+//detalle_compra
+Route::post('detalle_compra/crear', ['as' => 'detalle_compra.create', 'uses'=>'detalleCompraController@store']);
+
+Route::delete('detalle_compra/{id}/eliminar', ['as'=> 'detalle_compra.delete', 'uses' =>'detalleCompraController@destroy']);
+
+Route::post('detalle_compra/{id}/edit', ['as' => 'detalle_compra.editar', 'uses' => 'detalleCompraController@edit']);
+
+Route::put('detalle_compra/{id}', ['as' => 'detalle_compra.update', 'uses'=>'detalleCompraController@update']);
+
+
+/// filtro de productos
+//Route::get('filtroProductos/{dato?}','detalleCompraController@filtroProductos');
+// Route::get()
+
+
+//Alquiler
+Route::post('alquiler/crear', ['as' => 'alquiler.create', 'uses'=>'alquilerController@store']);
+
+Route::delete('alquiler/{id}/eliminar', ['as'=> 'alquiler.delete', 'uses' =>'alquilerController@destroy']);
+
+Route::post('alquiler/{id}/edit', ['as' => 'alquiler.editar', 'uses' => 'alquilerController@edit']);
+
+Route::put('alquiler/{id}', ['as' => 'alquiler.update', 'uses'=>'alquilerController@update']);
 

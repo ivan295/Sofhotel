@@ -48,19 +48,19 @@
     </thead>
     <tbody>
       <tr></tr>
-      @foreach($Nuevotipouser as $Nuevotipouser)
+      @foreach($Nuevotipouser as $NuevotipoUser)
       <tr class='text-center'>
-        <td>{{$Nuevotipouser->id}}</td>
-        <td>{{$Nuevotipouser->descripcion}}</td>
+        <td>{{$NuevotipoUser->id}}</td>
+        <td>{{$NuevotipoUser->descripcion}}</td>
         <td class="text-center">
           <div class="row">
             <div class="col-md-3 col-md-offset-3">
-             <form action="{{route ('tipouser.editar', $Nuevotipouser->id)}}" method="post">
+             <form action="{{route ('tipouser.editar', $NuevotipoUser->id)}}" method="post">
               {{csrf_field()}}
               <button type="submit" class="btn btn-warning btn-xs">Editar</button></form>
             </div>
             <div class="col-md-6 text-left">
-              <form action="{{route('tipouser.delete', $Nuevotipouser->id)}}" method="post">
+              <form action="{{route('tipouser.delete', $NuevotipoUser->id)}}" method="post">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-danger btn-xs">Borrar</button>
@@ -73,5 +73,6 @@
     @endforeach
   </tbody>
 </table>
+{{ $Nuevotipouser->links() }}
 
 @endsection

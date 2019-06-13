@@ -13,17 +13,17 @@ class DetalleCompraTable extends Migration
      */
     public function up()
     {
-        Schema::create('detalle_compra', function (Blueprint $table){
-            $table->increments('id');
+        Schema::create('detalle_compra', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
             $table->integer('cantidad');
             $table->float('total_compra');
             
-            $table->integer('id_factura')->unsigned()->index();
+            $table->bigInteger('id_factura')->unsigned()->index();
             $table->foreign('id_factura')->references('id')->on('factura_compra');
 
             $table->integer('id_producto')->unsigned()->index();
             $table->foreign('id_producto')->references('id')->on('producto');
-
         });
     }
 

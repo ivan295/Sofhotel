@@ -18,10 +18,8 @@ class GastosTable extends Migration
             $table->timestamps();
             $table->string('descripcion',100);
             $table->float('gasto_total');
-            $table->time('hora_gasto');
-            $table->datetime('fecha_gasto');
            $table->bigInteger('id_usuario')->unsigned();
-           $table->foreign('id_usuario')->references('id')->on('usuario');
+           $table->foreign('id_usuario')->references('id')->on('users');
         });
     }
 

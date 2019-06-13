@@ -19,10 +19,10 @@ class AlquilerTable extends Migration
             $table->time('hora_ingreso_habitacion');
             $table->time('hora_salida_habitacion');
             $table->time('tiempo_alquiler');
-            $table->integer('numero de personas');
+            $table->integer('numero_personas');
 
             $table->bigInteger('id_usuario')->unsigned()->index();
-            $table->foreign('id_usuario')->references('id')->on('usuario');
+            $table->foreign('id_usuario')->references('id')->on('users');
 
             $table->integer('id_habitacion')->unsigned()->index();
             $table->foreign('id_habitacion')->references('id')->on('habitacion');
