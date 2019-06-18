@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ProveedorTable extends Migration
+class CreateProveedorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class ProveedorTable extends Migration
      */
     public function up()
     {
-        Schema::create('proveedor', function (Blueprint $table){
-            $table->increments('id');
-
+        Schema::create('proveedor', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
             $table->string('nombres',100);
             $table->string('apellidos',100);
             $table->string('cedula',10)->unique();

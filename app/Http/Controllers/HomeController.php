@@ -27,15 +27,13 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return Response
-     */
     public function index()
     {
-        $NuevaH = \DB::table('habitacion')->get();
-        return view('adminlte::home', compact('NuevaH'));      
+        $NuevaH = \DB::table('habitacion')->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
+        ->select('habitacion.*','estado_habitacion.estado')
+        ->get();
+         return view('adminlte::home', compact('NuevaH'));     
+        //return response()->json($NuevaH); 
 
         return view('adminlte::home');
     }

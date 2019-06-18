@@ -17,7 +17,7 @@ class gastosController extends Controller
      {
      	$NuevoGasto = DB::table('gastos')
         ->join('users','users.id','=','gastos.id_usuario')
-        ->select('gastos.*','users.nombre as name')
+        ->select('gastos.*','users.usuario as user')
         ->orderBy('id', 'desc')
         ->paginate(10);
         return view('vendor.adminlte.gastos', compact('NuevoGasto'));

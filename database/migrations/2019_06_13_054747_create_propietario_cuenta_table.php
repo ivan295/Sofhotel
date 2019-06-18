@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EstadoHabitacionTable extends Migration
+class CreatePropietarioCuentaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class EstadoHabitacionTable extends Migration
      */
     public function up()
     {
-        Schema::create('estado_habitacion', function (Blueprint $table){
-            $table->increments('id');
-            $table->integer('estado');
+        Schema::create('propietario_cuenta', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
+            $table->string('descripcion',100);
         });
     }
 
@@ -26,6 +27,6 @@ class EstadoHabitacionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estado_habitacion');
+        Schema::dropIfExists('propietario_cuenta');
     }
 }

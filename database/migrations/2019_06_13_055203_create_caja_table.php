@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CajaTable extends Migration
+class CreateCajaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CajaTable extends Migration
      */
     public function up()
     {
-        Schema::create('caja', function (Blueprint $table){
-            $table->increments('id');
+        Schema::create('caja', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
             $table->datetime('fecha');
             $table->time('hora_ingreso');
             $table->time('hora_salida');
@@ -23,7 +24,6 @@ class CajaTable extends Migration
 
             $table->bigInteger('id_usuario')->unsigned()->index();
             $table->foreign('id_usuario')->references('id')->on('users');
-
         });
     }
 

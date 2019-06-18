@@ -8,5 +8,5 @@ class Estado_habitacion extends Model
 {
     public $timestamps  = false;
     protected $table    = 'estado_habitacion';
-    protected $fillable = ['estado'];
+    protected $fillable = ['estado','ip_arduino'];
 }

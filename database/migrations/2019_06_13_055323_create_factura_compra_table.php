@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class FacturaCompraTable extends Migration
+class CreateFacturaCompraTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,15 +16,14 @@ class FacturaCompraTable extends Migration
         Schema::create('factura_compra', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('descripcion',100);
+             $table->string('descripcion',100);
             $table->float('total_pagar');
 
-            $table->integer('id_proveedor')->unsigned()->index();
+            $table->bigInteger('id_proveedor')->unsigned()->index();
             $table->foreign('id_proveedor')->references('id')->on('proveedor');
 
             $table->bigInteger('id_usuario')->unsigned()->index();
             $table->foreign('id_usuario')->references('id')->on('users');
-
         });
     }
 

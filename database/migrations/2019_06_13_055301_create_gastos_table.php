@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class PropietarioCuentaTabla extends Migration
+class CreateGastosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class PropietarioCuentaTabla extends Migration
      */
     public function up()
     {
-        Schema::create('propietario_cuenta', function (Blueprint $table){
-            $table->increments('id');
+        Schema::create('gastos', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
             $table->string('descripcion',100);
+            $table->float('gasto_total');
+           $table->bigInteger('id_usuario')->unsigned();
+           $table->foreign('id_usuario')->references('id')->on('users');
         });
     }
 
@@ -26,6 +30,6 @@ class PropietarioCuentaTabla extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('propietario_cuenta');
+        Schema::dropIfExists('gastos');
     }
 }

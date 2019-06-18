@@ -14,13 +14,13 @@
       <form method="post"  action="{{route('gastos.create')}}" >
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="box-body">
-          <label for="numerohabitacion">Descripción</label>
+          <label for="descripcion">Descripción</label>
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-file-o"></i></span>
+            <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
             <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción">
           </div>
           <br>
-          <label for="tipohabitacion">Total a Pagar</label>
+          <label for="total_pagar">Total a Pagar</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
             <input type="text" class="form-control" name="gasto_total" id="gasto_total" placeholder="Total a Pagar">
@@ -65,7 +65,7 @@
         <td>{{$Nuevogasto->descripcion}}</td>
         <td>$ {{$Nuevogasto->gasto_total}}</td>
         <td>{{$Nuevogasto->created_at}}</td>
-        <td>{{$Nuevogasto->name}}</td>
+        <td>{{$Nuevogasto->user}}</td>
         <td class="text-center">
           <div class="row">
             <div class="col-md-3 col-md-offset-2">

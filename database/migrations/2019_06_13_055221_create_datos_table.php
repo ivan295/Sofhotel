@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class GastosTable extends Migration
+class CreateDatosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class GastosTable extends Migration
      */
     public function up()
     {
-        Schema::create('gastos', function (Blueprint $table) {
+        Schema::create('datos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('descripcion',100);
-            $table->float('gasto_total');
-           $table->bigInteger('id_usuario')->unsigned();
-           $table->foreign('id_usuario')->references('id')->on('users');
+            $table->string('temperatura',100);
+            $table->string('humedad',100);
         });
     }
 
@@ -30,6 +28,6 @@ class GastosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gastos');
+        Schema::dropIfExists('datos');
     }
 }

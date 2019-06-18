@@ -1,32 +1,50 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Estado_habitacion;
 use Illuminate\Http\Request;
 use App\Estado_habitacion;
+use DB;
 class estadoHabitacionController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
+ 
+    public function addip($ip)
+    {	
+        $dato=new Estado_habitacion;
+
+        $aux = 0;
+        $consulta = DB::table('estado_habitacion')->get();
+        foreach ($consulta as $c) {
+            if($c->ip_arduino == $ip){
+                $aux = 1;
+            }
+        }
+        if($aux==1){
+            dd("ya existe");
+        }else {
+        $dato->estado ="Inactivo";
+        $dato->ip_arduino = $ip;
+        $dato->save();
+        }
+        //dd($ip);
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return Response
-     */
-    public function index()
-    {	
-         $estadoH = \DB::table('estado_habitacion')->get();
-        return view('adminlte::home', compact('estadoH'));
+    public function mod($t, $ip){
+
+
+        $cont = DB::table('estado_habitacion')->where('ip_arduino', $ip)->first();
+        //dd($cont->ip_arduino);
+          if ($t == 1) {
+              $data = Estado_habitacion::Find($cont->id);
+              $data->estado = "Activo";
+              $data->save();
+          }
+    
         
 
+        //dd($t, $ip);
     }
+
+
+
 
 }

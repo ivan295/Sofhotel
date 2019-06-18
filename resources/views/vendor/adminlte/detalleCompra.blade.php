@@ -16,16 +16,6 @@
   }
 </script>
 
-<script type="text/javascript">
-    $("#txtusuario").keyup(function(){
-        $("#txtemail").val($("#txtusuario").val());
-    });
-    function llenar(){
-        //alert("ffgfg");
-        $("#txtemail").val($("#txtusuario").val()+'@sistema.com');
-    }
-
-</script>
 <div class="row">
   <div class="col-md-6 col-md-offset-0" > 
     <div class="box box-primary">
@@ -80,7 +70,7 @@
      <div class="box-header with-border">
       <i class="fa fa-picture-o"></i>
       <h3 class="box-title" align="text-center">Listado de Productos</h3></div>
-      <table class="table table-hover table-bordered" id="tablagastos">
+      <table class="table table-hover table-bordered" id="tablaDetalleProductos">
         <thead>
             <tr>
                 <td>Descripción</td>

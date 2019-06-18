@@ -11,7 +11,7 @@ class proveedorController extends Controller
     {
         $Nuevoproveedor = DB::table('proveedor')
         ->orderBy('id', 'desc')
-        ->get();
+        ->paginate(10);
         return view('vendor.adminlte.nuevoproveedor',compact('Nuevoproveedor'));
     }
 
@@ -32,5 +32,25 @@ class proveedorController extends Controller
     {
         Proveedor::destroy($id);
         return redirect('/proveedor');        
+    }
+
+
+    public function edit($id)
+    {
+        $Nuevoproveedor = Proveedor::find($id);
+         return view('vendor.adminlte.editproveedor', compact('Nuevoproveedor'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $Nuevoproveedor = Proveedor::find($id);
+        $Nuevoproveedor->nombres = $request->nombre;
+        $Nuevoproveedor->apellidos = $request->apellido;
+        $Nuevoproveedor->cedula = $request->cedula;
+        $Nuevoproveedor->telefono = $request->telefono;
+        $Nuevoproveedor->correo = $request->correo;
+        $Nuevoproveedor->empresa = $request->empresa;
+        $Nuevoproveedor->save();
+        return redirect('/proveedor');
     }
 }

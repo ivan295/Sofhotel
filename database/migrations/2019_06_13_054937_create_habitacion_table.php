@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class HabitacionTable extends Migration
+class CreateHabitacionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class HabitacionTable extends Migration
      */
     public function up()
     {
-        Schema::create('habitacion', function (Blueprint $table){
-            $table->increments('id');
+        Schema::create('habitacion', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
             $table->integer('numero_habitacion')->unique();
             $table->string('tipo_habitacion', 100);
             $table->float('precio');
             $table->time('tiempo_limpieza');
 
-            $table->integer('id_estado')->unsigned()->index();
+            $table->bigInteger('id_estado')->unsigned()->index();
             $table->foreign('id_estado')->references('id')->on('estado_habitacion');
         });
     }

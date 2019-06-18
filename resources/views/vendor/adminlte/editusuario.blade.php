@@ -57,7 +57,7 @@
           <label for="password">Contraseña</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-key "></i></span>
-            <input type="text" class="form-control" name="password" id="password" placeholder="Contraseña" required>
+            <input type="password" class="form-control" name="password" id="password" value="<?php echo $Nuevousuario->password; ?>">
           </div>
           </div>
           <div class="col-md-6">
@@ -78,7 +78,7 @@
           <div class="form-group">
             <label>Tipo de Usuario</label>
             <select class="form-control" name="idtipouser" id="consulta_tipo" onchange="consultar()">                    
-              <option value="0"></option>
+              <option value="0"><?php echo $Nuevousuario->descripcion; ?></option>
               <?php $tipousuario = DB::table('tipousuario')->get();?>
               @foreach($tipousuario as $tipouser)
               <option value="<?php  echo $tipouser->id ; ?>"> <?php echo $tipouser->descripcion; ?>  </option>
@@ -90,6 +90,7 @@
       </div>
         <div class="box-footer">
           <button type="submit"class="btn btn-success">Modificar</button>
+          <button type="submit" class="btn btn-danger" onclick="vendor/adminlte/nuevousuario.php">Salir</button>
         </div>
       </form>
 

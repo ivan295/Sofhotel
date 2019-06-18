@@ -3,8 +3,6 @@
 @section('htmlheader_title')
 {{ trans('adminlte_lang::message.home') }}
 @endsection
-
-
 @section('main-content')
 <script type="text/javascript">
   function consultar(){
@@ -54,7 +52,7 @@
           <label for="password">Contraseña</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-key "></i></span>
-            <input type="text" class="form-control" name="password" id="password" placeholder="Contraseña" required>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" required>
           </div>
           </div>
           <div class="col-md-6">
@@ -67,7 +65,7 @@
           <div class="col-md-6">
           <label for="telefono">Teléfono</label>
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa fa-phone"></i></span>
+          <span class="input-group-addon"><i class="fa fa fa-phone"></i></span>
             <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Teléfono" required>
           </div>
           </div>
@@ -103,7 +101,7 @@
     </div>
   </div> 
   <!--tabla-->
-  <table class="table table-hover table-bordered" id="tablagastos">
+  <table class="table table-hover table-bordered" id="tablausuarios">
     <thead>
       <tr>
         <th class='text-center'>ID</th>
@@ -119,30 +117,30 @@
     </thead>
     <tbody>
       <tr></tr>
-      @foreach($Nuevousuario as $Nuevousuario)
+      @foreach($Nuevousuario as $Nuevouser)
       <tr class='text-center'>
-        <td>{{$Nuevousuario->id}}</td>
-        <td>{{$Nuevousuario->nombre}}</td>
-        <td>{{$Nuevousuario->apellido}}</td>
-        <td>{{$Nuevousuario->cedula}}</td>
-        <td>{{$Nuevousuario->usuario}}</td>
-        <td>{{$Nuevousuario->direccion}}</td>
-        <td>{{$Nuevousuario->telefono}}</td>
-        <td>{{$Nuevousuario->tipousuario->descripcion}}</td>
+        <td>{{$Nuevouser->id}}</td>
+        <td>{{$Nuevouser->nombre}}</td>
+        <td>{{$Nuevouser->apellido}}</td>
+        <td>{{$Nuevouser->cedula}}</td>
+        <td>{{$Nuevouser->usuario}}</td>
+        <td>{{$Nuevouser->direccion}}</td>
+        <td>{{$Nuevouser->telefono}}</td>
+        <td>{{$Nuevouser->TipoUser}}</td>
         <td class="text-center">
           <div class="row">
           </div>
         </div>
         <div class="row">
               <div class="col-md-3 col-md-offset-2">
-               <form action="{{route ('nuevouser.editar', $Nuevousuario->id)}}" method="post">
+               <form action="{{route ('nuevouser.editar', $Nuevouser->id)}}" method="post">
                 {{csrf_field()}}
                 
                 <button type="submit" class="btn btn-warning btn-xs">Editar</button></form>
 
               </div>
               <div class="col-md-3">
-               <form action="{{route('nuevouser.delete', $Nuevousuario->id)}}" method="post">
+               <form action="{{route('nuevouser.delete', $Nuevouser->id)}}" method="post">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-danger btn-xs">Borrar</button>
@@ -154,6 +152,7 @@
     @endforeach
   </tbody>
 </table>
+{{$Nuevousuario->links()}}
 </div>
 </div>
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CuentaTabla extends Migration
+class CreateCuentaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class CuentaTabla extends Migration
      */
     public function up()
     {
-        Schema::create('cuenta', function (Blueprint $table){
-            $table->increments('id');
+        Schema::create('cuenta', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
             $table->string('numero_cuenta',10);
                         
-            $table->integer('id_propietario')->unsigned()->index();
+            $table->bigInteger('id_propietario')->unsigned()->index();
             $table->foreign('id_propietario')->references('id')->on('propietario_cuenta');
 
-            $table->integer('id_banco')->unsigned()->index();
+            $table->bigInteger('id_banco')->unsigned()->index();
             $table->foreign('id_banco')->references('id')->on('banco');
-
-
         });
     }
 

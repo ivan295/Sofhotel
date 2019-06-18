@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DetalleCompraTable extends Migration
+class CreateDetalleVentaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class DetalleCompraTable extends Migration
      */
     public function up()
     {
-        Schema::create('detalle_compra', function (Blueprint $table) {
+        Schema::create('detalle_venta', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->integer('cantidad');
-            $table->float('total_compra');
+            $table->float('total_venta');
             
-            $table->bigInteger('id_factura')->unsigned()->index();
-            $table->foreign('id_factura')->references('id')->on('factura_compra');
+            $table->bigInteger('id_factura_venta')->unsigned()->index();
+            $table->foreign('id_factura_venta')->references('id')->on('factura_venta');
 
-            $table->integer('id_producto')->unsigned()->index();
+            $table->bigInteger('id_producto')->unsigned()->index();
             $table->foreign('id_producto')->references('id')->on('producto');
         });
     }
@@ -34,6 +34,6 @@ class DetalleCompraTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detalle_compra');
+        Schema::dropIfExists('detalle_venta');
     }
 }

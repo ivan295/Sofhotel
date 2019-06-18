@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlquilerTable extends Migration
+class CreateAlquilerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AlquilerTable extends Migration
      */
     public function up()
     {
-         Schema::create('alquiler', function (Blueprint $table){
-            $table->increments('id');
+        Schema::create('alquiler', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
             $table->datetime('fecha');
             $table->time('hora_ingreso_habitacion');
             $table->time('hora_salida_habitacion');
@@ -24,9 +25,8 @@ class AlquilerTable extends Migration
             $table->bigInteger('id_usuario')->unsigned()->index();
             $table->foreign('id_usuario')->references('id')->on('users');
 
-            $table->integer('id_habitacion')->unsigned()->index();
+            $table->bigInteger('id_habitacion')->unsigned()->index();
             $table->foreign('id_habitacion')->references('id')->on('habitacion');
-
         });
     }
 
@@ -37,7 +37,6 @@ class AlquilerTable extends Migration
      */
     public function down()
     {
-                Schema::dropIfExists('alquiler');
-
+        Schema::dropIfExists('alquiler');
     }
 }

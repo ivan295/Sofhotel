@@ -11,7 +11,7 @@
   }
 </script>
 <div class="row">
-  <div class="col-md-5 col-md-offset-3" >
+  <div class="col-md-12 col-md-offset-0" >
     <div class="box box-primary">
       <div class="box-header with-border">
         <h3 class="box-title">Producto</h3>
@@ -20,28 +20,37 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="box-body">
           <br>
-          <label for="numerohabitacion">Descripcion</label>
+          <div class="col-md-6">
+          <label for="descripcion_producto">Descripcion</label>
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-file-o"></i></span>
+            <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
             <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion">
           </div>
-          <label for="numerohabitacion">Precio de Venta</label>
+        </div>
+        <div class="col-md-6">
+          <label for="precio_venta">Precio de Venta</label>
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-file-o"></i></span>
+            <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
             <input type="text" class="form-control" name="precio_venta" id="precio_venta" placeholder="Precio de Venta">
           </div>
-          <label for="numerohabitacion">Stock</label>
+        </div>
+        <div class="col-md-6">
+          <label for="stock">Cantidad</label>
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-file-o"></i></span>
-            <input type="text" class="form-control" name="stock" id="stock" placeholder="Cédula">
+            <span class="input-group-addon"><i class="fa fa-database"></i></span>
+            <input type="text" class="form-control" name="stock" id="stock" placeholder="Cantidad">
           </div>
-          <label for="numerohabitacion">Precio de Compra</label>
+        </div>
+        <div class="col-md-6">
+          <label for="precio_compra">Precio de Compra</label>
           <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-file-o"></i></span>
+            <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
             <input type="text" class="form-control" name="precio_compra" id="precio_compra" placeholder="Precio de Compra">
           </div>
-          <div class="form-group">
+        </div>
+        <div class="col-md-6">
           <label>Proveedor</label>
+          <div class="select-group">
           <select class="form-control" name="id_proveedor" id="consulta_proveedor" onchange="consultar()" required>                    
             <option value="0">Seleccionar Proveedor</option>
             <?php $prov = DB::table('proveedor')->get(); ?>
@@ -50,6 +59,7 @@
             @endforeach
           </select>
         </div>
+      </div>
         <input type="hidden" id="id_proveedor" name="id_proveedor" required>
         </div>
       <div class="box-footer">
@@ -93,7 +103,7 @@
         <td class="text-center">
           <div class="row">
             <div class="col-md-3 col-md-offset-2">
-             <form action="" method="post">
+             <form action="{{route('productos.editar', $NuevoProd->id)}}" method="post">
               {{csrf_field()}}
 
               <button type="submit" class="btn btn-warning btn-xs">Editar</button></form>

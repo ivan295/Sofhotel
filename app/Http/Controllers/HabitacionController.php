@@ -13,7 +13,7 @@ class HabitacionController extends Controller
     {
         $NuevaHabitacion = DB::table('habitacion')
         ->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
-        ->select('habitacion.*','estado_habitacion.estado as estado')
+        ->select('habitacion.*','estado_habitacion.ip_arduino as ip')
         ->get();
         //dd($NuevaHabitacion);        
         return view('vendor.adminlte.nuevahabitacion', compact('NuevaHabitacion'));
@@ -33,8 +33,14 @@ class HabitacionController extends Controller
         $NuevaHabitacion->tipo_habitacion   = $request->tipo_habitacion;
         $NuevaHabitacion->precio            = $request->precio;
         $NuevaHabitacion->tiempo_limpieza   = $request->tiempo_limpieza;
-        $NuevaHabitacion->id_estado   = $request->estado;
+        $NuevaHabitacion->id_estado   = $request->id_estado;
         $NuevaHabitacion->save();
+        $tiempo = 2 * 60 * 1000000;
+        $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+        $len = strlen($tiempo);
+        socket_sendto($sock, $tiempo, $len, 0, '192.168.0.108', 8888);
+        socket_close($sock);
+
         return redirect('/Habitacion');
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class BancoTabla extends Migration
+class CreateEstadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class BancoTabla extends Migration
      */
     public function up()
     {
-        Schema::create('banco', function (Blueprint $table){
-            $table->increments('id');
-            $table->string('descripcion',100);
+        Schema::create('estados', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
+             $table->integer('contador');
         });
     }
 
@@ -26,6 +27,6 @@ class BancoTabla extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('banco');
+        Schema::dropIfExists('estados');
     }
 }

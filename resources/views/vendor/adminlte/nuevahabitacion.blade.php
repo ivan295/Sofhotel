@@ -5,6 +5,12 @@
 @endsection
 
 @section('main-content')
+<script type="text/javascript">
+  function consultar(){
+    var dato = document.getElementById('consulta_ip').value;
+    document.getElementById('id_estado').value = dato;
+  }
+</script>
 <!-- box con input para crear habitaciones -->
 <div class="row">
   <div class="col-md-5">
@@ -18,7 +24,7 @@
           <label for="numerohabitacion">Número de Habitación</label>
           <div class="input-group">
           <span class="input-group-addon"><i class="fa  fa-slack"></i></span>
-            <input type="text" class="form-control" name="numero_habitacion" id="numero_habitacion" placeholder="Número de Habitacion" required pattern="[0-9]" title="ESTE CAMPO SOLO ADMITE VALORES NUMÉRICOS">
+            <input type="text" class="form-control" name="numero_habitacion" id="numero_habitacion" placeholder="Número de Habitacion">
           </div>
           <br>
           <label for="tipohabitacion">Tipo de Habitación</label>
@@ -44,7 +50,17 @@
               </div>
             </div>
           </div>
-          <input type="hidden" name="estado" value="3">
+           <div class="form-group">
+            <label>Ip de la placa Arduino</label>
+            <select class="form-control" name="ip_arduino" id="consulta_ip" onchange="consultar()">                    
+              <option value="0">Seleccionar Ip de Arduino</option>
+              <?php $ip = DB::table('estado_habitacion')->get(); ?>
+              @foreach($ip as $ip)
+              <option value="<?php  echo $ip->id ; ?>"> <?php echo $ip->ip_arduino; ?>  </option>
+              @endforeach
+            </select>
+          </div>
+          <input type="hidden" id="id_estado" name="id_estado">
         </div>
         <div class="box-footer">
           <button type="submit"class="btn btn-success">Crear</button>

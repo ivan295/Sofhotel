@@ -26,8 +26,8 @@ function cargarTabla(data){
 	fila+=      '	</td>';
 	fila+=    	'</tr>';
 
-            $('#tablaDetalleProductos').append(//identificamos ala nota que queremos add esta otra nota        
-                 fila									
+    $('#tablaDetalleProductos').append(//identificamos a lo que queremos add  #tablaDetalleProductos -> es el id de la tabla a llenar       
+        fila									
             );
             
         });  

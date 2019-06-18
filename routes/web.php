@@ -54,6 +54,9 @@ Route::get('/detalle_compra/detalle_compra',function(){
 Route::get('/alquiler/alquiler',function(){
     return view('/vendor/adminlte/Alquiler');
 });
+Route::get('/factura_venta/factura_venta',function(){
+    return view('/vendor/adminlte/Facturaventa');
+});
 
 
 
@@ -67,9 +70,11 @@ Route::get('/proveedor','proveedorController@index');
 Route::get('/productos','productosController@index');
 Route::get('/detalle_compra','detalleCompraController@index');
 Route::get('/alquiler','alquilerController@index');
+Route::get('/factura_venta','facturaventaController@index');
 
 
-
+//ruta para llenar home
+Route::get('/mostrar_inner','HomeController@index');
 
 
 //nueva habitacion
@@ -125,11 +130,11 @@ Route::get('/iniciarestado', function () {
     return view('/vendor/adminlte/iniciarestado');
 });
 
-Route::get('/estado/{t}', 'EstadoController@add');
-
-Route::get('/modificar_estado/{t}', 'EstadoController@mod');
-
-Route::get('modestados', 'EstadoController@actualizar');
+Route::get('/estado/{t}', 'estadoController@add');
+Route::get('/consult_estado','estadoController@mostrar');
+Route::get('/modificar_estado/{t}/{ip}', 'estadoHabitacionController@mod');
+Route::get('modestados', 'estadoController@actualizar');
+Route::get('direccion_ip/{ip}','estadoHabitacionController@addip');
 
 
 //proveedor
@@ -174,4 +179,17 @@ Route::delete('alquiler/{id}/eliminar', ['as'=> 'alquiler.delete', 'uses' =>'alq
 Route::post('alquiler/{id}/edit', ['as' => 'alquiler.editar', 'uses' => 'alquilerController@edit']);
 
 Route::put('alquiler/{id}', ['as' => 'alquiler.update', 'uses'=>'alquilerController@update']);
+
+
+//factura venta
+Route::post('factura_venta/crear', ['as' => 'factura_venta.create', 'uses'=>'facturaventaController@store']);
+
+Route::delete('factura_venta/{id}/eliminar', ['as'=> 'factura_venta.delete', 'uses' =>'facturaventaController@destroy']);
+
+Route::post('factura_venta/{id}/edit', ['as' => 'factura_venta.editar', 'uses' => 'facturaventaController@edit']);
+
+Route::put('factura_venta/{id}', ['as' => 'factura_venta.update', 'uses'=>'facturaventaController@update']);
+
+
+
 

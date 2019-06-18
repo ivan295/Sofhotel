@@ -11,7 +11,7 @@
       <div class="box-header with-border">
         <h3 class="box-title">Alquiler</h3>
       </div>
-      <form method="post"  action="{{route('alquiler.create')}}" >
+      <form method="post"  action="" >
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="box-body">
           <label for="numerohabitacion">fecha</label>

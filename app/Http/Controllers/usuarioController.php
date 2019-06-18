@@ -10,11 +10,11 @@ class usuarioController extends Controller
 {
     public function index()
     {  
-    	//$Nuevousuario = DB::table('usuario')
-    	//->join('tipousuario','tipousuario.id','=','usuario.idtipoUsuario')
-    	//->select('usuario.*','tipousuario.descripcion as TipoUser')
-        //->orderBy('id', 'desc')
-    	$Nuevousuario = User::with('tipousuario')->get();
+    	$Nuevousuario = DB::table('users')
+    	->join('tipousuario','tipousuario.id','=','users.idtipoUsuario')
+    	->select('users.*','tipousuario.descripcion as TipoUser')
+        ->orderBy('id', 'desc')
+        ->paginate(10);
         //return response()->json($Nuevousuario);
         //dd($Nuevousuario);
         return view('vendor.adminlte.nuevousuario',compact('Nuevousuario'));
@@ -32,7 +32,7 @@ class usuarioController extends Controller
         $Nuevousuario->direccion = $request->direccion;
         $Nuevousuario->telefono = $request->telefono;
         $Nuevousuario->idtipoUsuario = $request->idtipouser;
-        $Nuevousuario->email =$request->usuario.'@sistema.com';
+        $Nuevousuario->email = $request->usuario.'@sistema.com';
         $Nuevousuario->save();
         return redirect('/nuevouser');
     }
@@ -46,7 +46,7 @@ class usuarioController extends Controller
     public function edit($id)
     {
         $Nuevousuario = User::find($id);
-        return view('vendor.adminlte.editusuario', compact('Nuevousuario'));
+         return view('vendor.adminlte.editusuario', compact('Nuevousuario'));
     }
 
     public function update(Request $request, $id)

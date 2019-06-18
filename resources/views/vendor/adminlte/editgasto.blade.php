@@ -30,6 +30,7 @@
           <br>
           <div class="box-footer">
           <button type="submit"class="btn btn-success">Modificar</button>
+          <button type="submit" class="btn btn-danger" onclick="vendor/adminlte/gastos.php">Salir</button>
         </div>
       </form>
       

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DepositoTabla extends Migration
+class CreateDepositoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class DepositoTabla extends Migration
      */
     public function up()
     {
-        Schema::create('deposito', function (Blueprint $table){
-            $table->increments('id');
+        Schema::create('deposito', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
             $table->string('descripcion',100);
             $table->float('total_deposito');
             $table->datetime('fecha_deposito');
@@ -22,10 +23,9 @@ class DepositoTabla extends Migration
             $table->bigInteger('id_Usuario')->unsigned()->index();
             $table->foreign('id_Usuario')->references('id')->on('users');
 
-            $table->integer('id_Cuenta')->unsigned()->index();
+            $table->bigInteger('id_Cuenta')->unsigned()->index();
             $table->foreign('id_Cuenta')->references('id')->on('cuenta');
-
-         });
+        });
     }
 
     /**
@@ -35,7 +35,6 @@ class DepositoTabla extends Migration
      */
     public function down()
     {
-                Schema::dropIfExists('deposito');
-
+        Schema::dropIfExists('deposito');
     }
 }

@@ -39,8 +39,9 @@
             <li><a href="{{ url('/tipouser') }}"><i class='fa fa-users'></i> <span>Tipo de Usuario</span></a></li>
             <li><a href="{{ url('/nuevouser') }}"><i class='fa fa-user-plus'></i> <span>Crear Usuario</span></a></li>
             <li><a href="{{ url('/proveedor') }}"><i class='fa fa-user-plus'></i> <span>Crear Proveedor</span></a></li>
-            <li><a href="{{ url('/productos') }}"><i class='fa fa-user-plus'></i> <span>Agregar Producto</span></a></li>
+            <li><a href="{{ url('/productos') }}"><i class='fa fa-object-group'></i> <span>Agregar Producto</span></a></li>
             <li><a href="{{ url('/alquiler') }}"><i class='fa fa-user-plus'></i> <span>Alquiler</span></a></li>
+            <li><a href="{{ url('/factura_venta') }}"><i class='fa fa-user-plus'></i> <span>factura venta</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>Compras</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">

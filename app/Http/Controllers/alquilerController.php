@@ -6,19 +6,25 @@ use Illuminate\Http\Request;
 use App\Alquiler;
 use Habitacion;
 use User;
+use Estado_habitacion;
 use DB;
 class alquilerController extends Controller
 {
     public function index()
     {
-        $nuevoAlquiler = DB::table('alquiler')
-        ->join('users','users.id','=','alquiler.id_usuario')
-        ->join('habitacion','habitacion.id','=','alquiler.id_habitacion')
-    	->select('alquiler.*','users.nombre as name','habitacion.numero_habitacion as habitacion')
-    	->orderBy('id', 'desc')
-        //dd($nuevoAlquiler);
+        $NuevaH = \DB::table('habitacion')->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
+        ->select('habitacion.*','estado_habitacion.estado')
         ->get();
-        return view('vendor.adminlte.Alquiler',compact('nuevoAlquiler'));
+        return view('vendor.adminlte.home', compact('NuevaH'));
+        //$nuevoAlquiler = DB::table('alquiler')
+        //->join('users','users.id','=','alquiler.id_usuario')
+        //->join('habitacion','habitacion.id','=','alquiler.id_habitacion')
+    	//->select('alquiler.*','users.nombre as name','habitacion.numero_habitacion as habitacion')
+    	//->orderBy('id', 'desc')
+        //dd($nuevoAlquiler);
+        //->get();
+        //return view('vendor.adminlte.home');
+        //,compact('nuevoAlquiler'));
     }
 
     public function store(Request $request)

@@ -5,8 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Estado;
 use DB;
+use Habitacion;
 class estadoController extends Controller
 {
+
+    public function mostrar(){
+        $userall = DB::table('estados')->get();
+        return response()->json($userall);
+    }
+
+
+
      public function add($t){
     	$dato = new Estado;
     	$dato->contador = $t;
@@ -28,12 +37,14 @@ class estadoController extends Controller
     }
 
     public function actualizar(Request $request){
+
+        
     	$mensaje = $request->campo;
  		$sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
 
     	$len = strlen($mensaje);
 
-   		socket_sendto($sock, $mensaje, $len, 0, '192.168.0.106', 8888);
+   		socket_sendto($sock, $mensaje, $len, 0, '192.168.0.108', 8888);
     	socket_close($sock);
     	return view('vendor.adminlte.iniciarestado');
     	//dd($mensaje);

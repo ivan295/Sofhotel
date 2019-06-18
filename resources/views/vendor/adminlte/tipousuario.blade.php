@@ -7,6 +7,17 @@
 
 @section('main-content')
 <!-- box con input para crear tipo de usuario -->
+@if(session()->has('msj'))
+<div class="alert alert-success">
+  <a href="#" class="alert-link">{{ session('msj') }}</a>
+</div>
+@endif
+@if(session()->has('msjerror'))
+<div class="alert alert-danger">
+  <a href="#" class="alert-link">Error al guardar</a>
+</div>
+@endif
+
 <div class="row">
   <div class="col-md-12">
     <div class="box box-primary">

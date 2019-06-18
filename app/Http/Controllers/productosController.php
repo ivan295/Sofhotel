@@ -37,10 +37,21 @@ class productosController extends Controller
         return redirect('/productos');        
     }
 
-    // public function filtroProductos(Response $reponse){
+   public function edit($id)
+    {
+        $nuevoproducto = Productos::find($id);
+         return view('vendor.adminlte.editproducto', compact('nuevoproducto'));
+    }
 
-    //     $productos = Productos::where('descripcion','like',%$response%)->get();
-    //     return response()->json($productos);
-
-    // }
+    public function update(Request $request, $id)
+    {
+        $nuevoproducto = Productos::find($id);
+        $nuevoproducto->descripcion = $request->descripcion;
+        $nuevoproducto->precio_venta = $request->precio_venta;
+        $nuevoproducto->stock = $request->stock;
+        $nuevoproducto->precio_compra = $request->precio_compra;
+        $nuevoproducto->id_proveedor = $request->id_proveedor;
+        $nuevoproducto->save();
+        return redirect('/productos');
+    }
 }
