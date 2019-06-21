@@ -12,19 +12,19 @@ class alquilerController extends Controller
 {
     public function index()
     {
-        $NuevaH = \DB::table('habitacion')->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
-        ->select('habitacion.*','estado_habitacion.estado')
-        ->get();
-        return view('vendor.adminlte.home', compact('NuevaH'));
-        //$nuevoAlquiler = DB::table('alquiler')
-        //->join('users','users.id','=','alquiler.id_usuario')
-        //->join('habitacion','habitacion.id','=','alquiler.id_habitacion')
-    	//->select('alquiler.*','users.nombre as name','habitacion.numero_habitacion as habitacion')
-    	//->orderBy('id', 'desc')
+        // $NuevaH = \DB::table('habitacion')->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
+        // ->select('habitacion.*','estado_habitacion.estado')
+        // ->get();
+        // return view('vendor.adminlte.home', compact('NuevaH'));
+
+        $nuevoAlquiler = DB::table('alquiler')
+        ->join('users','users.id','=','alquiler.id_usuario')
+        ->join('habitacion','habitacion.id','=','alquiler.id_habitacion')
+    	->select('alquiler.*','users.nombre as name','habitacion.numero_habitacion as habitacion')
+    	->orderBy('id', 'desc')
         //dd($nuevoAlquiler);
-        //->get();
-        //return view('vendor.adminlte.home');
-        //,compact('nuevoAlquiler'));
+        ->paginate(10);
+        return view('vendor.adminlte.Alquiler',compact('nuevoAlquiler'));
     }
 
     public function store(Request $request)
@@ -38,7 +38,7 @@ class alquilerController extends Controller
         $nuevoAlquiler->id_usuario = $request->id_usuario;
         $nuevoAlquiler->id_habitacion = $request->id_habitacion;
         $nuevoAlquiler->save();
-        return redirect('/alquiler');
+        return redirect('/cargarinner');
 	}
 
 }

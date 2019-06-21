@@ -71,10 +71,12 @@ Route::get('/productos','productosController@index');
 Route::get('/detalle_compra','detalleCompraController@index');
 Route::get('/alquiler','alquilerController@index');
 Route::get('/factura_venta','facturaventaController@index');
+Route::get('/cargarinner','HomeController@index');
 
 
 //ruta para llenar home
-Route::get('/mostrar_inner','HomeController@index');
+Route::get('/home','HomeController@index');
+Route::get('/mostrar_inner','HomeController@getdata');
 
 
 //nueva habitacion
@@ -189,6 +191,133 @@ Route::delete('factura_venta/{id}/eliminar', ['as'=> 'factura_venta.delete', 'us
 Route::post('factura_venta/{id}/edit', ['as' => 'factura_venta.editar', 'uses' => 'facturaventaController@edit']);
 
 Route::put('factura_venta/{id}', ['as' => 'factura_venta.update', 'uses'=>'facturaventaController@update']);
+
+
+//Caja
+
+Route::get('apertura', 'CajaController@index');
+
+Route::get('/cierre', function () {
+    return view('/vendor/adminlte/cierre_caja');
+    //return view('/');
+});
+
+Route::post('crear', 'CajaController@store');
+
+
+//Bancos
+
+Route::get('/nuevo_banco', function () {
+    return view('/vendor/adminlte/nuevo_banco');
+});
+
+Route::get('/modificar_banco', function () {
+    return view('/vendor/adminlte/modificar_banco');
+});
+
+Route::get('banco', 'BancoController@index');
+
+Route::post('banco/crear', ['as' => 'banco.create', 'uses'=>'BancoController@store']);
+
+Route::delete('banco/{id}/eliminar', ['as' => 'banco.delete', 'uses' => 'BancoController@destroy']);
+
+Route::post('banco/{id}/edit', ['as' => 'banco.cambio', 'uses' => 'BancoController@edit']);
+
+Route::put('banco/{id}', ['as' => 'banco.update', 'uses' => 'BancoController@update']);
+
+//Tipo de cuentas
+
+Route::get('/nuevo_tipo_cuenta', function () {
+    return view('/vendor/adminlte/nuevo_tipo_cuenta');
+});
+
+Route::get('/modificar_tipo_cuenta', function () {
+    return view('/vendor/adminlte/modificar_tipo_cuenta');
+});
+
+Route::get('tipo_cuenta', 'TipoCuentaController@index');
+
+
+Route::post('tipo_cuenta/crear', ['as' => 'tipo_cuenta.create', 'uses'=>'TipoCuentaController@store']);
+
+
+Route::delete('tipo_cuenta/{id}/eliminar', ['as' => 'tipo_cuenta.delete', 'uses' => 'TipoCuentaController@destroy']);
+
+Route::post('tipo_cuenta/{id}/edit', ['as' => 'tipo_cuenta.cambio', 'uses' => 'TipoCuentaController@edit']);
+
+Route::put('tipo_cuenta/{id}', ['as' => 'tipo_cuenta.update', 'uses' => 'TipoCuentaController@update']);
+
+
+//Propietarios cuentas
+
+Route::get('/nuevo_propietario_cuenta', function () {
+    return view('/vendor/adminlte/nuevo_propietario_cuenta');
+});
+
+Route::get('/modificar_propietario_cuenta', function () {
+    return view('/vendor/adminlte/modificar_propietario_cuenta');
+});
+
+Route::get('propietario_cuenta', 'PropietarioCuentaController@index');
+
+
+Route::post('propietario_cuenta/crear', ['as' => 'propietario_cuenta.create', 'uses'=>'PropietarioCuentaController@store']);
+
+
+Route::delete('propietario_cuenta/{id}/eliminar', ['as' => 'propietario_cuenta.delete', 'uses' => 'PropietarioCuentaController@destroy']);
+
+Route::post('propietario_cuenta/{id}/edit', ['as' => 'propietario_cuenta.cambio', 'uses' => 'PropietarioCuentaController@edit']);
+
+Route::put('propietario_cuenta/{id}', ['as' => 'propietario_cuenta.update', 'uses' => 'PropietarioCuentaController@update']);
+
+//Cuenta
+
+Route::get('/nueva_cuenta', function () {
+    return view('/vendor/adminlte/nueva_cuenta');
+});
+
+Route::get('/modificar_cuenta', function () {
+    return view('/vendor/adminlte/modificar_cuenta');
+});
+
+Route::get('cuenta', 'CuentaController@index');
+
+
+Route::post('cuenta/crear', ['as' => 'cuenta.create', 'uses'=>'CuentaController@store']);
+
+
+Route::delete('cuenta/{id}/eliminar', ['as' => 'cuenta.delete', 'uses' => 'CuentaController@destroy']);
+
+Route::post('cuenta/{id}/edit', ['as' => 'cuenta.cambio', 'uses' => 'CuentaController@edit']);
+
+
+Route::put('cuenta/{id}', ['as' => 'cuenta.update', 'uses' => 'CuentaController@update']);
+
+//depositos
+
+Route::get('/nuevo_deposito', function () {
+    return view('/vendor/adminlte/nuevo_deposito');
+});
+
+
+Route::get('/modificar_deposito', function () {
+    return view('/vendor/adminlte/modificar_deposito');
+});
+
+Route::get('deposito', 'DepositoController@index');
+
+
+Route::post('deposito/crear', ['as' => 'deposito.create', 'uses'=>'DepositoController@store']);
+
+
+Route::delete('deposito/{id}/eliminar', ['as' => 'deposito.delete', 'uses' => 'DepositoController@destroy']);
+
+Route::post('deposito/{id}/edit', ['as' => 'deposito.cambio', 'uses' => 'DepositoController@edit']);
+
+
+Route::put('deposito/{id}', ['as' => 'deposito.update', 'uses' => 'DepositoController@update']);
+
+
 
 
 

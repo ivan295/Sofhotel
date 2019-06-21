@@ -31,23 +31,57 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
-            <li class="header">OPCIONES</li>
-            <!-- Optionally, you can add icons to the links -->
+            <!--<li class="header">OPCIONES</li>
+             Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='glyphicon glyphicon-home'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
-            <li><a href="{{ url('/Habitacion') }}"><i class='glyphicon glyphicon-wrench'></i> <span>crear habitacion</span></a></li>
+
+             <li class="treeview">
+                <a href="#"><i class='fa fa-money'></i> <span>Caja</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                 <li><a href="{{ url('/apertura') }}"><i class='fa fa-plus'></i> <span>Apertura</span></a></li>  
+                 <!-- <li><a href="{{ url('/cierre') }}"><i class='fa fa-times'></i> <span>Cierre</span></a></li>-->
+                </ul>
+             </li>
+
+             <li class="treeview">
+                <a href="#"><i class='fa fa-list-alt'></i> <span>Gestión depósito</span> <i class="fa fa-angle-left pull-right"></i></a>
+             <ul class="treeview-menu">
+                
+                <li><a href="{{ url('/propietario_cuenta') }}"><i class='fa fa-user'></i> <span>Propietario Cuenta</span></a></li>
+
+                <li><a href="{{ url('/tipo_cuenta') }}"><i class='fa  fa-cubes'></i> <span>Tipo de cuenta</span></a></li>
+
+                 <li><a href="{{ url('/banco') }}"><i class='fa fa-bank'></i><span>Bancos</span></a></li>
+
+                 <li><a href="{{ url('/cuenta') }}"><i class='fa fa-credit-card'></i> <span>Cuentas</span></a></li> 
+
+                 <li><a href="{{ url('/deposito') }}"><i class='fa fa-file-text'></i> <span>Crear depósito</span></a></li>
+                    
+             </ul>
+             </li>
+
+            <li><a href="{{ url('/Habitacion') }}"><i class='glyphicon glyphicon-wrench'></i> <span>crear habitación</span></a></li>
+
             <li><a href="{{ url('/gastos') }}"><i class='glyphicon glyphicon-usd'></i> <span>Gastos</span></a></li>
+
             <li><a href="{{ url('/tipouser') }}"><i class='fa fa-users'></i> <span>Tipo de Usuario</span></a></li>
+
             <li><a href="{{ url('/nuevouser') }}"><i class='fa fa-user-plus'></i> <span>Crear Usuario</span></a></li>
+
             <li><a href="{{ url('/proveedor') }}"><i class='fa fa-user-plus'></i> <span>Crear Proveedor</span></a></li>
-            <li><a href="{{ url('/productos') }}"><i class='fa fa-object-group'></i> <span>Agregar Producto</span></a></li>
-            <li><a href="{{ url('/alquiler') }}"><i class='fa fa-user-plus'></i> <span>Alquiler</span></a></li>
+
+            <li><a href="{{ url('/productos') }}"><i class='fa fa-object-group'></i> <span>Productos</span></a></li>
+
+            <li><a href="{{ url('/alquiler') }}"><i class='fa  fa-exclamation'></i> <span>Alquiler</span></a></li>
+
             <li><a href="{{ url('/factura_venta') }}"><i class='fa fa-user-plus'></i> <span>factura venta</span></a></li>
+
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>Compras</span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
+            <ul class="treeview-menu">
                  <li><a href="{{ url('/factura_compra') }}"><i class='fa fa-user-plus'></i> <span>Factura de Compra</span></a></li>  
                  <li><a href="{{ url('/detalle_compra') }}"><i class='fa fa-user-plus'></i> <span>Detalle de Compra</span></a></li> 
-             </ul>
+            </ul>
          </li> 
      </ul><!-- /.sidebar-menu -->
  </section>

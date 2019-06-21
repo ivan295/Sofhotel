@@ -4,22 +4,46 @@
 {{ trans('adminlte_lang::message.home') }}
 @endsection
 @section('main-content')
+
+
+
 <script type="text/javascript">
   function consultar(){
     var dato = document.getElementById('consulta_proveedor').value;
     document.getElementById('id_proveedor').value = dato;
   }
 </script>
+<label ><h3>Listado de Productos</h3></label>
 <div class="row">
-  <div class="col-md-12 col-md-offset-0" >
-    <div class="box box-primary">
-      <div class="box-header with-border">
-        <h3 class="box-title">Producto</h3>
+  <br>
+<div class="col-md-5">
+<div class="input-group">
+<span class="input-group-addon"><i class="fa fa-search"></i></span>
+ <input type="text" class="form-control" name="buscar_producto" id="buscar_producto" placeholder="Busqueda por nombre de producto">
+</div>
+</div>
+<div class="col-md-5">
+  <input type="hidden" name="hidden">
+</div>
+<div class="contenedor-modal">
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Agregar Producto</button>
+</div>
+</div>
+<br>
+<!-- ventana modal -->
+<div class="modal fade" id="ventana_crear" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Agregar Nuevo Producto</h4>
       </div>
+      <div class="modal-body">
       <form method="post"  action="{{route('productos.create')}}" >
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="box-body">
-          <br>
           <div class="col-md-6">
           <label for="descripcion_producto">Descripcion</label>
           <div class="input-group">
@@ -51,7 +75,7 @@
         <div class="col-md-6">
           <label>Proveedor</label>
           <div class="select-group">
-          <select class="form-control" name="id_proveedor" id="consulta_proveedor" onchange="consultar()" required>                    
+          <select class="form-control" name="id_proveedor" id="consulta_proveedor" onchange="consultar()" required>                 
             <option value="0">Seleccionar Proveedor</option>
             <?php $prov = DB::table('proveedor')->get(); ?>
             @foreach($prov as $prov)
@@ -69,6 +93,8 @@
   </div>
 </div>
 </div>
+</div>
+<!-- fin de ventana modal-->
 <!-- box para mostrar tabla con datos -->
 <div class="col-md-14">
   <div class="box box-primary">
@@ -79,16 +105,16 @@
     </div>
   </div>
   <!--tabla-->
-  <table class="table table-hover table-bordered" id="tablagastos">
+  <table class="table table-hover table-bordered" id="tablaproductos">
     <thead>
-      <tr>
+      <tr bgcolor="#98A8D5">
         <th class='text-center'>#</th>
         <th class='text-center'>Descripcion</th>
         <th class='text-center'>Precio de Venta</th>
         <th class="text-center">Stock</th>
         <th class="text-center">Precio de Compra</th>
         <th class="text-center">Proveedor</th>
-        <th class="text-center">Acciones</th>
+        <th class="text-center">Opciones</th>
       </tr>
     </thead>
     <tbody>
@@ -114,7 +140,6 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-danger btn-xs">Borrar</button>
               </form>
-            </form>
           </div>
         </div>
       </td>
@@ -125,5 +150,4 @@
 {{ $NuevoProducto->links() }}
 </div>
 </div>
-
 @endsection

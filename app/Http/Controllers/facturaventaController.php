@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Factura_venta;
 use DB;
 use Habitacion;
+use Alquiler;
 class facturaventaController extends Controller
 {
     public function index()
@@ -14,9 +15,9 @@ class facturaventaController extends Controller
        ->join('alquiler','alquiler.id','=','factura_venta.id_alquiler')
        ->join('habitacion','habitacion.id','=','alquiler.id_habitacion')
        ->select('factura_venta.*','alquiler.fecha as Fecha','habitacion.numero_habitacion as habitacion','habitacion.precio as Precio')
-     //->orderBy('id', 'desc')
+         ->orderBy('id', 'desc')
      
-         ->get();
+         ->paginate(10);
          //dd($FacturaVenta);
          
         return view('vendor.adminlte.Facturaventa', compact('FacturaVenta'));
@@ -29,15 +30,7 @@ class facturaventaController extends Controller
         $FacturaVenta->total_cobro = $request->total_cobro;
         $FacturaVenta->id_alquiler = $request->id_alquiler;
         $FacturaVenta->save();
-        $id_alq = $request->id_alquiler;
 
-        $FacturaVenta = DB::table('factura_venta')
-       ->join('alquiler','alquiler.id','=','factura_venta.id_alquiler')
-       ->join('habitacion','habitacion.id','=','alquiler.id_habitacion')
-       ->select('factura_venta.*','alquiler.fecha as Fecha','habitacion.numero_habitacion as habitacion','habitacion.precio as Precio')
-         ->get();
-
-        //return redirect('/factura_venta');
-        return view('vendor.adminlte.Facturaventa',compact('id_alq', '$FacturaVenta'));
+        return redirect('/factura_venta');
 	}
 }

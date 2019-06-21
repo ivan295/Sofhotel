@@ -4,19 +4,42 @@
 {{ trans('adminlte_lang::message.home') }}
 @endsection
 @section('main-content')
+
 <script type="text/javascript">
   function consultar(){
     var dato = document.getElementById('consulta_tipo').value;
     document.getElementById('idtipo').value = dato;
   }
 </script>
-<!-- box con input para crear habitaciones -->
+
+<label ><h3>Usuarios</h3></label>
 <div class="row">
-  <div class="col-md-12">
-    <div class="box box-primary">
-      <div class="box-header with-border">
-        <h3 class="box-title">Crear Usuario</h3>
+<br>
+<div class="col-md-5">
+<div class="input-group">
+<span class="input-group-addon"><i class="fa fa-search"></i></span>
+ <input type="text" class="form-control" name="buscar_producto" id="buscar_producto" placeholder="Busqueda por nombre">
+</div>
+</div>
+<div class="col-md-5">
+  <input type="hidden" name="hidden">
+</div>
+<div class="contenedor-modal">
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Nuevo usuario</button>
+</div>
+</div>
+<br>
+<!--ventana modal -->
+<div class="modal fade" id="ventana_crear" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Crear nuevo usuario</h4>
       </div>
+      <div class="modal-body">
       <form method="post"  action="{{route('nuevouser.create')}}" target="request">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="box-body">
@@ -83,13 +106,14 @@
           <input type="hidden" id="idtipo" name="idtipouser">
         </div>
       </div>
-        <div class="box-footer">
           <button type="submit"class="btn btn-success">Crear</button>
-        </div>
-      </form>
+       
+      </form> 
 
-    </div>
+    
   </div>
+</div>
+</div>
 </div>
 <!-- box para mostrar usuarios -->
 <div class="col-md-14">
@@ -103,16 +127,16 @@
   <!--tabla-->
   <table class="table table-hover table-bordered" id="tablausuarios">
     <thead>
-      <tr>
+      <tr bgcolor="#98A8D5">
         <th class='text-center'>ID</th>
         <th class='text-center'>Nombre</th>
         <th class='text-center'>Apellido</th>
-        <th class="text-center">Cedula</th>
+        <th class="text-center">Cédula</th>
         <th class="text-center">Usuario</th>
         <th class="text-center">Dirección</th>
         <th class="text-center">Teléfono</th>
         <th class="text-center">Tipo de usuario</th>
-        <th class='text-center'>Acciones</th>
+        <th class='text-center'>Opciones</th>
       </tr>
     </thead>
     <tbody>

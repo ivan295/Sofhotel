@@ -1,45 +1,44 @@
+
+
 $(document).ready(function(){
-       		habMostrar();
-       		setInterval(habMostrar, 10000);
- });
+    //cargarhabitacion();
+    //	setInterval(cargarhabitacion,10000);
+         //});
+        //function cargarhabitacion(){
+           $.get('mostrar_inner', function (data) {
+            $.each(data, function(i, item) { 
+             $("#cuadro").append(
+                "<div class='col-md-3 col-md-offset-0'>\
+                <div class='small-box bg-aqua'>\
+                <div class='inner'>\
+                <h3>"+item.numero_habitacion+"</h3>\
+                <p>Fecha: </p>\
+                <p>Hora de ingreso: </p>\
+                <p>Hora de salida: </p>\
+                <p>Total a pagar: </p>\
+                <button type='submit'class='btn  btn-block btn-warning' data-toggle='modal' data-target='#exampleModalCenter'>Imprimir</button>\
+                </div>\
+                <div class='icon'>\
+                <i class='fa fa-hotel'></i>\
+                </div>\
+                <progress value=0 max=100 id='barra' class='barraStyle style='width:100%' ></progress>\
+                </div>\
+                </div>"
 
-function habMostrar(){
-    $.get('mostrar_inner', function (data) {
-        $("#cuadro").html("");
-        $.each(data, function(i, item) { //recorre el data 
-            cargarInner(item); // carga los datos en la tabla
-        });      
-    });
-}
+                );
+         });
 
-function cargarInner(data){
-	$("#cuadro").append(
-        "<h3>"+# item.numero_habitacion+"</h3>\
-         <p>'Fecha: </p>'\
-         <p>'Hora de ingreso:'</p>\
-         <p>'Hora de salida:'</p>\
-         <p>'Total a pagar:'</p>\ "
-    );
 
- 
- // $('#cuadro').html('');
- //        $.each(data, function(a, item) {
- // var fila="";
-
- //    fila+=  	'<h3>'+# item.numero_habitacion+'</h3>';
-	// fila+=      '  <p>'Fecha: '</p>';
-	// fila+=      '  <p>'Hora de ingreso:'</p>';
-	// fila+=      '  <p>'Hora de salida:'</p>';
-	// fila+=      '  <p>'Total a pagar:'</p>';
-
- //    $('#cuadro').append(fila);//identificamos a lo que queremos add  #tablaDetalleProductos -> es el id de la tabla a llenar       
-}
+        });
+//}
+});
 
 
 
 
 
-					
-					
-					
-					
+
+
+
+
+

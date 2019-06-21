@@ -40,18 +40,12 @@
           </div>
           <br>
           <label for="tiempolimpieza">Tiempo de Limpieza </label>
-          <div class="bootstrap-timepicker">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa fa-clock-o"></i>
-                </div>
-                <input type="text" class="form-control timepicker" name="tiempo_limpieza" id="tiempo_limpieza" value="00:00:00" required>
-              </div>
-            </div>
+          <div class="form-group">
+            <input type="time" name="tiempo_limpieza" value="00:00:00"  step="1">
           </div>
-           <div class="form-group">
-            <label>Ip de la placa Arduino</label>
+          <label>Ip de la placa Arduino</label>
+           <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-tv"></i></span>
             <select class="form-control" name="ip_arduino" id="consulta_ip" onchange="consultar()">                    
               <option value="0">Seleccionar Ip de Arduino</option>
               <?php $ip = DB::table('estado_habitacion')->get(); ?>
@@ -60,10 +54,10 @@
               @endforeach
             </select>
           </div>
-          <input type="hidden" id="id_estado" name="id_estado">
         </div>
         <div class="box-footer">
           <button type="submit"class="btn btn-success">Crear</button>
+          <input type="hidden" id="id_estado" name="id_estado">
         </div>
       </form>
 

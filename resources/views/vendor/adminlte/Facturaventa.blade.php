@@ -7,7 +7,7 @@
 <script type="text/javascript">
   function consultar(){
     var dato = document.getElementById('consulta_tipo').value;
-    document.getElementById('idtipo').value = dato;
+    document.getElementById('id_alquiler').value = dato;
   }
 </script>
 <!-- box con input para crear habitaciones -->
@@ -21,54 +21,53 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         
         <div class="box-body">
-        @foreach($FacturaVenta as $FacturaVenta)
-          <input type="hidden" class="form-control" name="total_alquiler" id="total_alquiler" value="<?php echo $FacturaVenta->Precio; ?>" >
-        @endforeach
-         
+    
+          <input type="hidden" class="form-control" name="total_alquiler" id="total_alquiler" value="{{Auth::user()->id}}">
+      
         <div class="col-md-6">
-          <label for="apellido">Apellido</label>
+          <label for="apellido">total de productos</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user"></i></span>
             <input type="text" class="form-control" name="total_productos" id="total_productos" placeholder="total_productos" >
           </div>
           </div>
           <div class="col-md-6">
-          <label for="cedula">Cédula</label>
+          <label for="cedula">total cobro</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-slack"></i></span>
             <input type="text" class="form-control" name="total_cobro" id="total_cobro" placeholder="total_cobro" >
           </div>
           </div>
-          
-          <div class="col-md-6">
-          <div class="form-group">
-            <label>Tipo de Usuario</label>
-            <select class="form-control" name="idtipouser" id="consulta_tipo" onchange="consultar()">                    
-              <option value="0">Seleccionar tipo de Usuario</option>
-              <?php $Alquiler = DB::table('alquiler')->get(); ?>
-              @foreach($Alquiler as $Alquiler)
-              <option value="<?php  echo $Alquiler->id ; ?>"> <?php echo $Alquiler->fecha; ?>  </option>
-              @endforeach
-            </select>
-          </div>
-          <input type="hidden" id="idtipo" name="id_alquiler">
+           <div class="col-md-6">
+          <label>alquiler</label>
+          <div class="select-group">
+          <select class="form-control" name="id_proveedor" id="consulta_tipo" onchange="consultar()" required>                    
+            <option value="0">Seleccionar Proveedor</option>
+            <?php $alquiler = DB::table('alquiler')->get(); ?>
+            @foreach($alquiler as $alquiler)
+            <option value="<?php  echo $alquiler->id ; ?>"> <?php echo $alquiler->fecha; ?>  </option>
+            @endforeach
+          </select>
         </div>
       </div>
+        <input type="hidden" id="id_alquiler" name="id_alquiler" required>
+        </div>
         <div class="box-footer">
           <button type="submit"class="btn btn-success">Crear</button>
         </div>
         
       </form>
-
     </div>
   </div>
 </div>
+
+
 <!-- box para mostrar usuarios -->
 <div class="col-md-14">
   <div class="box box-primary">
    <div class="box-header with-border">
     <i class="fa fa-picture-o"></i>
-    <h3 class="box-title" align="text-center">Usuarios</h3>
+    <h3 class="box-title" align="text-center">Factura Venta</h3>
     <div class="box-tools pull-right">
     </div>
   </div> 
@@ -80,48 +79,26 @@
         <th class='text-center'>total_alquiler</th>
         <th class='text-center'>total_productos</th>
         <th class="text-center">total cobro</th>
-        <th class="text-center">habitacion</th>
-        <th class="text-center">precio</th>
+        <th class="text-center">Fecha de Alquiler</th>
+        <th class="text-center">Número de Habitación</th>
         
       </tr>
     </thead>
     <tbody>
-      <tr></tr>
-      
+      @foreach($FacturaVenta as $facturaVenta)
       <tr class='text-center'>
-         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td class="text-center">
-          <div class="row">
-          </div>
-        </div>
-        <div class="row">
-              <div class="col-md-3 col-md-offset-2">
-               <form action="" method="post">
-                {{csrf_field()}}
-                
-                <button type="submit" class="btn btn-warning btn-xs">Editar</button></form>
-
-              </div>
-              <div class="col-md-3">
-               <form action="" method="post">
-                <input type="hidden" name="_method" value="DELETE">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="submit" class="btn btn-danger btn-xs">Borrar</button>
-              </form>
-            </div>
-          </div>
-      </td>
-    </tr>
-  
+         <td>{{$facturaVenta->id}}</td>
+        <td>{{$facturaVenta->Precio}}</td>
+        <td>{{$facturaVenta->total_productos}}</td>
+        <td>{{$facturaVenta->total_cobro}}</td>
+        <td>{{$facturaVenta->Fecha}}</td>
+        <td>{{$facturaVenta->habitacion}}</td>
+        
+      </tr>
+  @endforeach
   </tbody>
 </table>
-
 </div>
 </div>
-
+{{$FacturaVenta ->links()}}
 @endsection

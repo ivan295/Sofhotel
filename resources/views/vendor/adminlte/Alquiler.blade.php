@@ -5,13 +5,13 @@
 @endsection
 @section('main-content')
 <!-- box con input para registrar gasto -->
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-5 col-md-offset-3" >
     <div class="box box-primary">
       <div class="box-header with-border">
         <h3 class="box-title">Alquiler</h3>
-      </div>
-      <form method="post"  action="" >
+      </div> -->
+      <!-- <form method="post"  action="" >
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="box-body">
           <label for="numerohabitacion">fecha</label>
@@ -55,7 +55,7 @@
     </form>
   </div>
 </div>
-</div>
+</div> -->
 <!-- box para mostrar tabla con datos -->
 <div class="col-md-14">
   <div class="box box-primary">
@@ -68,31 +68,30 @@
   <!--tabla-->
   <table class="table table-hover table-bordered" id="tablagastos">
     <thead>
-      <tr>
+      <tr bgcolor="#98A8D5">
         <th class='text-center'>#</th>
-        <th class='text-center'>fecha</th>
-        <th class='text-center'>hora ingreso</th>
-        <th class="text-center">hora salida</th>
-        <th class="text-center">tiempo alquiler</th>
-        <th class="text-center">numero personas</th>
-        <th class="text-center">usuario</th>
-        <th class="text-center"># habitacion</th>
-        <th class="text-center">Acciones</th>
+        <th class='text-center'>Fecha</th>
+        <th class='text-center'>Hora de ingreso</th>
+        <th class="text-center">Hora de salida</th>
+        <th class="text-center">Tiempo alquiler</th>
+        <th class="text-center">Número personas</th>
+        <th class="text-center">Usuario</th>
+        <th class="text-center">Número de habitación</th>
       </tr>
     </thead>
     <tbody>
       <tr></tr>
-      @foreach($nuevoAlquiler as $nuevoAlquiler)
+      @foreach($nuevoAlquiler as $nuevoalquiler)
       <tr class='text-center'>
-        <td>{{$nuevoAlquiler->id}}</td>
-        <td>{{$nuevoAlquiler->fecha}}</td>
-        <td>{{$nuevoAlquiler->hora_ingreso_habitacion}}</td>
-        <td>{{$nuevoAlquiler->hora_salida_habitacion}}</td>
-        <td>{{$nuevoAlquiler->tiempo_alquiler}}</td>
-        <td>{{$nuevoAlquiler->numero_personas}}</td>
-        <td>{{$nuevoAlquiler->name}}</td>
-        <td>{{$nuevoAlquiler->habitacion}}</td>
-        <td class="text-center">
+        <td>{{$nuevoalquiler->id}}</td>
+        <td>{{$nuevoalquiler->fecha}}</td>
+        <td>{{$nuevoalquiler->hora_ingreso_habitacion}}</td>
+        <td>{{$nuevoalquiler->hora_salida_habitacion}}</td>
+        <td>{{$nuevoalquiler->tiempo_alquiler}}</td>
+        <td>{{$nuevoalquiler->numero_personas}}</td>
+        <td>{{$nuevoalquiler->name}}</td>
+        <td>{{$nuevoalquiler->habitacion}}</td>
+        <!-- <td class="text-center">
           <div class="row">
             <div class="col-md-3 col-md-offset-2">
              <form action="" method="post">
@@ -106,17 +105,14 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-danger btn-xs">Borrar</button>
               </form>
-            </form>
           </div>
         </div>
-      </td>
+      </td> -->
     </tr>
     @endforeach
   </tbody>
 </table>
-
-
-
+{{ $nuevoAlquiler->links() }}
 </div>
 </div>
 

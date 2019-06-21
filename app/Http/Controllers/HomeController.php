@@ -29,13 +29,16 @@ class HomeController extends Controller
 
     public function index()
     {
-        $NuevaH = \DB::table('habitacion')->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
+        return view('adminlte::home');
+    }
+
+    public function getdata(){
+
+         $NuevaH = \DB::table('habitacion')->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
         ->select('habitacion.*','estado_habitacion.estado')
         ->get();
-         return view('adminlte::home', compact('NuevaH'));     
-        //return response()->json($NuevaH); 
-
-        return view('adminlte::home');
+         //return view('adminlte::home', compact('NuevaH'));     
+        return response()->json($NuevaH); 
     }
 
     public function estadohabitacion(){

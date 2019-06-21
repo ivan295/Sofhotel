@@ -13,16 +13,15 @@ class CreateCajaTable extends Migration
      */
     public function up()
     {
-        Schema::create('caja', function (Blueprint $table) {
+        Schema::create('cajas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->datetime('fecha');
-            $table->time('hora_ingreso');
-            $table->time('hora_salida');
-            $table->float('saldo_inicial');
-            $table->float('saldo_final');
-
-            $table->bigInteger('id_usuario')->unsigned()->index();
+            $table->integer('numero_caja');
+            $table->bigInteger('id_dinero')->unsigned();
+            $table->bigInteger('id_usuario')->unsigned();
+            $table->date('fecha');
+            $table->date('fecha_cierre');
+            $table->foreign('id_dinero')->references('id')->on('dinero');
             $table->foreign('id_usuario')->references('id')->on('users');
         });
     }
@@ -34,6 +33,6 @@ class CreateCajaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('caja');
+        Schema::dropIfExists('cajas');
     }
 }

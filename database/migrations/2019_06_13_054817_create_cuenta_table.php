@@ -13,16 +13,17 @@ class CreateCuentaTable extends Migration
      */
     public function up()
     {
-        Schema::create('cuenta', function (Blueprint $table) {
+        Schema::create('cuentas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('numero_cuenta',10);
-                        
-            $table->bigInteger('id_propietario')->unsigned()->index();
-            $table->foreign('id_propietario')->references('id')->on('propietario_cuenta');
+              $table->string('numero_cuenta');
+            $table->bigInteger('id_tipo_cuenta')->unsigned();
+            $table->bigInteger('id_propietario')->unsigned();
+            $table->bigInteger('id_banco')->unsigned();
 
-            $table->bigInteger('id_banco')->unsigned()->index();
-            $table->foreign('id_banco')->references('id')->on('banco');
+            $table->foreign('id_tipo_cuenta')->references('id')->on('tipo_cuentas');
+            $table->foreign('id_propietario')->references('id')->on('propietario_cuentas');
+            $table->foreign('id_banco')->references('id')->on('bancos');
         });
     }
 
@@ -33,6 +34,6 @@ class CreateCuentaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cuenta');
+        Schema::dropIfExists('cuentas');
     }
 }

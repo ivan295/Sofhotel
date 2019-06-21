@@ -16,7 +16,7 @@ class productosController extends Controller
         ->orderBy('id', 'desc')
         //dd($NuevaCompra);
         ->paginate(10);
-        return view('vendor.adminlte.nuevoproducto',compact('NuevoProducto'));
+    return view('vendor.adminlte.nuevoproducto',compact('NuevoProducto'));
     }
 
     public function store(Request $request)
