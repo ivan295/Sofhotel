@@ -157,6 +157,7 @@ Route::delete('productos/{id}/eliminar', ['as'=> 'productos.delete', 'uses' =>'p
 Route::post('productos/{id}/edit', ['as' => 'productos.editar', 'uses' => 'productosController@edit']);
 
 Route::put('productos/{id}', ['as' => 'productos.update', 'uses'=>'productosController@update']);
+Route::get('productos/index', ['as' => 'productos.index', 'uses'=>'productosController@index']);
 
 //detalle_compra
 Route::post('detalle_compra/crear', ['as' => 'detalle_compra.create', 'uses'=>'detalleCompraController@store']);

@@ -5,8 +5,6 @@
 @endsection
 @section('main-content')
 
-
-
 <script type="text/javascript">
   function consultar(){
     var dato = document.getElementById('consulta_proveedor').value;
@@ -16,12 +14,17 @@
 <label ><h3>Listado de Productos</h3></label>
 <div class="row">
   <br>
+  
 <div class="col-md-5">
 <div class="input-group">
+  <form method="GET"  action="{{route('productos.index')}}" >
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+  <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Busqueda por descripcion del producto">
+</form>
 <span class="input-group-addon"><i class="fa fa-search"></i></span>
- <input type="text" class="form-control" name="buscar_producto" id="buscar_producto" placeholder="Busqueda por nombre de producto">
 </div>
 </div>
+
 <div class="col-md-5">
   <input type="hidden" name="hidden">
 </div>
@@ -150,4 +153,5 @@
 {{ $NuevoProducto->links() }}
 </div>
 </div>
+
 @endsection

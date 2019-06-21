@@ -8,14 +8,14 @@ use App\Proveedor;
 use DB;
 class productosController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $NuevoProducto = DB::table('producto')
+        $NuevoProducto = Productos::search($request->nombre)//llama al metodo queryscope definido en el modelo Productos
         ->join('proveedor','proveedor.id','=','producto.id_proveedor')
     	->select('producto.*','proveedor.empresa as Empresa')
         ->orderBy('id', 'desc')
         //dd($NuevaCompra);
-        ->paginate(10);
+        ->paginate(5);
     return view('vendor.adminlte.nuevoproducto',compact('NuevoProducto'));
     }
 
