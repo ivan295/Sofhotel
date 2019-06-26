@@ -15,7 +15,7 @@ class productosController extends Controller
     	->select('producto.*','proveedor.empresa as Empresa')
         ->orderBy('id', 'desc')
         //dd($NuevaCompra);
-        ->paginate(5);
+        ->paginate(10);
     return view('vendor.adminlte.nuevoproducto',compact('NuevoProducto'));
     }
 

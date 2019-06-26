@@ -13,9 +13,9 @@ class gastosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function index()
+     public function index(Request $request)
      {
-     	$NuevoGasto = DB::table('gastos')
+     	$NuevoGasto = Gastos::search($request->gasto)
         ->join('users','users.id','=','gastos.id_usuario')
         ->select('gastos.*','users.usuario as user')
         ->orderBy('id', 'desc')

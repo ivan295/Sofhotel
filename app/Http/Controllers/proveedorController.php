@@ -7,9 +7,9 @@ use App\Proveedor;
 use DB;
 class proveedorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $Nuevoproveedor = DB::table('proveedor')
+        $Nuevoproveedor = Proveedor::search($request->nombre)
         ->orderBy('id', 'desc')
         ->paginate(10);
         return view('vendor.adminlte.nuevoproveedor',compact('Nuevoproveedor'));

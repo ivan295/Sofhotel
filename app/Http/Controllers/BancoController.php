@@ -12,9 +12,9 @@ class BancoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $banco = DB::table('bancos')
+        $banco = Banco::search($request->banco)
         ->orderBy('id', 'desc')
         ->paginate(10);
         return view('vendor.adminlte.banco', compact('banco'));

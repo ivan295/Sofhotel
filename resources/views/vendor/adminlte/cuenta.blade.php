@@ -26,19 +26,24 @@
 </script>
 <label ><h3>Cuentas</h3></label>
 <div class="row">
-<br>
-<div class="col-md-5">
-<div class="input-group">
-<span class="input-group-addon"><i class="fa fa-search"></i></span>
- <input type="text" class="form-control" name="buscar_cuenta" id="buscar_cuenta" placeholder="Busqueda por número de cuenta">
+  <br>
+  <div class="col-md-5">
+  <form method="GET"  action="{{route('cuenta.index')}}" >
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <div class="input-group input-group-flat">
+      <input type="text" class="form-control" name="numero" id="numero" placeholder="Busqueda por número de cuenta">
+      <span class="input-group-btn">
+
+        <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i> Buscar</button>
+
+      </span>
+    </div>
+  </form>
 </div>
-</div>
-<div class="col-md-5">
-  <input type="hidden" name="hidden">
-</div>
-<div class="contenedor-modal">
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Nueva cuenta</button>
-</div>
+
+  <div class="contenedor-modal">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Agregar Cuenta</button>
+  </div>
 </div>
 <br>
 <!--ventana modal-->

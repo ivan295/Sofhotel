@@ -16,9 +16,10 @@ class CuentaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cuentas = DB::table('cuentas')->join('tipo_cuentas', 'tipo_cuentas.id', '=', 'cuentas.id_tipo_cuenta')->join('propietario_cuentas', 'propietario_cuentas.id', '=', 'cuentas.id_propietario')->join('bancos', 'bancos.id', '=', 'cuentas.id_banco')->select('cuentas.id','cuentas.numero_cuenta', 'tipo_cuentas.descripcion as descripcion','propietario_cuentas.nombre as nombre', 'bancos.entidad as entidad')
+        $cuentas = Cuenta::search($request->numero)
+        ->join('tipo_cuentas', 'tipo_cuentas.id', '=', 'cuentas.id_tipo_cuenta')->join('propietario_cuentas', 'propietario_cuentas.id', '=', 'cuentas.id_propietario')->join('bancos', 'bancos.id', '=', 'cuentas.id_banco')->select('cuentas.id','cuentas.numero_cuenta', 'tipo_cuentas.descripcion as descripcion','propietario_cuentas.nombre as nombre', 'bancos.entidad as entidad')
         ->orderBy('id', 'desc')
         ->paginate(10);
         

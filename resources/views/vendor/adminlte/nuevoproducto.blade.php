@@ -11,26 +11,25 @@
     document.getElementById('id_proveedor').value = dato;
   }
 </script>
-<label ><h3>Listado de Productos</h3></label>
+<label ><center><h3>Productos</h3></center></label>
 <div class="row">
   <br>
-  
-<div class="col-md-5">
-<div class="input-group">
+  <div class="col-md-5">
   <form method="GET"  action="{{route('productos.index')}}" >
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-  <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Busqueda por descripcion del producto">
-</form>
-<span class="input-group-addon"><i class="fa fa-search"></i></span>
-</div>
+    <div class="input-group input-group-flat">
+      <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Busqueda por descripcion del producto">
+      <span class="input-group-btn">
+
+        <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i> Buscar</button>
+
+      </span>
+    </div>
+  </form>
 </div>
 
-<div class="col-md-5">
-  <input type="hidden" name="hidden">
-</div>
-<div class="contenedor-modal">
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Agregar Producto</button>
-</div>
+  <div class="contenedor-modal">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Agregar Producto</button>
+  </div>
 </div>
 <br>
 <!-- ventana modal -->
@@ -44,58 +43,59 @@
         <h4 class="modal-title" id="myModalLabel">Agregar Nuevo Producto</h4>
       </div>
       <div class="modal-body">
-      <form method="post"  action="{{route('productos.create')}}" >
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div class="box-body">
-          <div class="col-md-6">
-          <label for="descripcion_producto">Descripcion</label>
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-            <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion">
+        <form method="post"  action="{{route('productos.create')}}" >
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <div class="box-body">
+            <div class="col-md-6">
+              <label for="descripcion_producto">Descripcion</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="precio_venta">Precio de Venta</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                <input type="text" class="form-control" name="precio_venta" id="precio_venta" placeholder="Precio de Venta">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="stock">Cantidad</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-database"></i></span>
+                <input type="text" class="form-control" name="stock" id="stock" placeholder="Cantidad">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="precio_compra">Precio de Compra</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                <input type="text" class="form-control" name="precio_compra" id="precio_compra" placeholder="Precio de Compra">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>Proveedor</label>
+              <div class="select-group">
+                <select class="form-control" name="id_proveedor" id="consulta_proveedor" onchange="consultar()" required>                 
+                  <option value="0">Seleccionar Proveedor</option>
+                  <?php $prov = DB::table('proveedor')->get(); ?>
+                  @foreach($prov as $prov)
+                  <option value="<?php  echo $prov->id ; ?>"> <?php echo $prov->empresa; ?>  </option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            <input type="hidden" id="id_proveedor" name="id_proveedor" required>
           </div>
-        </div>
-        <div class="col-md-6">
-          <label for="precio_venta">Precio de Venta</label>
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-            <input type="text" class="form-control" name="precio_venta" id="precio_venta" placeholder="Precio de Venta">
+          <div class="box-footer">
+            <button type="submit"class="btn btn-success">Crear</button>
           </div>
-        </div>
-        <div class="col-md-6">
-          <label for="stock">Cantidad</label>
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-database"></i></span>
-            <input type="text" class="form-control" name="stock" id="stock" placeholder="Cantidad">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <label for="precio_compra">Precio de Compra</label>
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-            <input type="text" class="form-control" name="precio_compra" id="precio_compra" placeholder="Precio de Compra">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <label>Proveedor</label>
-          <div class="select-group">
-          <select class="form-control" name="id_proveedor" id="consulta_proveedor" onchange="consultar()" required>                 
-            <option value="0">Seleccionar Proveedor</option>
-            <?php $prov = DB::table('proveedor')->get(); ?>
-            @foreach($prov as $prov)
-            <option value="<?php  echo $prov->id ; ?>"> <?php echo $prov->empresa; ?>  </option>
-            @endforeach
-          </select>
-        </div>
+          
+        </form>
       </div>
-        <input type="hidden" id="id_proveedor" name="id_proveedor" required>
-        </div>
-      <div class="box-footer">
-        <button type="submit"class="btn btn-success">Crear</button>
-      </div>
-    </form>
+    </div>
   </div>
-</div>
-</div>
 </div>
 <!-- fin de ventana modal-->
 <!-- box para mostrar tabla con datos -->
@@ -108,6 +108,7 @@
     </div>
   </div>
   <!--tabla-->
+  
   <table class="table table-hover table-bordered" id="tablaproductos">
     <thead>
       <tr bgcolor="#98A8D5">
@@ -135,7 +136,7 @@
              <form action="{{route('productos.editar', $NuevoProd->id)}}" method="post">
               {{csrf_field()}}
 
-              <button type="submit" class="btn btn-warning btn-xs">Editar</button></form>
+              <button type="submit" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#ventana_crear">Editar</button></form>
             </div>
             <div class="col-md-6 text-left">
               <form action="{{route('productos.delete', $NuevoProd->id)}}" method="post">
@@ -143,15 +144,14 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-danger btn-xs">Borrar</button>
               </form>
+            </div>
           </div>
-        </div>
-      </td>
-    </tr>
-   @endforeach
-  </tbody>
-</table>
-{{ $NuevoProducto->links() }}
+        </td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+  {{ $NuevoProducto->links() }}
 </div>
 </div>
-
 @endsection

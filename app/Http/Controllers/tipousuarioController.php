@@ -7,9 +7,9 @@ use App\TipoUsuario;
 use DB;
 class tipousuarioController extends Controller
 {
-	public function index()
+	public function index(Request $request)
     {
-        $Nuevotipouser = DB::table('tipousuario')
+        $Nuevotipouser = TipoUsuario::search($request->tipo)
         ->orderBy('id', 'desc')
         ->paginate(10);
         return view('vendor.adminlte.tipousuario',compact('Nuevotipouser'));

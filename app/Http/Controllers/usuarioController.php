@@ -8,9 +8,9 @@ use App\TipoUsuario;
 use DB;
 class usuarioController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {  
-    	$Nuevousuario = DB::table('users')
+    	$Nuevousuario = Usuario::search($request->nombre)
     	->join('tipousuario','tipousuario.id','=','users.idtipoUsuario')
     	->select('users.*','tipousuario.descripcion as TipoUser')
         ->orderBy('id', 'desc')

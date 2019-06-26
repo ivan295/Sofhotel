@@ -12,9 +12,9 @@ class TipoCuentaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tipo_cuenta = DB::table('tipo_cuentas')
+        $tipo_cuenta = TipoCuenta::search($request->tipo)
         ->orderBy('id', 'desc')
         ->paginate(10);
         return view('vendor.adminlte.tipo_cuenta', compact('tipo_cuenta'));

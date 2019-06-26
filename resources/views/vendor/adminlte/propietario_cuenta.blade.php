@@ -10,16 +10,18 @@
 <div class="row">
   <br>
   <div class="col-md-5">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-search"></i></span>
-      <input type="text" class="form-control" name="buscar_propietario" id="buscar_propietario" placeholder="Busqueda por nombre">
+  <form method="GET"  action="{{route('propietario_cuenta.index')}}" >
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <div class="input-group input-group-flat">
+      <input type="text" class="form-control" name="propietario" id="propietario" placeholder="Busqueda por nombre de propietario o entidad">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i> Buscar</button>
+      </span>
     </div>
-  </div>
-  <div class="col-md-5">
-    <input type="hidden" name="hidden">
-  </div>
+  </form>
+</div>
   <div class="contenedor-modal">
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Nuevo Propietario</button>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Agregar Producto</button>
   </div>
 </div>
 <br>

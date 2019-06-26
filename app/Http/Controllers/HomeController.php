@@ -11,6 +11,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Habitacion;
 use App\Estado_habitacion;
+
 /**
  * Class HomeController
  * @package App\Http\Controllers
@@ -28,7 +29,11 @@ class HomeController extends Controller
     }
 
     public function index()
-    {
+    {   //$NuevaH = \DB::table('habitacion')->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
+        //->select('habitacion.*','estado_habitacion.estado')
+        //->orderBy('id', 'asc')
+        //->get();
+         //dd($NuevaH);
         return view('adminlte::home');
     }
 
@@ -36,9 +41,11 @@ class HomeController extends Controller
 
          $NuevaH = \DB::table('habitacion')->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
         ->select('habitacion.*','estado_habitacion.estado')
+        ->orderBy('id', 'asc')
         ->get();
-         //return view('adminlte::home', compact('NuevaH'));     
         return response()->json($NuevaH); 
+        return view('adminlte::home', compact('NuevaH'));     
+
     }
 
     public function estadohabitacion(){

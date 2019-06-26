@@ -14,6 +14,7 @@ class HabitacionController extends Controller
         $NuevaHabitacion = DB::table('habitacion')
         ->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
         ->select('habitacion.*','estado_habitacion.ip_arduino as ip')
+        ->orderBy('id', 'asc')
         ->get();
         //dd($NuevaHabitacion);        
         return view('vendor.adminlte.nuevahabitacion', compact('NuevaHabitacion'));

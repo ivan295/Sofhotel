@@ -18,16 +18,20 @@
 <div class="row">
   <br>
   <div class="col-md-5">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-search"></i></span>
-      <input type="text" class="form-control" name="buscar_deposito" id="buscar_deposito" placeholder="Busqueda por fecha">
+  <form method="GET"  action="{{route('deposito.index')}}" >
+    <div class="input-group input-group-flat">
+      <input type="text" class="form-control" name="fecha" id="fecha" placeholder="Busqueda por descripción de depósito">
+      <span class="input-group-btn">
+
+        <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i> Buscar</button>
+
+      </span>
     </div>
-  </div>
-  <div class="col-md-5">
-    <input type="hidden" name="hidden">
-  </div>
+  </form>
+</div>
+
   <div class="contenedor-modal">
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Nuevo depósito</button>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Agregar Depósito</button>
   </div>
 </div>
 <br>
@@ -45,7 +49,6 @@
         <form method="post"  action="{{route('deposito.create')}}">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="box-body">
-            <br>
             <label for="monto">Monto</label>
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
@@ -113,7 +116,7 @@
       <tr class='text-center'>
         <td><?php echo $dp->nombre_usuario?></td>
         <td><?php echo $dp->monto?></td>
-        <td><?php echo $dp->descripcion?></td>
+        <td><?php echo $dp->motivo?></td>
         <td><?php echo $dp->entidad?></td>
         <td><?php echo $dp->num_cta?></td>
         <td><?php echo $dp->tp_descripcion?></td>

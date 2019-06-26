@@ -10,16 +10,18 @@
 <div class="row">
   <br>
   <div class="col-md-5">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-search"></i></span>
-      <input type="text" class="form-control" name="buscar_tipocuenta" id="buscar_tipocuenta" placeholder="Busqueda por tipo">
+  <form method="GET"  action="{{route('tipo_cuenta.index')}}" >
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <div class="input-group input-group-flat">
+      <input type="text" class="form-control" name="tipo" id="tipo" placeholder="Busqueda por tipo de cuenta">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i> Buscar</button>
+      </span>
     </div>
-  </div>
-  <div class="col-md-5">
-    <input type="hidden" name="hidden">
-  </div>
-  <div class="contenedor-modal">
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Nuevo tipo de cuenta</button>
+  </form>
+</div>
+ <div class="contenedor-modal">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Agregar Tipo de Cuenta</button>
   </div>
 </div>
 <br>

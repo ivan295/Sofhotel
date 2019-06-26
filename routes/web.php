@@ -92,6 +92,9 @@ Route::post('Habitacion/crear', ['as' => 'habitacion.create', 'uses'=>'Habitacio
 
 
 //gastos/////////////////
+
+Route::get('gastos/index', ['as' => 'gastos.index', 'uses'=>'gastosController@index']);
+
 Route::post('gastos/crear', ['as' => 'gastos.create', 'uses'=>'gastosController@store']);
 
 Route::delete('gastos/{id}/eliminar', ['as'=> 'gastos.delete', 'uses' =>'gastosController@destroy']);
@@ -101,6 +104,9 @@ Route::post('gastos/{id}/edit', ['as' => 'gastos.editar', 'uses' => 'gastosContr
 Route::put('gastos/{id}', ['as' => 'gastos.update', 'uses'=>'gastosController@update']);
 
 //tipo de usuario////////////
+
+Route::get('tipouser/index', ['as' => 'tipouser.index', 'uses'=>'tipousuarioController@index']);
+
 Route::post('tipouser/crear', ['as' => 'tipouser.create', 'uses'=>'tipousuarioController@store']);
 
 Route::delete('tipouser/{id}/eliminar', ['as'=> 'tipouser.delete', 'uses' =>'tipousuarioController@destroy']);
@@ -110,6 +116,10 @@ Route::post('tipouser/{id}/edit', ['as' => 'tipouser.editar', 'uses' => 'tipousu
 Route::put('tipouser/{id}', ['as' => 'tipouser.update', 'uses'=>'tipousuarioController@update']);
 
 //nuevo usuario///////////
+
+Route::get('nuevouser/index', ['as' => 'nuevouser.index', 'uses'=>'usuarioController@index']);
+
+
 Route::post('nuevouser/crear', ['as' => 'nuevouser.create', 'uses'=>'usuarioController@store']);
 
 Route::delete('nuevouser/{id}/eliminar', ['as'=> 'nuevouser.delete', 'uses' =>'usuarioController@destroy']);
@@ -137,9 +147,13 @@ Route::get('/consult_estado','estadoController@mostrar');
 Route::get('/modificar_estado/{t}/{ip}', 'estadoHabitacionController@mod');
 Route::get('modestados', 'estadoController@actualizar');
 Route::get('direccion_ip/{ip}','estadoHabitacionController@addip');
+Route::post('alquiler','alquilerController@store');
 
 
 //proveedor
+
+Route::get('proveedor/index', ['as' => 'proveedor.index', 'uses'=>'proveedorController@index']);
+
 Route::post('proveedor/crear', ['as' => 'proveedor.create', 'uses'=>'proveedorController@store']);
 
 Route::delete('proveedor/{id}/eliminar', ['as'=> 'proveedor.delete', 'uses' =>'proveedorController@destroy']);
@@ -157,6 +171,7 @@ Route::delete('productos/{id}/eliminar', ['as'=> 'productos.delete', 'uses' =>'p
 Route::post('productos/{id}/edit', ['as' => 'productos.editar', 'uses' => 'productosController@edit']);
 
 Route::put('productos/{id}', ['as' => 'productos.update', 'uses'=>'productosController@update']);
+
 Route::get('productos/index', ['as' => 'productos.index', 'uses'=>'productosController@index']);
 
 //detalle_compra
@@ -182,6 +197,7 @@ Route::delete('alquiler/{id}/eliminar', ['as'=> 'alquiler.delete', 'uses' =>'alq
 Route::post('alquiler/{id}/edit', ['as' => 'alquiler.editar', 'uses' => 'alquilerController@edit']);
 
 Route::put('alquiler/{id}', ['as' => 'alquiler.update', 'uses'=>'alquilerController@update']);
+
 
 
 //factura venta
@@ -218,6 +234,8 @@ Route::get('/modificar_banco', function () {
 
 Route::get('banco', 'BancoController@index');
 
+Route::get('banco/index', ['as' => 'banco.index', 'uses'=>'BancoController@index']);
+
 Route::post('banco/crear', ['as' => 'banco.create', 'uses'=>'BancoController@store']);
 
 Route::delete('banco/{id}/eliminar', ['as' => 'banco.delete', 'uses' => 'BancoController@destroy']);
@@ -237,6 +255,8 @@ Route::get('/modificar_tipo_cuenta', function () {
 });
 
 Route::get('tipo_cuenta', 'TipoCuentaController@index');
+
+Route::get('tipo_cuenta/index', ['as' => 'tipo_cuenta.index', 'uses'=>'TipoCuentaController@index']);
 
 
 Route::post('tipo_cuenta/crear', ['as' => 'tipo_cuenta.create', 'uses'=>'TipoCuentaController@store']);
@@ -271,6 +291,9 @@ Route::post('propietario_cuenta/{id}/edit', ['as' => 'propietario_cuenta.cambio'
 
 Route::put('propietario_cuenta/{id}', ['as' => 'propietario_cuenta.update', 'uses' => 'PropietarioCuentaController@update']);
 
+Route::get('propietario_cuenta/index', ['as' => 'propietario_cuenta.index', 'uses'=>'PropietarioCuentaController@index']);
+
+
 //Cuenta
 
 Route::get('/nueva_cuenta', function () {
@@ -281,7 +304,9 @@ Route::get('/modificar_cuenta', function () {
     return view('/vendor/adminlte/modificar_cuenta');
 });
 
-Route::get('cuenta', 'CuentaController@index');
+Route::get('cuenta','CuentaController@index');
+
+Route::get('cuenta/index', ['as' => 'cuenta.index', 'uses'=>'CuentaController@index']);
 
 
 Route::post('cuenta/crear', ['as' => 'cuenta.create', 'uses'=>'CuentaController@store']);
@@ -306,6 +331,9 @@ Route::get('/modificar_deposito', function () {
 });
 
 Route::get('deposito', 'DepositoController@index');
+
+
+Route::get('deposito/index', ['as' => 'deposito.index', 'uses'=>'DepositoController@index']);
 
 
 Route::post('deposito/crear', ['as' => 'deposito.create', 'uses'=>'DepositoController@store']);

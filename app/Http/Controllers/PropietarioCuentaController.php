@@ -13,9 +13,9 @@ class PropietarioCuentaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $propietario_cuenta = DB::table('propietario_cuentas')
+        $propietario_cuenta = PropietarioCuenta::search($request->propietario)
         ->orderBy('id', 'desc')
         ->paginate(10);
 
