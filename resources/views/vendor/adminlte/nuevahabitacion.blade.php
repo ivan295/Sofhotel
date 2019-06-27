@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="box-footer">
-          <button type="submit"class="btn btn-success">Crear</button>
+          <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Guardar</button>  
           <input type="hidden" id="id_estado" name="id_estado">
         </div>
       </form>

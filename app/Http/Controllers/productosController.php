@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Productos;
 use App\Proveedor;
 use DB;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class productosController extends Controller
 {
     public function index(Request $request)
@@ -16,6 +18,7 @@ class productosController extends Controller
         ->orderBy('id', 'desc')
         //dd($NuevaCompra);
         ->paginate(10);
+        
     return view('vendor.adminlte.nuevoproducto',compact('NuevoProducto'));
     }
 
@@ -28,7 +31,9 @@ class productosController extends Controller
         $nuevoproducto->precio_compra = $request->precio_compra;
         $nuevoproducto->id_proveedor = $request->id_proveedor;
         $nuevoproducto->save();
-        return redirect('/productos');
+       
+        return redirect('/productos')->with('success', 'Login Successfully!');;
+
 	}
 
 	public function destroy($id)

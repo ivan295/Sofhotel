@@ -30,6 +30,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
 
     <link href="{{ asset('/css/all-landing.css') }}" rel="stylesheet">
     
+    
 
 </head>
 

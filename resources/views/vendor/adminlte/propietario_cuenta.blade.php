@@ -21,7 +21,7 @@
   </form>
 </div>
   <div class="contenedor-modal">
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Agregar Producto</button>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Agregar Propietario</button>
   </div>
 </div>
 <br>
@@ -47,7 +47,7 @@
             <br>
           </div>
           <div class="box-footer">
-            <button type="submit"class="btn btn-success">Crear</button>
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Guardar</button>  
           </div>
         </form>
 

@@ -107,8 +107,7 @@
           <input type="hidden" id="idtipo" name="idtipouser">
         </div>
       </div>
-          <button type="submit"class="btn btn-success">Crear</button>
-       
+          <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Guardar</button>  
       </form> 
 
     

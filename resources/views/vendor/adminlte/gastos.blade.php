@@ -53,7 +53,7 @@
             <input type="hidden" class="form-control" name="id_usuario" id="id_usuario" value="{{Auth::user()->id}}">
           </div>
       <div class="box-footer">
-        <button type="submit"class="btn btn-success">Registrar Pago</button>
+        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Guardar</button>  
       </div>
     </form>
 </div>

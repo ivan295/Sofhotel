@@ -74,7 +74,7 @@
             </div>
           </div>
           <div class="box-footer">
-            <button type="submit"class="btn btn-success">Crear</button>
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Guardar</button>  
             <input type="hidden" name="id_cuenta" id="id_cta" />
             <input type="hidden" name="id_usuario" value="{{ Auth::user()->id }}" />
           </div>

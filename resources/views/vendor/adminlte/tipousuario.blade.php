@@ -10,17 +10,17 @@
 <div class="row">
   <br>
   <div class="col-md-5">
-  <form method="GET"  action="{{route('tipouser.index')}}" >
-    <div class="input-group input-group-flat">
-      <input type="text" class="form-control" name="tipo" id="tipo" placeholder="Busqueda por tipo de usuario">
-      <span class="input-group-btn">
+    <form method="GET"  action="{{route('tipouser.index')}}" >
+      <div class="input-group input-group-flat">
+        <input type="text" class="form-control" name="tipo" id="tipo" placeholder="Busqueda por tipo de usuario">
+        <span class="input-group-btn">
 
-        <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i> Buscar</button>
+          <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i> Buscar</button>
 
-      </span>
-    </div>
-  </form>
-</div>
+        </span>
+      </div>
+    </form>
+  </div>
 
   <div class="contenedor-modal">
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Agregar Tipo de Usuario</button>
@@ -38,27 +38,22 @@
         <h4 class="modal-title" id="myModalLabel">Nuevo tipo de usuario</h4>
       </div>
       <div class="modal-body">
-      <form method="post"  action="{{route('tipouser.create')}}" target="request">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div class="box-body">
-          <label for="tipousuario">Tipo de Usuario</label>
-          <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-users"></i></span>
-            <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Tipo de Usuario">
+        <form method="post"  action="{{route('tipouser.create')}}" target="request">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <div class="box-body">
+            <label for="tipousuario">Tipo de Usuario</label>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-users"></i></span>
+              <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Tipo de Usuario">
+            </div>
+            <br>
           </div>
-          <br>
-        </div>
-        
-          <button type="submit"class="btn btn-success">Crear</button>
-       
-      </form>
-    
-  
-
-       </div> 
-     </div>
-   </div>
- </div>
+          <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Guardar</button>  
+        </form>
+      </div> 
+    </div>
+  </div>
+</div>
 <div class="col-md-14">
   <div class="box box-primary">
    <div class="box-header with-border">

@@ -47,7 +47,7 @@
           <br>
         </div>
         <div class="box-footer">
-          <button type="submit"class="btn btn-success">Crear</button>
+          <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Guardar</button>  
         </div>
       </form>
       </div>

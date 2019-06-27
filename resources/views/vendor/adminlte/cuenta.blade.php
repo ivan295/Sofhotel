@@ -103,7 +103,7 @@
           </div>
         </div>
         <div class="box-footer">
-          <button type="submit"class="btn btn-success">Crear</button>
+          <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Guardar</button>  
           <input type="hidden" id="id_tip" name="id_tipo_cuenta">
             <input type="hidden" id="id_prop" name="id_propietario">
             <input type="hidden" id="id_banc" name="id_banco">
