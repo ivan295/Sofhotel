@@ -12,15 +12,8 @@
   }
 </script>
 <!-- box con input para crear habitaciones -->
-@if ($errors->any())
-        <div class="alert alert-danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-        @endif
+@include('adminlte::alerts.error')
+  @include('adminlte::alerts.exito')
 <div class="row">
   <div class="col-md-5">
     <div class="box box-primary">
@@ -113,7 +106,7 @@
                <form action="{{route('habitacion.delete', $NuevaHabitacion->id)}}" method="post">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="submit" class="btn btn-danger btn-xs">Borrar</button>
+                <button type="submit" class="btn btn-danger btn-xs" onclick="return borrar()">Borrar</button>
               </form>
             </div>
           </div>
@@ -126,4 +119,6 @@
 </div>
 </div>
 </div>
+<script src="{{ asset('/js/alerta_confirmacion.js') }}" defer></script>
+
 @endsection

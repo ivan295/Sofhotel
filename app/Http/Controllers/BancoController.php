@@ -45,7 +45,7 @@ class BancoController extends Controller
         $banco = new Banco;
         $banco->entidad = $request->entidad;
         $banco->save();
-        return redirect('/banco');
+        return redirect('/banco')->with('success','Banco agregado correctamente');
     }
 
     /**

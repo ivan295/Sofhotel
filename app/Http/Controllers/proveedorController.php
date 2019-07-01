@@ -35,7 +35,7 @@ class proveedorController extends Controller
         $Nuevoproveedor->correo = $request->correo;
         $Nuevoproveedor->empresa = $request->empresa;
         $Nuevoproveedor->save();
-        return redirect('/proveedor');
+        return redirect('/proveedor')->with('success','Proveedor agregado correctamente');
 	}
 
 	public function destroy($id)

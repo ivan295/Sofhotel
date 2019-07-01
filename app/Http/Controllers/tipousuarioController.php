@@ -24,13 +24,8 @@ class tipousuarioController extends Controller
          //dd($request->all());
         $Nuevotipouser                    = new TipoUsuario;
         $Nuevotipouser->descripcion = $request->descripcion;
-        if ($Nuevotipouser->save()) {
-            return back()->with('msj','Datos guardados correctamente');
-        }else{
-                return back()->with('msjerror');
-        }
-        //$Nuevotipouser->save();
-        //return redirect('/tipouser');
+        $Nuevotipouser->save();
+        return redirect('/tipouser')->with('success','Tipo de usuario agregado correctamente');
     }
 
 

@@ -11,15 +11,8 @@
     document.getElementById('idtipo').value = dato;
   }
 </script>
-@if ($errors->any())
-        <div class="alert alert-danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-        @endif
+@include('adminlte::alerts.error')
+  @include('adminlte::alerts.exito')
 <label ><h3>Usuarios</h3></label>
 <div class="row">
   <br>
@@ -49,15 +42,7 @@
         <h4 class="modal-title" id="myModalLabel">Crear nuevo usuario</h4>
       </div>
       <div class="modal-body">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-        @endif
+       @include('adminlte::alerts.error')
       <form method="post"  action="{{route('nuevouser.create')}}" target="request">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="box-body">
@@ -184,7 +169,7 @@
                <form action="{{route('nuevouser.delete', $Nuevouser->id)}}" method="post">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="submit" class="btn btn-danger btn-xs">Borrar</button>
+                <button type="submit" class="btn btn-danger btn-xs"onclick="return borrar()">Borrar</button>
               </form>
             </div>
           </div>
@@ -196,5 +181,6 @@
 {{$Nuevousuario->links()}}
 </div>
 </div>
+<script src="{{ asset('/js/alerta_confirmacion.js') }}" defer></script>
 
 @endsection

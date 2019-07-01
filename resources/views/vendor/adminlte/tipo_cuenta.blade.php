@@ -6,15 +6,8 @@
 
 
 @section('main-content')
-@if ($errors->any())
-        <div class="alert alert-danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-        @endif
+@include('adminlte::alerts.error')
+  @include('adminlte::alerts.exito')
 <label ><h3>Tipos de cuentas</h3></label>
 <div class="row">
   <br>
@@ -45,15 +38,7 @@
         <h4 class="modal-title" id="myModalLabel">Nuevo tipo de cuenta</h4>
       </div>
       <div class="modal-body">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-        @endif
+       @include('adminlte::alerts.error')
 
         <form method="post"  action="{{route('tipo_cuenta.create')}} ">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -108,7 +93,7 @@
               <form action="{{route('tipo_cuenta.delete', $tp->id)}}" method="post">
                 {{csrf_field()}}
                 {{ method_field('DELETE') }}
-                <button type="submit" class="btn btn-danger btn-xs">Borrar</button>
+                <button type="submit" class="btn btn-danger btn-xs"onclick="return borrar()">Borrar</button>
               </form>
             </form>
           </div>
@@ -118,5 +103,6 @@
     @endforeach
   </tbody>
 </table>
+<script src="{{ asset('/js/alerta_confirmacion.js') }}" defer></script>
 
 @endsection

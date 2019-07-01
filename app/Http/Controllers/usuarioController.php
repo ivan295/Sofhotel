@@ -46,7 +46,7 @@ class usuarioController extends Controller
         $Nuevousuario->idtipoUsuario = $request->idtipouser;
         $Nuevousuario->email = $request->usuario.'@sistema.com';
         $Nuevousuario->save();
-        return redirect('/nuevouser');
+        return redirect('/nuevouser')->with('success','Usuario agregado correctamente');
     }
 
     public function destroy($id)

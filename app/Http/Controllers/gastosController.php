@@ -39,7 +39,7 @@ class gastosController extends Controller
      	$NuevoGasto->gasto_total = $request->gasto_total;
         $NuevoGasto->id_usuario = $request->id_usuario;
      	$NuevoGasto->save();
-     	return redirect('/gastos');
+     	return redirect('/gastos')->with('success','Gasto agregado correctamente');
      }
 
       public function destroy($id)

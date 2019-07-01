@@ -46,7 +46,7 @@ class PropietarioCuentaController extends Controller
         $propietario = new PropietarioCuenta;
         $propietario->nombre = $request->nombre;
         $propietario->save();
-        return redirect('/propietario_cuenta');
+        return redirect('/propietario_cuenta')->with('success','Propietario agregado correctamente');
     }
 
     /**

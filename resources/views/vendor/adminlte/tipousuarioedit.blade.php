@@ -31,4 +31,6 @@
     </div>
   </div>
 </div>
+<script src="{{ asset('/js/alerta_confirmacion.js') }}" defer></script>
+
 @endsection

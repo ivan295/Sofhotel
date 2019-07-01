@@ -44,7 +44,7 @@ class TipoCuentaController extends Controller
         $tipo_cuenta = new TipoCuenta;
         $tipo_cuenta->descripcion = $request->descripcion;
         $tipo_cuenta->save();
-        return redirect('/tipo_cuenta');
+        return redirect('/tipo_cuenta')->with('success','Tipo de cuenta agregada correctamente');
     }
 
     /**

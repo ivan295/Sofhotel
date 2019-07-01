@@ -52,13 +52,13 @@ class DepositoController extends Controller
 
 
         $deposito = new Deposito;
-        $deposito->descripcion = $request->descripcion;
+        $deposito->motivo = $request->descripcion;
         $deposito->monto = $request->monto;
         $deposito->id_usuario = $request->id_usuario;
         $deposito->id_cuenta = $request->id_cuenta;
         $deposito->save();
 
-        return redirect('/deposito');
+        return redirect('/deposito')->with('success','Depósito agregado correctamente');
     }
 
     /**

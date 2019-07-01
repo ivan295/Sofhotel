@@ -4,15 +4,8 @@
 {{ trans('adminlte_lang::message.home') }}
 @endsection
 @section('main-content')
-@if ($errors->any())
-        <div class="alert alert-danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-        @endif
+@include('adminlte::alerts.error')
+  @include('adminlte::alerts.exito')
 <label ><h3>Listado de Gastos</h3></label>
 <div class="row">
   <br>
@@ -43,15 +36,7 @@
         <h4 class="modal-title" id="myModalLabel">Nuevo gasto</h4>
       </div>
       <div class="modal-body">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-        @endif
+       @include('adminlte::alerts.error')
       <form method="post"  action="{{route('gastos.create')}}" >
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="box-body">
@@ -121,7 +106,7 @@
               <form action="{{route('gastos.delete', $Nuevogasto->id)}}" method="post">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="submit" class="btn btn-danger btn-xs">Borrar</button>
+                <button type="submit" class="btn btn-danger btn-xs" onclick="return borrar()">Borrar</button>
               </form>
             </form>
           </div>
@@ -132,5 +117,6 @@
   </tbody>
 </table>
 {{ $NuevoGasto->links() }}
+<script src="{{ asset('/js/alerta_confirmacion.js') }}" defer></script>
 
 @endsection

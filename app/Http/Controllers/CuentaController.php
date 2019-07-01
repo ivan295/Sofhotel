@@ -57,7 +57,7 @@ class CuentaController extends Controller
         $cuenta->id_propietario = $request->id_propietario;
         $cuenta->id_banco = $request->id_banco;
         $cuenta->save();
-        return redirect('/cuenta');
+        return redirect('/cuenta')->with('success','Cuenta agregada correctamente');
     }
 
     /**

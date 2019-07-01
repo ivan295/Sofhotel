@@ -48,7 +48,7 @@ class HabitacionController extends Controller
         socket_sendto($sock, $tiempo, $len, 0, '192.168.0.108', 8888);
         socket_close($sock);
 
-        return redirect('/Habitacion');
+        return redirect('/Habitacion')->with('success','Habitacion creada correctamente');
     }
 
     /**
