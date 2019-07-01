@@ -22,6 +22,18 @@ class usuarioController extends Controller
 
     public function store(Request $request)
     {
+
+        $request->validate([
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'cedula' => 'required',
+            'usuario' => 'required',
+            'password' => 'required',
+            'direccion' => 'required',
+            'telefono' => 'required',
+            'idtipouser' => 'required',
+            'usuario' => 'required',
+            ]);
          //dd($request->all());
         $Nuevousuario                   = new User;
         $Nuevousuario->nombre = $request->nombre;

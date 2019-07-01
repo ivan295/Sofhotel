@@ -40,6 +40,9 @@ class PropietarioCuentaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre' => 'required',
+            ]);
         $propietario = new PropietarioCuenta;
         $propietario->nombre = $request->nombre;
         $propietario->save();

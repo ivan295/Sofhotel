@@ -17,6 +17,10 @@ class tipousuarioController extends Controller
 
     public function store(Request $request)
     {
+         $request->validate([
+            'descripcion' => 'required',
+            ]);
+
          //dd($request->all());
         $Nuevotipouser                    = new TipoUsuario;
         $Nuevotipouser->descripcion = $request->descripcion;

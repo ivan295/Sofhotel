@@ -26,6 +26,13 @@ class gastosController extends Controller
 
      public function store(Request $request)
      {
+
+        $request->validate([
+            'descripcion' => 'required',
+            'gasto_total' => 'required',
+            'id_usuario' => 'required',
+            ]);
+
         //dd($request->all());
      	$NuevoGasto                    = new Gastos;
      	$NuevoGasto->descripcion = $request->descripcion;

@@ -38,6 +38,9 @@ class TipoCuentaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'descripcion' => 'required',
+            ]);
         $tipo_cuenta = new TipoCuenta;
         $tipo_cuenta->descripcion = $request->descripcion;
         $tipo_cuenta->save();

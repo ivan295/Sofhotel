@@ -12,6 +12,15 @@
   }
 </script>
 <!-- box con input para crear habitaciones -->
+@if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif
 <div class="row">
   <div class="col-md-5">
     <div class="box box-primary">
@@ -30,13 +39,13 @@
           <label for="tipohabitacion">Tipo de Habitación</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-puzzle-piece"></i></span>
-            <input type="text" class="form-control" name="tipo_habitacion" id="tipo_habitacion" placeholder="Tipo de Habitación" required pattern="[A-Za-z]{1-50}">
+            <input type="text" class="form-control" name="tipo_habitacion" id="tipo_habitacion" placeholder="Tipo de Habitación" >
           </div>
           <br>
           <label for="preciohabitacion">Precio de Habitación</label>
           <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-            <input type="text" class="form-control" name="precio" id="precio" placeholder="Precio de Habitación" required pattern="[.-,]">
+            <input type="text" class="form-control" name="precio" id="precio" placeholder="Precio de Habitación">
           </div>
           <br>
           <label for="tiempolimpieza">Tiempo de Limpieza </label>

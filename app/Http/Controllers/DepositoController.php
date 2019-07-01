@@ -43,6 +43,14 @@ class DepositoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'descripcion' => 'required',
+            'monto' => 'required',
+            'id_usuario' => 'required',
+            'id_cuenta' => 'required',
+            ]);
+
+
         $deposito = new Deposito;
         $deposito->descripcion = $request->descripcion;
         $deposito->monto = $request->monto;

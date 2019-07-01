@@ -6,6 +6,15 @@
 
 
 @section('main-content')
+@if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif
 <label ><h3>Propietario de Cuenta</h3></label>
 <div class="row">
   <br>
@@ -36,6 +45,15 @@
         <h4 class="modal-title" id="myModalLabel">Nuevo Propietario</h4>
       </div>
       <div class="modal-body">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif
         <form method="post"  action="{{route('propietario_cuenta.create')}} ">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="box-body">

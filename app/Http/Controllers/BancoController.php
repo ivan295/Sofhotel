@@ -38,6 +38,10 @@ class BancoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'entidad' => 'required',
+            ]);
+
         $banco = new Banco;
         $banco->entidad = $request->entidad;
         $banco->save();

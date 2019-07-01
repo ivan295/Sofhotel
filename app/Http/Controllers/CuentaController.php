@@ -45,6 +45,12 @@ class CuentaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'numero_cuenta' => 'required',
+            'id_tipo_cuenta' => 'required',
+            'id_propietario' => 'required',
+            'id_banco' => 'required',
+            ]);
         $cuenta = new Cuenta;
         $cuenta->numero_cuenta = $request->numero_cuenta;
         $cuenta->id_tipo_cuenta = $request->id_tipo_cuenta;

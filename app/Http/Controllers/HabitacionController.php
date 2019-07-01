@@ -28,6 +28,12 @@ class HabitacionController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'numero_habitacion' => 'required|numeric',
+            'tipo_habitacion' => 'required|alpha', //alpha valida que solo se ingresen letras
+            'precio' => 'required',
+            'tiempo_limpieza' => 'required',
+            ]);
             //dd($request->all());
         $NuevaHabitacion                    = new Habitacion;
         $NuevaHabitacion->numero_habitacion = $request->numero_habitacion;

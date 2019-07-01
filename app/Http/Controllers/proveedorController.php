@@ -17,6 +17,16 @@ class proveedorController extends Controller
 
     public function store(Request $request)
     {
+
+        $request->validate([
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'cedula' => 'required',
+            'telefono' => 'required',
+            'correo' => 'required',
+            'empresa' => 'required',
+            ]);
+
         $Nuevoproveedor                   = new Proveedor;
         $Nuevoproveedor->nombres = $request->nombre;
         $Nuevoproveedor->apellidos = $request->apellido;

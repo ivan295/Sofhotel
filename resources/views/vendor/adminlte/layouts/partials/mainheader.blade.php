@@ -30,7 +30,7 @@
                                 <a href="#">
                                     <div class="pull-left">
                                         <!-- User Image -->
-                                        <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image"/>
+                                        
                                     </div>
                                     <!-- Message title and timestamp -->
 
@@ -45,7 +45,7 @@
 
             <!-- Notifications Menu -->
             <li class="dropdown notifications-menu">
-                <!-- Menu toggle button -->
+               
             </li>
             <!-- Tasks Menu -->
             <li class="dropdown tasks-menu">
@@ -80,14 +80,14 @@
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <!-- The user image in the navbar-->
-                    <img src="{{ Gravatar::get($user->email) }}" class="user-image" alt="User Image"/>
+                   
                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
                     <span class="hidden-xs">{{ Auth::user()->nombre }}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- The user image in the menu -->
                     <li class="user-header">
-                        <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image" />
+                        <img src="img/avatar2.png" class="img-circle" alt="User Image" />
                         <p>
                             {{ Auth::user()->nombre }}
                             <small><?=date(' d/m/Y  g:i a ')?></small>

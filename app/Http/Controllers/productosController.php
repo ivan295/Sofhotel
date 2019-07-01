@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Productos;
 use App\Proveedor;
 use DB;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class productosController extends Controller
 {
@@ -24,6 +23,14 @@ class productosController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'descripcion' => 'required',
+            'precio_venta' => 'required',
+            'stock' => 'required',
+            'precio_compra' => 'required',
+            'id_proveedor' => 'required',
+            ]);
+
         $nuevoproducto                   = new Productos;
         $nuevoproducto->descripcion = $request->descripcion;
         $nuevoproducto->precio_venta = $request->precio_venta;
@@ -32,7 +39,7 @@ class productosController extends Controller
         $nuevoproducto->id_proveedor = $request->id_proveedor;
         $nuevoproducto->save();
        
-        return redirect('/productos')->with('success', 'Login Successfully!');;
+        return redirect('/productos')->with('success','Producto agregado correctamente');
 
 	}
 
