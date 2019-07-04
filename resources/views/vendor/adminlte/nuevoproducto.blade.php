@@ -12,9 +12,9 @@
   }
 </script>
 <!--alertas-->
- @include('adminlte::alerts.error')
-  @include('adminlte::alerts.exito')
-  <!--@include('sweet::alert')-->
+@include('adminlte::alerts.error')
+@include('adminlte::alerts.exito')
+<!--@include('sweet::alert')-->
 <label ><center><h3>Productos</h3></center></label>
 <div class="row">
   <br>
@@ -48,7 +48,7 @@
       </div>
       <div class="modal-body">
         <!--alerta-->
- @include('adminlte::alerts.error')
+        @include('adminlte::alerts.error')
         <form method="post"  action="{{route('productos.create')}}" >
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="box-body">
@@ -83,7 +83,7 @@
             <div class="col-md-6">
               <label>Proveedor</label>
               <div class="select-group">
-                <select class="form-control" name="id_proveedor" id="consulta_proveedor" onchange="consultar()">                 
+                <select class="form-control selectpicker" name="id_proveedor" id="consulta_proveedor" onchange="consultar()" data-live-search="true">                 
                   <option value="0">Seleccionar Proveedor</option>
                   <?php $prov = DB::table('proveedor')->get(); ?>
                   @foreach($prov as $prov)
@@ -94,11 +94,12 @@
             </div>
             <input type="hidden" id="id_proveedor" name="id_proveedor" >
           </div>
-          <div class="box-footer">
-            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Guardar</button>          
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Guardar</button>   
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

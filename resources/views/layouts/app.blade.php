@@ -11,14 +11,17 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <script src="{{ asset('js/bootstrap-select.min.js') }}" defer></script>
+
+   
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">
+    <link href="{{ asset('css/bootstrap-select.min.css') }}" rel="stylesheet">
     
 </head>
 <body>

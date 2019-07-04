@@ -74,6 +74,7 @@ Route::get('/factura_venta','facturaventaController@index');
 Route::get('/cargarinner','HomeController@index');
 
 
+
 //ruta para llenar home
 Route::get('/home','HomeController@index');
 Route::get('/mostrar_inner','HomeController@getdata');
@@ -182,6 +183,12 @@ Route::delete('detalle_compra/{id}/eliminar', ['as'=> 'detalle_compra.delete', '
 Route::post('detalle_compra/{id}/edit', ['as' => 'detalle_compra.editar', 'uses' => 'detalleCompraController@edit']);
 
 Route::put('detalle_compra/{id}', ['as' => 'detalle_compra.update', 'uses'=>'detalleCompraController@update']);
+
+Route::get('detalle_compra/filtroProductos', ['as' => 'detalle_compra.filtroProductos', 'uses'=>'detalleCompraController@filtroProductos']);
+
+Route::get('detalle_compra/index', ['as' => 'detalle_compra.index', 'uses'=>'detalleCompraController@index']);
+
+
 
 
 /// filtro de productos
