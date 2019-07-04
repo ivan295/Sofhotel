@@ -23,3 +23,9 @@ Route::group(['prefix' => 'v1','middleware' => 'auth:api'], function () {
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_api_routes
 });
+
+Route::post('report_depositos_diario', 'DepositoController@reporte_diario');
+
+Route::post('report_depositos_especifico', 'DepositoController@reporte_especifico');
+
+Route::post('report_depositos_mensual', 'DepositoController@reporte_mensual');

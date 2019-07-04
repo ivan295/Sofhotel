@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Deposito extends Model
 {
-    public $timestamps = false;
+    //public $timestamps = false;
     protected $table = 'depositos';
-  protected $fillable = ['motivo','monto','id_usuario','id_cuenta'];
+  protected $fillable = ['motivo','monto','id_usuario','id_cuenta', 'created_at', 'update_at'];
 
 
   public function Scopesearch($query, $motivo){
