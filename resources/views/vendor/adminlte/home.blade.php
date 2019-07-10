@@ -6,24 +6,28 @@
 
 @section('main-content')
 
-
 <div class="container-fluid spark-screen" id="cuadro">
 	<div class="row">
-	<!--	<div class="col-md-3 col-md-offset-0">
-			 <div class="small-box bg-aqua"> -->
-				<!-- <div class="inner">
+		<!--<div class="col-md-3 col-md-offset-0">
+			<div class="small-box bg-aqua">
+				<div id="inner" class="inner">
 
-					</div> -->
-				
-	<!-- ventana para preguntar si consumio productos-->
-				<!-- <form method="post" action="{{route('alquiler.create')}}">
+				</div>
+			</div>
+		</div>-->
+	</div>
+</div>
+
+
+<!-- ventana para preguntar si consumio productos-->
+<!-- <form method="post" action="{{route('alquiler.create')}}">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					 fecha
-					<input type="hidden" class="form-control" name="fecha" id="fecha" value="<?=date(' Y-m-d g:i:s ')?>">
+					<input type="hidden" class="form-control" name="fecha" id="fecha" value="<?= date(' Y-m-d g:i:s ') ?>">
 					 hora ingreso
-					<input type="hidden" class="form-control" name="hora_ingreso" id="hora_ingreso" value="<?=date(' g:i:s')?>">-->
-					<!-- hora salida
-					<input type="hidden" class="form-control" name="hora_salida" id="hora_salida" value="<?=date(' g:i:s')?>">				
+					<input type="hidden" class="form-control" name="hora_ingreso" id="hora_ingreso" value="<?= date(' g:i:s') ?>">-->
+<!-- hora salida
+					<input type="hidden" class="form-control" name="hora_salida" id="hora_salida" value="<?= date(' g:i:s') ?>">				
 					 tiempo-
 					<input type="hidden" class="form-control" name="tiempo_alquiler" id="tiempo_alquiler" value="00:34:00">
 
@@ -36,7 +40,7 @@
 					<button type="submit"class="btn  btn-block btn-warning" data-toggle="modal" data-target="#exampleModalCenter">Imprimir</button>
 				</form> -->
 
-				<!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"  aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"  aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -56,21 +60,16 @@
 				</div>  -->
 
 
-				<!--barra de carga-->	
-				 <!-- <div class="contenedor ">
+<!--barra de carga-->
+<!-- <div class="contenedor ">
 					<progress value=0 max=100 id="barra" class="barraStyle" style="width:100%" ></progress>
 					{{-- <input type="button" value="cargar" id="cargar" onclick="setInterval('cargar()',1800)"/>  --}}
 				</div> -->
-				<!-- <div class="icon">
+<!-- <div class="icon">
 					<i class="fa fa-hotel"></i>
 				</div> -->
 
-			
-			<!-- </div> 
-		</div>
-		
-	</div>-->
-</div>
+
+
 <script src="{{ asset('/js/llenarhome.js') }}" defer></script>
 @endsection
-

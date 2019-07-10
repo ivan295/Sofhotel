@@ -8,7 +8,7 @@
 <script type="text/javascript">
   function consultar(){
     var dato = document.getElementById('consulta_proveedor').value;
-    document.getElementById('id_proveedor').value = dato;
+    document.getElementById('proveedor').value = dato;
   }
 </script>
 <!--alertas-->
@@ -92,7 +92,7 @@
                 </select>
               </div>
             </div>
-            <input type="hidden" id="id_proveedor" name="id_proveedor" >
+            <input type="hidden" id="proveedor" name="proveedor" >
           </div>
           <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -114,7 +114,7 @@
     </div>
   </div>
   <!--tabla-->
-
+  
   <table class="table table-hover table-bordered" id="tablaproductos">
     <thead>
       <tr bgcolor="#98A8D5">
@@ -129,11 +129,20 @@
     </thead>
     <tbody>
       @foreach($NuevoProducto as $NuevoProd)
+      <!--cambiar de color celda de stock al ser menor o igual a 5-->
+      <?php 
+      if ($NuevoProd->stock <= 5) {
+        $color = 'red';
+        } elseif ($NuevoProd->stock > 5) {
+          $color = 'white';
+        }
+      ?>
+      <!--fin de condicional-->
       <tr class='text-center'>
         <td>{{$NuevoProd->id}}</td>
         <td>{{$NuevoProd->descripcion}}</td>
         <td>$ {{$NuevoProd->precio_venta}}</td>
-        <td>{{$NuevoProd->stock}}</td>
+        <td style="background-color:<?php echo $color ?>;">{{$NuevoProd->stock}}</td>
         <td>$ {{$NuevoProd->precio_compra}}</td>
         <td>{{$NuevoProd->Empresa}}</td>
         <td class="text-center">

@@ -45,7 +45,7 @@
 
             <!-- Notifications Menu -->
             <li class="dropdown notifications-menu">
-               
+               <div>notificaciones</div>
             </li>
             <!-- Tasks Menu -->
             <li class="dropdown tasks-menu">

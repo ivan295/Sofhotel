@@ -58,6 +58,7 @@ desired effect
 </div>
 @section('scripts')
     @include('adminlte::layouts.partials.scripts')
+
 @show
 
 </body>

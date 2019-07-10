@@ -138,6 +138,8 @@ Route::post('factura_compra/{id}/edit', ['as' => 'factura_compra.editar', 'uses'
 
 Route::put('factura_compra/{id}', ['as' => 'factura_compra.update', 'uses'=>'facturacompraController@update']);
 
+
+
 //Arduino
 Route::get('/iniciarestado', function () {
     return view('/vendor/adminlte/iniciarestado');
@@ -176,6 +178,7 @@ Route::put('productos/{id}', ['as' => 'productos.update', 'uses'=>'productosCont
 Route::get('productos/index', ['as' => 'productos.index', 'uses'=>'productosController@index']);
 
 //detalle_compra
+
 Route::post('detalle_compra/crear', ['as' => 'detalle_compra.create', 'uses'=>'detalleCompraController@store']);
 
 Route::delete('detalle_compra/{id}/eliminar', ['as'=> 'detalle_compra.delete', 'uses' =>'detalleCompraController@destroy']);
@@ -188,7 +191,9 @@ Route::get('detalle_compra/filtroProductos', ['as' => 'detalle_compra.filtroProd
 
 Route::get('detalle_compra/index', ['as' => 'detalle_compra.index', 'uses'=>'detalleCompraController@index']);
 
+//Route::post('detalle_compra/factura', ['as' => 'detalle_compra.factura', 'uses'=>'detalleCompraController@factura']);
 
+//Route::post('detalle_compra/create', 'detalleCompraController@store');
 
 
 /// filtro de productos

@@ -3,67 +3,88 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Collection;
+use Response;
 use App\DetalleCompra;
 use DB;
-use App\Productos;
 use App\Factura_Compra;
+use App\Http\Requests\IngresoFormRequest;
 
 class detalleCompraController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-         $Producto = DB::table('detalle_compra')
-        ->join('producto','producto.id','=','detalle_compra.id_producto')
-        ->join('factura_compra','factura_compra.id','=','detalle_compra.id_factura')
-    	 ->select('detalle_compra.*','factura_compra.descripcion as Descripcion_fact')
+         $Factura = DB::table('factura_compra')
     	
          ->orderBy('id', 'desc')
         //dd($NuevaCompra);
-        ->paginate(10);
-        return view('vendor.adminlte.detalleCompra',compact('Producto'));
+        ->first();
+        
+        return view('vendor.adminlte.detalleCompra',compact('Factura'));
     }
+
 
     public function store(Request $request)
     {
-        //dd($request);
-        // $DetalleCompra                   = new DetalleCompra;
-        // $DetalleCompra->cantidad = $request->cantidad;
-        // $DetalleCompra->total_compra = $request->total_compra;
-        // $DetalleCompra->id_factura = $request->id_factura;
-        // $DetalleCompra->id_producto = $request->id_producto;
-        // $DetalleCompra->save();
-        // return redirect('/detalle_compra');
-        try{
-            DB::beginTransaction();
- 
-            $compra = new Factura_Compra();
-            $compra->descripcion = $request->descripcion;
         
-            $compra->id_proveedor = $request->id_proveedor;
-            $compra->id_usuario = \Auth::user()->id;
-            $compra->save();
- 
-            $detalles = $request->data;//Array de detalles
-            //Recorro todos los elementos
- 
-            foreach($detalles as $det)
-            {
-                $detalle = new DetalleCompra();
-                $detalle->id_factura = $compra->id;
-                $detalle->id_producto = $det->id_producto;
-                $detalle->cantidad = $det->cantidad;
-                $detalle->precio_compra = $det->precio_compra;      
-                $detalle->precio_venta = $det->precio_venta;   
-                $detalle->total = $det->total;   
-                $detalle->save();
-            }          
-           
-        } catch (Exception $e)
-            {
-            DB::rollBack();
-            }
+        try {
+    		DB::beginTransaction();       
+    		$factura = new Factura_Compra;
+    		$factura->id_proveedor = $request->get('id_proveedor');
+    		$factura->descripcion = $request->get('cdescripcion');
+            $factura->total_pagar = $request->get('total_pagar');
+            $factura->id_usuario = $request->get('id_usuario');
+            $factura->save();
+        
+    		//Artículos array()
+    		//Tabla detalle_ingreso
+    		$id_producto = $request->get('idproducto'); //array()
+    		$cant = $request->get('cantidad');
+    		$preciocompra = $request->get('preciocompra');
 
-}
+    		//Recorre los detalles de ingreso
+    		$cont = 0;
+
+    		while($cont < count($id_producto))
+    		{
+    			$detalle = new DetalleCompra;
+    			//$ingreso->id del ingreso que recien se guardo 
+    			$detalle->id_factura = $factura->id;
+    			//id_articulo de la posición cero
+    			$detalle->id_producto = $id_producto[$cont];
+    			$detalle->cantidad = $cant[$cont];
+    			$detalle->total_pagar = $preciocompra[$cont];
+    		 	$detalle->save();
+
+                $cont = $cont + 1;
+            }
+            DB::commit();
+    	} catch (Exception $e) {
+    		//Si existe algún error en la Transacción
+    		DB::rollback(); //Anular los cambios en la DB
+    	}
+
+    	
+        
+             return redirect('/detalle_compra');
+        }
+
+           
+
+
+
+       // public function factura(Request $request){
+          //  $NuevaCompra                   = new Factura_Compra;
+        //$NuevaCompra->id_proveedor = $request->get('id_proveedor');
+        //$NuevaCompra->descripcion = $request->get('descripcion');
+        //$NuevaCompra->total_pagar = $request->get('total_pagar');
+        //$NuevaCompra->id_usuario = $request->get('id_usuario');
+        //$NuevaCompra->save();
+        //return redirect('/detalle_compra');        
+
+        //}
 
 	public function destroy($id)
     {

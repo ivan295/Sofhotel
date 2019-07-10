@@ -14,7 +14,11 @@
     
     <script src="{{ asset('js/bootstrap-select.min.js') }}" defer></script>
 
-   
+    <script src="{{ asset('js/jquery-2.1.4.min.min.min.js') }}"></script>
+    @stack('tabla')
+
+    
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -80,6 +84,7 @@
         <main class="py-4">
             @include('sweet::alert')
             @yield('content')
+            
 
         </main>
     </div>
