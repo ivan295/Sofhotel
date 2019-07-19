@@ -17,6 +17,7 @@ class CreateTipocuentasTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('descripcion');
+            $table->boolean('estado');
         });
     }
 

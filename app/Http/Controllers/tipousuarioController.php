@@ -11,6 +11,7 @@ class tipousuarioController extends Controller
     {
         $Nuevotipouser = TipoUsuario::search($request->tipo)
         ->orderBy('id', 'desc')
+        ->where('tipousuario.estado','=',1)
         ->paginate(10);
         return view('vendor.adminlte.tipousuario',compact('Nuevotipouser'));
     }
@@ -24,6 +25,7 @@ class tipousuarioController extends Controller
          //dd($request->all());
         $Nuevotipouser                    = new TipoUsuario;
         $Nuevotipouser->descripcion = $request->descripcion;
+        $Nuevotipouser->estado =1;
         $Nuevotipouser->save();
         return redirect('/tipouser')->with('success','Tipo de usuario agregado correctamente');
     }
@@ -31,7 +33,9 @@ class tipousuarioController extends Controller
 
     public function destroy($id)
     {
-        TipoUsuario::destroy($id);
+        $tipousuario = TipoUsuario::findOrFail($id);
+        $tipousuario->estado = '0';
+        $tipousuario->update();
         return redirect('/tipouser');        
     }
 

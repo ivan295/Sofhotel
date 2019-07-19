@@ -18,6 +18,7 @@ class CreateGastosTable extends Migration
             $table->timestamps();
             $table->string('descripcion',100);
             $table->float('gasto_total');
+            $table->boolean('estado');
            $table->bigInteger('id_usuario')->unsigned();
            $table->foreign('id_usuario')->references('id')->on('users');
         });

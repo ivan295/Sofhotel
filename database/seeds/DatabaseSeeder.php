@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
         DB::table('tipousuario')->insert([
-        	'descripcion'=>'admin',
+            'descripcion'=>'admin',
+            'estado'=>'1',
         ]);
         DB::table('users')->insert([
         	'nombre'=>'admin',
@@ -24,7 +25,8 @@ class DatabaseSeeder extends Seeder
         	'telefono'=>'091233123',
         	'email'=>'admin@sistema.com',
         	'password'=>bcrypt('12345678'),
-        	'idtipoUsuario'=>'1',
+            'idtipoUsuario'=>'1',
+            'estado'=>'1',
         ]);
     }
 }

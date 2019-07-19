@@ -10,87 +10,42 @@ use Response;
 use App\DetalleCompra;
 use DB;
 use App\Factura_Compra;
-use App\Http\Requests\IngresoFormRequest;
 
 class detalleCompraController extends Controller
 {
     public function index()
     {
-         $Factura = DB::table('factura_compra')
-    	
-         ->orderBy('id', 'desc')
-        //dd($NuevaCompra);
-        ->first();
         
-        return view('vendor.adminlte.detalleCompra',compact('Factura'));
+        return view('vendor.adminlte.detalleCompra');
     }
 
-
     public function store(Request $request)
-    {
-        
-        try {
-    		DB::beginTransaction();       
+    {    
     		$factura = new Factura_Compra;
-    		$factura->id_proveedor = $request->get('id_proveedor');
-    		$factura->descripcion = $request->get('cdescripcion');
-            $factura->total_pagar = $request->get('total_pagar');
-            $factura->id_usuario = $request->get('id_usuario');
+    		$factura->id_proveedor = $request->id_proveedor;
+    		$factura->descripcion = $request->cdescripcion;
+            $factura->total_pagar = $request->total_pagar;
+            $factura->id_usuario = $request->id_usuario;
+            $factura->estado = 1;
             $factura->save();
+
+             $cont = 0;
+    		 while($cont < count($request->productoid))
+    		 {
+    		 	$detalle = new DetalleCompra;
+    		 	$detalle->id_factura = $factura->id;//$factura->id  factura que recien se guardó
+    		 	$detalle->id_producto = $request->productoid[$cont];//id_articulo de la posición cero
+                $detalle->cantidad = $request->cant[$cont];
+                $detalle->precio_compra = $request->precioco[$cont];
+                $detalle->subtotal = $request->precioco[$cont]*$request->cant[$cont];
+
+                $detalle->save();
         
-    		//Artículos array()
-    		//Tabla detalle_ingreso
-    		$id_producto = $request->get('idproducto'); //array()
-    		$cant = $request->get('cantidad');
-    		$preciocompra = $request->get('preciocompra');
-
-    		//Recorre los detalles de ingreso
-    		$cont = 0;
-
-    		while($cont < count($id_producto))
-    		{
-    			$detalle = new DetalleCompra;
-    			//$ingreso->id del ingreso que recien se guardo 
-    			$detalle->id_factura = $factura->id;
-    			//id_articulo de la posición cero
-    			$detalle->id_producto = $id_producto[$cont];
-    			$detalle->cantidad = $cant[$cont];
-    			$detalle->total_pagar = $preciocompra[$cont];
-    		 	$detalle->save();
-
                 $cont = $cont + 1;
-            }
-            DB::commit();
-    	} catch (Exception $e) {
-    		//Si existe algún error en la Transacción
-    		DB::rollback(); //Anular los cambios en la DB
-    	}
-
-    	
-        
+             }
              return redirect('/detalle_compra');
         }
 
-           
-
-
-
-       // public function factura(Request $request){
-          //  $NuevaCompra                   = new Factura_Compra;
-        //$NuevaCompra->id_proveedor = $request->get('id_proveedor');
-        //$NuevaCompra->descripcion = $request->get('descripcion');
-        //$NuevaCompra->total_pagar = $request->get('total_pagar');
-        //$NuevaCompra->id_usuario = $request->get('id_usuario');
-        //$NuevaCompra->save();
-        //return redirect('/detalle_compra');        
-
-        //}
-
-	public function destroy($id)
-    {
-        DetalleCompra::destroy($id);
-        return redirect('/detalle_compra');        
-    }
 
 
 }

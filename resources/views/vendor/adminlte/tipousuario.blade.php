@@ -47,7 +47,7 @@
             <label for="tipousuario">Tipo de Usuario</label>
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-users"></i></span>
-              <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Tipo de Usuario">
+              <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Tipo de Usuario" required>
             </div>
             <br>
           </div>
@@ -92,7 +92,6 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-danger btn-xs" onclick="return borrar()">Borrar</button>
               </form>
-            </form>
           </div>
         </div>
       </td>

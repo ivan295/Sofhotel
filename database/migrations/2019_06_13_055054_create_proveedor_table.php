@@ -22,6 +22,7 @@ class CreateProveedorTable extends Migration
             $table->string('telefono',10);
             $table->string('correo',20);
             $table->string('empresa',100);
+            $table->boolean('estado');
         });
     }
 

@@ -50,28 +50,28 @@
           <label for="nombre">Nombre</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa  fa-user"></i></span>
-            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" >
+            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
           </div>
         </div>
         <div class="col-md-6">
           <label for="apellido">Apellido</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" >
+            <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" required>
           </div>
           </div>
           <div class="col-md-6">
           <label for="cedula">Cédula</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-slack"></i></span>
-            <input type="text" class="form-control" name="cedula" id="cedula" placeholder="Cédula" >
+            <input type="text" class="form-control" name="cedula" id="cedula" placeholder="Cédula" required>
           </div>
           </div>
           <div class="col-md-6">
           <label for="Usuario">Usuario</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user-plus"></i></span>
-            <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario" >
+            <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario" required>
           </div>
           </div>
           <div class="col-md-6">

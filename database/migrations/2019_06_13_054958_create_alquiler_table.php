@@ -21,6 +21,7 @@ class CreateAlquilerTable extends Migration
             $table->time('hora_salida_habitacion');
             $table->time('tiempo_alquiler');
             $table->integer('numero_personas');
+            $table->boolean('estado');
 
             $table->bigInteger('id_usuario')->unsigned()->index();
             $table->foreign('id_usuario')->references('id')->on('users');

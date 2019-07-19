@@ -11,6 +11,7 @@ class proveedorController extends Controller
     {
         $Nuevoproveedor = Proveedor::search($request->nombre)
         ->orderBy('id', 'desc')
+        ->where('proveedor.estado','=',1)
         ->paginate(10);
         return view('vendor.adminlte.nuevoproveedor',compact('Nuevoproveedor'));
     }
@@ -34,13 +35,16 @@ class proveedorController extends Controller
         $Nuevoproveedor->telefono = $request->telefono;
         $Nuevoproveedor->correo = $request->correo;
         $Nuevoproveedor->empresa = $request->empresa;
+        $Nuevoproveedor->estado = 1;
         $Nuevoproveedor->save();
         return redirect('/proveedor')->with('success','Proveedor agregado correctamente');
 	}
 
 	public function destroy($id)
     {
-        Proveedor::destroy($id);
+        $proveedor = Proveedor::findOrFail($id);
+        $proveedor->estado = '0';
+        $proveedor->update();
         return redirect('/proveedor');        
     }
 

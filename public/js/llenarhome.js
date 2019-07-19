@@ -26,7 +26,7 @@ $(document).ready(function(){
                 <p>Hora de ingreso: "+hora_ingreso+" </p>\
                 <p>Hora de salida: </p>\
                 <p>Total a pagar: </p>\
-                <button type='button'class='btn  btn-block btn-warning' data-toggle='modal' data-target='#ventana'>Imprimir</button>\
+                <button type='button' id='boton' class='btn  btn-block btn-warning'>Imprimir</button>\
                 </div>\
                 <div class='icon'>\
                 <i class='fa fa-hotel'></i>\
@@ -35,15 +35,18 @@ $(document).ready(function(){
                 </div>"
                 );
                 
-                $('#ventana').click(function() {
-                    alert("exito");
-                    
-                  });
+                
          });
 
 
         });
+
+        
 }
+$('#boton').click(function() {
+    alert("exito");
+    
+  });
 //});
 
 

@@ -43,42 +43,42 @@
               <label for="nombre_proveedor">Nombre</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre">
+                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
               </div>
             </div>
             <div class="col-md-6">
               <label for="apellidos_proveedor">Apellido</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido">
+                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" required>
               </div>
             </div>
             <div class="col-md-6">
               <label for="cedula_proveedor">Cédula</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-slack"></i></span>
-                <input type="text" class="form-control" name="cedula" id="cedula" placeholder="Cédula">
+                <input type="text" class="form-control" name="cedula" id="cedula" placeholder="Cédula" required>
               </div>
             </div>
             <div class="col-md-6">
               <label for="telefono_proveedor">Teléfono</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa fa-phone"></i></span>
-                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Teléfono">
+                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Teléfono" required>
               </div>
             </div>
             <div class="col-md-6">
               <label for="correo_proveedor">Correo</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa  fa-at"></i></span>
-                <input type="text" class="form-control" name="correo" id="correo" placeholder="Correo">
+                <input type="text" class="form-control" name="correo" id="correo" placeholder="Correo" required>
               </div>
             </div>
             <div class="col-md-6">
               <label for="empresa">Empresa</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-industry"></i></span>
-                <input type="text" class="form-control" name="empresa" id="empresa" placeholder="Empresa">
+                <input type="text" class="form-control" name="empresa" id="empresa" placeholder="Empresa" requierd>
               </div>
             </div>
           </div>

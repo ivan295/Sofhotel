@@ -19,6 +19,7 @@ class gastosController extends Controller
         ->join('users','users.id','=','gastos.id_usuario')
         ->select('gastos.*','users.usuario as user')
         ->orderBy('id', 'desc')
+        ->where('gastos.estado','=',1)
         ->paginate(10);
         return view('vendor.adminlte.gastos', compact('NuevoGasto'));
 
@@ -38,13 +39,16 @@ class gastosController extends Controller
      	$NuevoGasto->descripcion = $request->descripcion;
      	$NuevoGasto->gasto_total = $request->gasto_total;
         $NuevoGasto->id_usuario = $request->id_usuario;
+        $NuevoGasto->estado = 1;
      	$NuevoGasto->save();
      	return redirect('/gastos')->with('success','Gasto agregado correctamente');
      }
 
       public function destroy($id)
     {
-        Gastos::destroy($id);
+        $gasto = Gastos::findOrFail($id);
+        $gasto->estado = '0';
+        $gasto->update();
         return redirect('/gastos');        
     }
 

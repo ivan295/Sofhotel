@@ -15,8 +15,9 @@ class PropietarioCuentaController extends Controller
      */
     public function index(Request $request)
     {
-        $propietario_cuenta = PropietarioCuenta::search($request->propietario)
+        $propietario_cuenta = PropietarioCuenta::search($request->nombre)
         ->orderBy('id', 'desc')
+        ->where('propietario_cuentas.estado','=',1)
         ->paginate(10);
 
         return view('vendor.adminlte.propietario_cuenta', compact('propietario_cuenta'));
@@ -45,6 +46,7 @@ class PropietarioCuentaController extends Controller
             ]);
         $propietario = new PropietarioCuenta;
         $propietario->nombre = $request->nombre;
+        $propietario->estado = 1;
         $propietario->save();
         return redirect('/propietario_cuenta')->with('success','Propietario agregado correctamente');
     }
@@ -96,7 +98,9 @@ class PropietarioCuentaController extends Controller
      */
     public function destroy($id)
     {
-        PropietarioCuenta::destroy($id);
+        $propietario = PropietarioCuenta::findOrFail($id);
+        $propietario->estado = '0';
+        $propietario->update();
         return redirect('/propietario_cuenta');
     }
 }

@@ -20,6 +20,7 @@ class CreateCuentaTable extends Migration
             $table->bigInteger('id_tipo_cuenta')->unsigned();
             $table->bigInteger('id_propietario')->unsigned();
             $table->bigInteger('id_banco')->unsigned();
+            $table->boolean('estado');
 
             $table->foreign('id_tipo_cuenta')->references('id')->on('tipo_cuentas');
             $table->foreign('id_propietario')->references('id')->on('propietario_cuentas');

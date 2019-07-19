@@ -4,7 +4,6 @@
 {{ trans('adminlte_lang::message.home') }}
 @endsection
 @section('main-content')
-
 <script type="text/javascript">
   function consultar_producto() {
     var dato = document.getElementById('consulta_producto').value;
@@ -16,9 +15,6 @@
     document.getElementById('id_proveedor').value = dato;
   }
 </script>
-
-
-
 <div class="row">
   <div class="col-md-12 col-md-offset-0">
     <div class="box box-primary">
@@ -57,8 +53,7 @@
               </div>
               <input type="hidden" class="form-control" name="id_usuario" id="id_usuario" value="{{Auth::user()->id}}">
             </div>
-            <!--<label>-</label>
-            <button type="input" class="btn btn-success">Crear</button>-->
+           
           </div>
 
           <br>
@@ -67,8 +62,6 @@
             <div class="panel-body">
               <div class="panel-header">
                 <h4 class="box-title">Detalle de factura</h4>
-                <!-- <input type="hidden" id="id_factura" name="id_factura" value="<?php echo $Factura->id; ?>">
-                <label for="">Factura : <?php echo $Factura->descripcion; ?></label> -->
               </div>
               <div class="col-md-3">
                 <div class="form-group">
@@ -81,7 +74,7 @@
                     @endforeach
                   </select>
                 </div>
-                <input type="hidden" id="id_producto" name="product">
+                <input type="hidden" id="id_producto" name="product[]">
               </div>
               <div class="col-md-2">
                 <label for="Cantidad">Cantidad</label>
@@ -100,7 +93,8 @@
               </div>
               <input type="hidden" name="total_compra" id="total_compra">
 
-
+              
+      <div id="prueba"></div>
 
               <label>-</label>
               <div class="form-group">
@@ -150,40 +144,62 @@
 @push('tabla')
 
 <script>
+
   $(document).ready(function() {
+    debugger
     $('#bt_add').click(function() {
       agregar();
-
     });
   });
-  var array_productos = [];
+
   var cont = 0;
   total = 0;
   subtotal = [];
-
-  //indice=0;
   $("#boton").hide();
 
-  function agregar() {
+     data=[];
+      var i=0;
+      
 
+      
+  function agregar() {
+    debugger
     idproducto = $("#id_producto").val();
     producto = $("#id_producto option:selected").text();
     cantidad = $("#pcantidad").val();
     preciocompra = $("#pprecio_compra").val();
-
-
-    if (idproducto != "" && cantidad != "" && cantidad > 0 && preciocompra != "") {
+      
+     if (idproducto != "" && cantidad != "" && cantidad > 0 && preciocompra != "") {
       subtotal[cont] = (cantidad * preciocompra);
       total = total + subtotal[cont];
-      var fila = '<tr class="selected" id="fila' + cont + '"><td> <button type="button" class="btn btn-danger" onclick="eliminar(' + cont + ');">X</button></td><td><input type="hidden" name"idproducto[]" value="' + idproducto + '">' + producto + '</td><td><input type="number" name"cantidad[]" value="' + cantidad + '" disabled></td><td><input type="number" name"preciocompra[]" value="' + preciocompra + '" disabled></td><td>' + subtotal[cont] + '</td></tr>';
+      var fila = '<tr class="selected" id="fila' + cont + '"><td> <button type="button" class="btn btn-danger" onclick="eliminar(' + cont + ');">X</button></td><td><input type="hidden" name"idproducto" value="' + idproducto + '">' + producto + '</td><td><input type="number" name"cantidad[]" value="' + cantidad + '" disabled></td><td><input type="number" name"preciocompra[]" value="' + preciocompra + '" disabled></td><td>$'+ subtotal[cont] + '</td></tr>';
       cont++;
-
       $("#total").html("$" + total);
       $("#total_compra").val(+total);
-      //$("#sub").val(+subtotal[cont]);
+  
       evaluar();
       $('#detalles').append(fila);
       // limpiar();
+
+      ///este para un array
+      var x = document.createElement("INPUT");  
+      x.setAttribute("type", "hidden");
+      x.setAttribute("name", "productoid[]");
+      x.setAttribute("value", idproducto);
+      $('#prueba').append(x);
+      //este para el otro array que quieres enviar
+      var x = document.createElement("INPUT");  
+      x.setAttribute("type", "hidden");
+      x.setAttribute("name", "precioco[]");
+      x.setAttribute("value", preciocompra);
+      $('#prueba').append(x);
+
+      var x = document.createElement("INPUT");  
+      x.setAttribute("type", "hidden");
+      x.setAttribute("name", "cant[]");
+      x.setAttribute("value", cantidad);
+      $('#prueba').append(x);
+      
     } else {
       alert("Error al ingresar");
     }

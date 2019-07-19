@@ -17,6 +17,7 @@ class CreatePropietariocuentasTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('nombre');
+            $table->boolean('estado');
         });
     }
 

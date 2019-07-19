@@ -17,6 +17,7 @@ class CreateTipousuarioTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('descripcion',100);
+            $table->boolean('estado');
         });
     }
 

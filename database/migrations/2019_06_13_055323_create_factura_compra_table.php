@@ -18,6 +18,7 @@ class CreateFacturaCompraTable extends Migration
             $table->timestamps();
              $table->string('descripcion',100);
             $table->float('total_pagar');
+            $table->boolean('estado');
 
             $table->bigInteger('id_proveedor')->unsigned()->index();
             $table->foreign('id_proveedor')->references('id')->on('proveedor');

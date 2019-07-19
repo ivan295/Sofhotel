@@ -20,6 +20,7 @@ class CreateProductoTable extends Migration
             $table->float('precio_venta');
             $table->integer('stock');
             $table->float('precio_compra');
+            $table->boolean('estado');
 
             $table->bigInteger('id_proveedor')->unsigned()->index();
             $table->foreign('id_proveedor')->references('id')->on('proveedor');

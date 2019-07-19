@@ -20,6 +20,7 @@ class CreateDepositoTable extends Migration
             $table->decimal('monto');
             $table->bigInteger('id_usuario')->unsigned();
             $table->bigInteger('id_cuenta')->unsigned();
+            $table->boolean('estado');
 
             $table->foreign('id_usuario')->references('id')->on('users');
             $table->foreign('id_cuenta')->references('id')->on('cuentas');

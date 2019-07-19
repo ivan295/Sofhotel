@@ -15,6 +15,7 @@ class productosController extends Controller
         ->join('proveedor','proveedor.id','=','producto.id_proveedor')
     	->select('producto.*','proveedor.empresa as Empresa')
         ->orderBy('id', 'desc')
+        ->where('producto.estado','=',1)
         //dd($NuevaCompra);
         ->paginate(10);
         
@@ -37,16 +38,22 @@ class productosController extends Controller
         $nuevoproducto->stock = $request->stock;
         $nuevoproducto->precio_compra = $request->precio_compra;
         $nuevoproducto->id_proveedor = $request->id_proveedor;
+        $nuevoproducto->estado= 1;
         $nuevoproducto->save();
        
         return redirect('/productos')->with('success','Producto agregado correctamente');
 
-	}
+    }
+    
 
 	public function destroy($id)
     {
-        Productos::destroy($id);
+        $producto = Productos::findOrFail($id);
+        $producto->estado = '0';
+        $producto->update();
         return redirect('/productos');        
+        
+        
     }
 
    public function edit($id)

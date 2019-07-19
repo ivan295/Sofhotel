@@ -16,6 +16,7 @@ class BancoController extends Controller
     {
         $banco = Banco::search($request->banco)
         ->orderBy('id', 'desc')
+        ->where('bancos.estado','=',1)
         ->paginate(10);
         return view('vendor.adminlte.banco', compact('banco'));
     }
@@ -44,6 +45,7 @@ class BancoController extends Controller
 
         $banco = new Banco;
         $banco->entidad = $request->entidad;
+        $banco->estado = 1;
         $banco->save();
         return redirect('/banco')->with('success','Banco agregado correctamente');
     }
@@ -95,7 +97,9 @@ class BancoController extends Controller
      */
     public function destroy($id)
     {
-        Banco::destroy($id);
+        $banco = Banco::findOrFail($id);
+        $banco->estado = '0';
+        $banco->update();
         return redirect('/banco');
     }
 }

@@ -16,7 +16,7 @@
   <form method="GET"  action="{{route('propietario_cuenta.index')}}" >
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="input-group input-group-flat">
-      <input type="text" class="form-control" name="propietario" id="propietario" placeholder="Busqueda por nombre de propietario o entidad">
+      <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Busqueda por nombre de propietario o entidad">
       <span class="input-group-btn">
         <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i> Buscar</button>
       </span>
@@ -46,7 +46,7 @@
             <label for="Nombre">Nombre o Entidad</label>
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-              <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre o Entidad">
+              <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre o Entidad" required>
             </div>
             <br>
           </div>

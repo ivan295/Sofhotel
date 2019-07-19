@@ -56,28 +56,28 @@
               <label for="descripcion_producto">Descripcion</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" >
+                <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" required>
               </div>
             </div>
             <div class="col-md-6">
               <label for="precio_venta">Precio de Venta</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                <input type="text" class="form-control" name="precio_venta" id="precio_venta" placeholder="Precio de Venta" >
+                <input type="text" class="form-control" name="precio_venta" id="precio_venta" placeholder="Precio de Venta" required>
               </div>
             </div>
             <div class="col-md-6">
               <label for="stock">Cantidad</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-database"></i></span>
-                <input type="text" class="form-control" name="stock" id="stock" placeholder="Cantidad">
+                <input type="text" class="form-control" name="stock" id="stock" placeholder="Cantidad" required>
               </div>
             </div>
             <div class="col-md-6">
               <label for="precio_compra">Precio de Compra</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                <input type="text" class="form-control" name="precio_compra" id="precio_compra" placeholder="Precio de Compra">
+                <input type="text" class="form-control" name="precio_compra" id="precio_compra" placeholder="Precio de Compra" required>
               </div>
             </div>
             <div class="col-md-6">

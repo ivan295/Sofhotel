@@ -66,7 +66,7 @@
           <label for="numero_cuenta">Número de cuenta</label>
           <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-slack"></i></span>
-            <input type="text" class="form-control" name="numero_cuenta"  id="numero_cuenta" placeholder="Numero de cuenta">
+            <input type="text" class="form-control" name="numero_cuenta"  id="numero_cuenta" placeholder="Numero de cuenta" required>
           </div>
           <br>
           <label for="numero_cuenta">Tipo de cuenta</label>

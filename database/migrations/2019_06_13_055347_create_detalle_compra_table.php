@@ -17,7 +17,9 @@ class CreateDetalleCompraTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->integer('cantidad');
-            $table->float('total_compra');
+            $table->float('subtotal');
+            $table->float('precio_compra');
+
             
             $table->bigInteger('id_factura')->unsigned()->index();
             $table->foreign('id_factura')->references('id')->on('factura_compra');

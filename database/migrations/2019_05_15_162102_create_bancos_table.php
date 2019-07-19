@@ -17,6 +17,7 @@ class CreateBancosTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('entidad');
+            $table->boolean('estado');
         });
     }
 

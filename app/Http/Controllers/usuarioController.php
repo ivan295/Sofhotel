@@ -14,6 +14,7 @@ class usuarioController extends Controller
     	->join('tipousuario','tipousuario.id','=','users.idtipoUsuario')
     	->select('users.*','tipousuario.descripcion as TipoUser')
         ->orderBy('id', 'desc')
+        ->where('users.estado','=',1)
         ->paginate(10);
         //return response()->json($Nuevousuario);
         //dd($Nuevousuario);
@@ -45,13 +46,17 @@ class usuarioController extends Controller
         $Nuevousuario->telefono = $request->telefono;
         $Nuevousuario->idtipoUsuario = $request->idtipouser;
         $Nuevousuario->email = $request->usuario.'@sistema.com';
+        $Nuevousuario->estado = 1;
+
         $Nuevousuario->save();
         return redirect('/nuevouser')->with('success','Usuario agregado correctamente');
     }
 
     public function destroy($id)
     {
-        User::destroy($id);
+        $user = User::findOrFail($id);
+        $user->estado = '0';
+        $user->update();
         return redirect('/nuevouser');        
     }
 

@@ -19,6 +19,7 @@ class CreateFacturaVentaTable extends Migration
             $table->float('total_alquiler');
             $table->float('total_productos');
             $table->float('total_cobro');
+            $table->boolean('estado');
 
             $table->bigInteger('id_alquiler')->unsigned()->index();
             $table->foreign('id_alquiler')->references('id')->on('alquiler');

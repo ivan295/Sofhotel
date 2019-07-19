@@ -45,7 +45,7 @@
           <label for="entidad">Entidad</label>
           <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-bank"></i></span>
-            <input type="text" class="form-control" name="entidad" id="entidad" placeholder="Entidad">  
+            <input type="text" class="form-control" name="entidad" id="entidad" placeholder="Entidad"required>  
           </div>
           <br>
         </div>

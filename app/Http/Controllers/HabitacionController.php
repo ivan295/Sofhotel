@@ -15,6 +15,7 @@ class HabitacionController extends Controller
         ->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
         ->select('habitacion.*','estado_habitacion.ip_arduino as ip')
         ->orderBy('id', 'asc')
+        ->where('habitacion.estado','=',1)
         ->get();
         //dd($NuevaHabitacion);        
         return view('vendor.adminlte.nuevahabitacion', compact('NuevaHabitacion'));
@@ -41,6 +42,7 @@ class HabitacionController extends Controller
         $NuevaHabitacion->precio            = $request->precio;
         $NuevaHabitacion->tiempo_limpieza   = $request->tiempo_limpieza;
         $NuevaHabitacion->id_estado   = $request->id_estado;
+        $NuevaHabitacion->estado =1;
         $NuevaHabitacion->save();
         $tiempo = 2 * 60 * 1000000;
         $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
@@ -100,7 +102,9 @@ class HabitacionController extends Controller
      */
     public function destroy($id)
     {
-        Habitacion::destroy($id);
+        $habitacion = Habitacion::findOrFail($id);
+        $habitacion->estado = '0';
+        $habitacion->update();
         return redirect('/Habitacion');
         
     }

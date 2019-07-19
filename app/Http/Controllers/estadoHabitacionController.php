@@ -21,7 +21,7 @@ class estadoHabitacionController extends Controller
         if($aux==1){
             dd("ya existe");
         }else {
-        $dato->estado ="Inactivo";
+        $dato->estado ="Desocupado";
         $dato->ip_arduino = $ip;
         $dato->save();
         }
@@ -35,7 +35,7 @@ class estadoHabitacionController extends Controller
         //dd($cont->ip_arduino);
           if ($t == 1) {
               $data = Estado_habitacion::Find($cont->id);
-              $data->estado = "Activo";
+              $data->estado = "Ocupado";
               $data->save();
           }
     

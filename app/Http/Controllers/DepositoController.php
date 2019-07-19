@@ -18,6 +18,7 @@ class DepositoController extends Controller
           $depositos = Deposito::search($request->fecha)
           ->join('users', 'users.id', '=', 'depositos.id_usuario')->join('cuentas', 'cuentas.id', '=', 'depositos.id_cuenta')->join('bancos', 'bancos.id', '=', 'cuentas.id_banco')->join('propietario_cuentas', 'propietario_cuentas.id', '=', 'cuentas.id_propietario')->join('tipo_cuentas', 'tipo_cuentas.id', '=', 'cuentas.id_tipo_cuenta')->select('depositos.id','depositos.monto', 'depositos.motivo','depositos.created_at', 'users.usuario as nombre_usuario', 'cuentas.numero_cuenta as num_cta', 'bancos.entidad as entidad', 'propietario_cuentas.nombre as nombre', 'tipo_cuentas.descripcion as tp_descripcion' ,  'propietario_cuentas.nombre as nombre', 'bancos.entidad as entidad')
            ->orderBy('id', 'desc')
+           ->where('depositos.estado','=',1)
            ->paginate(10);
 
           return view('vendor.adminlte.deposito', compact('depositos'));
@@ -56,6 +57,7 @@ class DepositoController extends Controller
         $deposito->monto = $request->monto;
         $deposito->id_usuario = $request->id_usuario;
         $deposito->id_cuenta = $request->id_cuenta;
+        $deposito->estado = 1;
         $deposito->save();
 
         return redirect('/deposito')->with('success','Depósito agregado correctamente');
@@ -103,6 +105,10 @@ class DepositoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deposito = Deposito::findOrFail($id);
+        $deposito->estado = '0';
+        $deposito->update();
+        return redirect('/deposito');
+
     }
 }

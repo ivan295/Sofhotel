@@ -16,6 +16,7 @@ class TipoCuentaController extends Controller
     {
         $tipo_cuenta = TipoCuenta::search($request->tipo)
         ->orderBy('id', 'desc')
+        ->where('tipo_cuentas.estado','=',1)
         ->paginate(10);
         return view('vendor.adminlte.tipo_cuenta', compact('tipo_cuenta'));
     }
@@ -43,6 +44,7 @@ class TipoCuentaController extends Controller
             ]);
         $tipo_cuenta = new TipoCuenta;
         $tipo_cuenta->descripcion = $request->descripcion;
+        $tipo_cuenta->estado =1;
         $tipo_cuenta->save();
         return redirect('/tipo_cuenta')->with('success','Tipo de cuenta agregada correctamente');
     }
@@ -95,7 +97,9 @@ class TipoCuentaController extends Controller
      */
     public function destroy($id)
     {
-        TipoCuenta::destroy($id);
+        $tipo = TipoCuenta::findOrFail($id);
+        $tipo->estado = '0';
+        $tipo->update();
         return redirect('/tipo_cuenta');
             }
 }

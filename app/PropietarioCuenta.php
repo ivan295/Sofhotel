@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PropietarioCuenta extends Model
 {
-    public $timestamps = false;
+   
     protected $table = 'propietario_cuentas';
   protected $fillable = ['nombre'];
 

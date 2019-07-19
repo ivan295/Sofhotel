@@ -46,7 +46,7 @@
             <label for="descripcion">Descripción</label>
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-              <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción">
+              <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción" required>
             </div>
             <br>
           </div>

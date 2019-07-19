@@ -130,6 +130,8 @@ Route::post('nuevouser/{id}/edit', ['as' => 'nuevouser.editar', 'uses' => 'usuar
 Route::put('nuevouser/{id}', ['as' => 'nuevouser.update', 'uses'=>'usuarioController@update']);
 
 //factura compra/////
+Route::get('factura_compra/index', ['as' => 'factura_compra.index', 'uses'=>'facturacompraController@index']);
+
 Route::post('factura_compra/crear', ['as' => 'factura_compra.create', 'uses'=>'facturacompraController@store']);
 
 Route::delete('factura_compra/{id}/eliminar', ['as'=> 'factura_compra.delete', 'uses' =>'facturacompraController@destroy']);
@@ -137,6 +139,8 @@ Route::delete('factura_compra/{id}/eliminar', ['as'=> 'factura_compra.delete', '
 Route::post('factura_compra/{id}/edit', ['as' => 'factura_compra.editar', 'uses' => 'facturacompraController@edit']);
 
 Route::put('factura_compra/{id}', ['as' => 'factura_compra.update', 'uses'=>'facturacompraController@update']);
+
+Route::get('detalle_compra/{id}/show', ['as' => 'detalle_compra.show', 'uses'=>'facturacompraController@show']);
 
 
 
@@ -187,18 +191,7 @@ Route::post('detalle_compra/{id}/edit', ['as' => 'detalle_compra.editar', 'uses'
 
 Route::put('detalle_compra/{id}', ['as' => 'detalle_compra.update', 'uses'=>'detalleCompraController@update']);
 
-Route::get('detalle_compra/filtroProductos', ['as' => 'detalle_compra.filtroProductos', 'uses'=>'detalleCompraController@filtroProductos']);
-
 Route::get('detalle_compra/index', ['as' => 'detalle_compra.index', 'uses'=>'detalleCompraController@index']);
-
-//Route::post('detalle_compra/factura', ['as' => 'detalle_compra.factura', 'uses'=>'detalleCompraController@factura']);
-
-//Route::post('detalle_compra/create', 'detalleCompraController@store');
-
-
-/// filtro de productos
-//Route::get('filtroProductos/{dato?}','detalleCompraController@filtroProductos');
-// Route::get()
 
 
 //Alquiler
@@ -220,6 +213,7 @@ Route::delete('factura_venta/{id}/eliminar', ['as'=> 'factura_venta.delete', 'us
 Route::post('factura_venta/{id}/edit', ['as' => 'factura_venta.editar', 'uses' => 'facturaventaController@edit']);
 
 Route::put('factura_venta/{id}', ['as' => 'factura_venta.update', 'uses'=>'facturaventaController@update']);
+
 
 
 //Caja

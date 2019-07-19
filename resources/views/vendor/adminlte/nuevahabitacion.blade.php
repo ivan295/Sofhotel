@@ -26,24 +26,24 @@
           <label for="numerohabitacion">Número de Habitación</label>
           <div class="input-group">
           <span class="input-group-addon"><i class="fa  fa-slack"></i></span>
-            <input type="text" class="form-control" name="numero_habitacion" id="numero_habitacion" placeholder="Número de Habitacion">
+            <input type="text" class="form-control" name="numero_habitacion" id="numero_habitacion" placeholder="Número de Habitacion" required>
           </div>
           <br>
           <label for="tipohabitacion">Tipo de Habitación</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-puzzle-piece"></i></span>
-            <input type="text" class="form-control" name="tipo_habitacion" id="tipo_habitacion" placeholder="Tipo de Habitación" >
+            <input type="text" class="form-control" name="tipo_habitacion" id="tipo_habitacion" placeholder="Tipo de Habitación" required>
           </div>
           <br>
           <label for="preciohabitacion">Precio de Habitación</label>
           <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-            <input type="text" class="form-control" name="precio" id="precio" placeholder="Precio de Habitación">
+            <input type="text" class="form-control" name="precio" id="precio" placeholder="Precio de Habitación" required>
           </div>
           <br>
           <label for="tiempolimpieza">Tiempo de Limpieza </label>
           <div class="form-group">
-            <input type="time" name="tiempo_limpieza" value="00:00:00"  step="1">
+            <input type="time" name="tiempo_limpieza" value="00:00:00"  step="1" required>
           </div>
           <label>Ip de la placa Arduino</label>
            <div class="input-group">
