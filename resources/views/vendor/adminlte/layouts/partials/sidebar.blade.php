@@ -75,9 +75,34 @@
             <li><a href="{{ url('/alquiler') }}"><i class='fa  fa-exclamation'></i> <span>Alquiler</span></a></li>
 
             <li><a href="{{ url('/factura_venta') }}"><i class='fa fa-user-plus'></i> <span>factura venta</span></a></li>
+<<<<<<< HEAD
             <li><a href="{{ url('/factura_compra') }}"><i class='fa fa-user-plus'></i> <span>Factura de Compra</span></a></li>  
             
          </li> 
+=======
+
+            <li class="treeview">
+                <a href="#"><i class='fa fa-link'></i> <span>Compras</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                     <li><a href="{{ url('/factura_compra') }}"><i class='fa fa-user-plus'></i> <span>Factura de Compra</span></a></li>  
+                     <li><a href="{{ url('/detalle_compra') }}"><i class='fa fa-user-plus'></i> <span>Detalle de Compra</span></a></li> 
+                 </ul>
+            </li> 
+
+              <li class="treeview">
+                <a href="#"><i class='fa fa-list-alt'></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
+
+                 <ul class="treeview-menu">
+                        <li><a href="#" class="treeview"><i class='fa fa-user'></i> <span>Reportes de depósitos</span><i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ url('/reporte_diario_dep') }}"><i class='fa  fa-cubes'></i> <span>Reporte diario</span></a></li>
+                                 <li><a href="{{ url('/reporte_mensual_dep') }}"><i class='fa fa-bank'></i><span>Reporte mensual</span></a></li>
+                                 <li><a href="{{ url('/reporte_especifico_dep') }}"><i class='fa  fa-cubes'></i> <span>Reporte específico</span></a></li>
+                            </ul>
+                        </li>                       
+                 </ul>
+             </li>
+>>>>>>> ee48a39e92aa350cada851c29c0924e1daa6eac7
      </ul><!-- /.sidebar-menu -->
  </section>
  <!-- /.sidebar -->

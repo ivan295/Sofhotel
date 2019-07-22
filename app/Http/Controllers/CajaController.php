@@ -15,12 +15,12 @@ class CajaController extends Controller
      */
     public function index()
     {
-        $cash = DB::table('dinero')->get();
-        foreach ($cash as $d) {
-            
-        }
-        $dinero = $d;
-        //dd($dinero->dinero_disponible);
+        $dinero = DB::table('dinero')->orderBy('id', 'desc')->first();
+       /* foreach ($cash as $d) {
+           $dinero = $d; 
+        }*/
+        
+        //dd($dinero);
         return view('vendor.adminlte.apertura_caja', compact('dinero'));
 
     }

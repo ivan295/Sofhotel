@@ -30,11 +30,12 @@
       </span>
     </div>
   </form>
-</div>
+  </div>
 
   <div class="contenedor-modal">
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Agregar Depósito</button>
   </div>
+  
 </div>
 <br>
 <!--ventana modal -->
@@ -91,6 +92,7 @@
 </div>
 <!-- box con input para crear tipo de usuario -->
 
+
 <div class="col-md-14">
   <div class="box box-primary">
    <div class="box-header with-border">
@@ -114,7 +116,6 @@
       </tr>
     </thead>
     <tbody>
-      <tr></tr>
       @foreach($depositos as $dp)
       <tr class='text-center'>
         <td><?php echo $dp->nombre_usuario?></td>
@@ -130,14 +131,14 @@
             <div class="col-md-3 col-md-offset-3">
              <form action="{{route ('deposito.cambio', $dp->id)}}" method="post">
               {{csrf_field()}}
-              <button type="submit" class="btn btn-warning btn-xs">Editar</button></form>
+              <button type="submit" class="btn btn-warning btn-xs">Editar</button>
+            </form>
             </div>
             <div class="col-md-6 text-left">
               <form action="{{route('deposito.delete', $dp->id)}}" method="post">
                 {{csrf_field()}}
                 {{ method_field('DELETE') }}
                 <button type="submit" class="btn btn-danger btn-xs"onclick="return borrar()">Borrar</button>
-              </form>
             </form>
           </div>
         </div>

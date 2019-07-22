@@ -331,6 +331,17 @@ Route::get('/nuevo_deposito', function () {
     return view('/vendor/adminlte/nuevo_deposito');
 });
 
+Route::get('/reporte_diario_dep', function () {
+    return view('/vendor/adminlte/reporte_deposito_diario');
+});
+
+Route::get('/reporte_mensual_dep', function () {
+    return view('/vendor/adminlte/reporte_deposito_mensual');
+});
+
+Route::get('/reporte_especifico_dep', function () {
+    return view('/vendor/adminlte/reporte_deposito_especifico');
+});
 
 Route::get('/modificar_deposito', function () {
     return view('/vendor/adminlte/modificar_deposito');
@@ -353,7 +364,4 @@ Route::post('deposito/{id}/edit', ['as' => 'deposito.cambio', 'uses' => 'Deposit
 Route::put('deposito/{id}', ['as' => 'deposito.update', 'uses' => 'DepositoController@update']);
 
 
-
-
-
-
+//Route::post('report_depositos', 'DepositoController@reporte');
