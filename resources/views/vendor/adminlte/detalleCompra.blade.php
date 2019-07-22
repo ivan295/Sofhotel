@@ -30,7 +30,7 @@
                 <label>Proveedor</label>
                 <select class="form-control selectpicker" name="id_proveedor" id="consulta_proveedor" onchange="consultar_proveedor()" data-live-search="true">
                   <option value="0">Seleccionar Proveedor</option>
-                  <?php $prov = DB::table('proveedor')->get(); ?>
+                  <?php $prov = DB::table('proveedor')->where('proveedor.estado','=',1)->get(); ?>
                   @foreach($prov as $prov)
                   <option value="<?php echo $prov->id; ?>"> <?php echo $prov->empresa; ?> </option>
                   @endforeach
@@ -68,7 +68,7 @@
                   <label>Producto</label>
                   <select class="form-control selectpicker" name="id_producto" id="id_producto" onchange="consultar_producto()" data-live-search="true">
                     <option value="0">Seleccionar Producto</option>
-                    <?php $prod = DB::table('producto')->get(); ?>
+                    <?php $prod = DB::table('producto')->where('producto.estado','=',1)->get(); ?>
                     @foreach($prod as $prod)
                     <option value="<?php echo $prod->id; ?>"> <?php echo $prod->descripcion; ?> </option>
                     @endforeach

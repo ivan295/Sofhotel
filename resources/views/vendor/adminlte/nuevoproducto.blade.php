@@ -85,7 +85,7 @@
               <div class="select-group">
                 <select class="form-control selectpicker" name="id_proveedor" id="consulta_proveedor" onchange="consultar()" data-live-search="true">                 
                   <option value="0">Seleccionar Proveedor</option>
-                  <?php $prov = DB::table('proveedor')->get(); ?>
+                  <?php $prov = DB::table('proveedor')->where('proveedor.estado','=',1)->get(); ?>
                   @foreach($prov as $prov)
                   <option value="<?php  echo $prov->id ; ?>"> <?php echo $prov->empresa; ?>  </option>
                   @endforeach

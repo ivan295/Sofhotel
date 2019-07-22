@@ -100,7 +100,7 @@
             <label>Tipo de Usuario</label>
             <select class="form-control" name="idtipouser" id="consulta_tipo" onchange="consultar()">                    
               <option value="0">Seleccionar tipo de Usuario</option>
-              <?php $tipousuario = DB::table('tipousuario')->get(); ?>
+              <?php $tipousuario = DB::table('tipousuario')->where('tipousuario.estado','=',1)->get(); ?>
               @foreach($tipousuario as $tipouser)
               <option value="<?php  echo $tipouser->id ; ?>"> <?php echo $tipouser->descripcion; ?>  </option>
               @endforeach

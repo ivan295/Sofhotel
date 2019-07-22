@@ -70,7 +70,7 @@
               <span class="input-group-addon"><i class="fa fa-slack"></i></span>
               <select class="form-control" id="selc_cuenta" onchange="obtener()" required>
                 <option value="0">Seleccione una cuenta</option>
-                <?php $ctas = DB::table('cuentas')->join('tipo_cuentas', 'tipo_cuentas.id', '=', 'cuentas.id_tipo_cuenta')->join('propietario_cuentas', 'propietario_cuentas.id', '=', 'cuentas.id_propietario')->join('bancos', 'bancos.id', '=', 'cuentas.id_banco')->select('cuentas.id','cuentas.numero_cuenta', 'tipo_cuentas.descripcion as descripcion','propietario_cuentas.nombre as nombre', 'bancos.entidad as entidad')->get(); ?>
+                <?php $ctas = DB::table('cuentas')->join('tipo_cuentas', 'tipo_cuentas.id', '=', 'cuentas.id_tipo_cuenta')->join('propietario_cuentas', 'propietario_cuentas.id', '=', 'cuentas.id_propietario')->join('bancos', 'bancos.id', '=', 'cuentas.id_banco')->select('cuentas.id','cuentas.numero_cuenta', 'tipo_cuentas.descripcion as descripcion','propietario_cuentas.nombre as nombre', 'bancos.entidad as entidad')->where('cuentas.estado','=',1)->get(); ?>
                 @foreach($ctas as $cta)
                 <option value="<?php echo $cta->id; ?>"><?php echo $cta->numero_cuenta. ' / ' .$cta->nombre. ' / ' .$cta->entidad. ' / ' .$cta->descripcion?></option>
                 @endforeach

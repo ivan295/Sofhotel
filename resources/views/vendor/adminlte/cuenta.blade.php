@@ -74,7 +74,7 @@
           <span class="input-group-addon"><i class="fa fa-database"></i></span>
             <select class="form-control"  id="tipo_cta" onchange="obtener_tipo()">
               <option value="0">Seleccione un tipo de cuenta</option>
-                    <?php $tipo_cta = DB::table('tipo_cuentas')->get(); ?>
+                    <?php $tipo_cta = DB::table('tipo_cuentas')->where('tipo_cuentas.estado','=',1)->get(); ?>
                     @foreach($tipo_cta as $tc)
                     <option value=" <?php echo $tc->id ?>" > <?php echo $tc->descripcion; ?> </option>
                     @endforeach
@@ -86,7 +86,7 @@
           <span class="input-group-addon"><i class="fa fa-user"></i></span>
             <select class="form-control" id="prop" onchange="obtener_propietario()">
                     <option value="0">Seleccione un propietario</option>
-                    <?php $propietario_cuentas = DB::table('propietario_cuentas')->get(); ?>
+                    <?php $propietario_cuentas = DB::table('propietario_cuentas')->where('propietario_cuentas.estado','=',1)->get(); ?>
                     @foreach($propietario_cuentas as $pc)
                     <option value="<?php echo $pc->id ?>"> <?php echo $pc->nombre; ?> </option>
                     @endforeach
@@ -98,7 +98,7 @@
           <span class="input-group-addon"><i class="fa fa-bank"></i></span>
             <select class="form-control" id="banc" onchange="obtener_banco()">
                     <option value="0">Seleccione un banco</option>
-                    <?php $banco = DB::table('bancos')->get(); ?>
+                    <?php $banco = DB::table('bancos')->where('bancos.estado','=',1)->get(); ?>
                     @foreach($banco as $b)
                     <option value=" <?php echo $b->id ?>"> <?php echo $b->entidad; ?></option>
                     @endforeach
