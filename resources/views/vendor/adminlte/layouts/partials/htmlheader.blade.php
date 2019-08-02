@@ -8,10 +8,6 @@
 <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/bootstrap-select.min.css') }}" rel="stylesheet">
 
-    
-    <script src="{{ asset('js/jquery-2.1.4.min.min.min.js') }}"></script>
-    @stack('tabla')
-
 
 
     

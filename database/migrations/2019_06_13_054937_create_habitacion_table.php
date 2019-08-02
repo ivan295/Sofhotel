@@ -16,7 +16,7 @@ class CreateHabitacionTable extends Migration
         Schema::create('habitacion', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->integer('numero_habitacion')->unique();
+            $table->integer('numero_habitacion');
             $table->string('tipo_habitacion', 100);
             $table->float('precio');
             $table->time('tiempo_limpieza');

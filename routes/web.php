@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
- */
-
 Route::get('/', function () {
     return redirect('/login');
 });
@@ -57,6 +46,10 @@ Route::get('/alquiler/alquiler',function(){
 Route::get('/factura_venta/factura_venta',function(){
     return view('/vendor/adminlte/Facturaventa');
 });
+//detalle venta
+Route::get('/detalle_venta/detalle_venta',function(){
+    return view('/vendor/adminlte/detalleVenta');
+});
 
 
 
@@ -72,6 +65,8 @@ Route::get('/detalle_compra','detalleCompraController@index');
 Route::get('/alquiler','alquilerController@index');
 Route::get('/factura_venta','facturaventaController@index');
 Route::get('/cargarinner','HomeController@index');
+Route::get('/detalle_venta','detalleVentaController@index');
+
 
 
 
@@ -193,8 +188,19 @@ Route::put('detalle_compra/{id}', ['as' => 'detalle_compra.update', 'uses'=>'det
 
 Route::get('detalle_compra/index', ['as' => 'detalle_compra.index', 'uses'=>'detalleCompraController@index']);
 
+//detalle_venta
+Route::post('detalle_venta/crear', ['as' => 'detalle_venta.create', 'uses'=>'detalleVentaController@store']);
+
+Route::delete('detalle_venta/{id}/eliminar', ['as'=> 'detalle_venta.delete', 'uses' =>'detalleVentaController@destroy']);
+
+Route::post('detalle_venta/{id}/edit', ['as' => 'detalle_venta.editar', 'uses' => 'detalleVentaController@edit']);
+
+Route::put('detalle_venta/{id}', ['as' => 'detalle_venta.update', 'uses'=>'detalleVentaController@update']);
+
+Route::get('detalle_venta/index', ['as' => 'detalle_venta.index', 'uses'=>'detalleVentaController@index']);
 
 //Alquiler
+
 Route::post('alquiler/crear', ['as' => 'alquiler.create', 'uses'=>'alquilerController@store']);
 
 Route::delete('alquiler/{id}/eliminar', ['as'=> 'alquiler.delete', 'uses' =>'alquilerController@destroy']);

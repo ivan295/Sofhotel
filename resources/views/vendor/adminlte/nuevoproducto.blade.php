@@ -95,7 +95,7 @@
             <input type="hidden" id="proveedor" name="proveedor" >
           </div>
           <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Guardar</button>   
           </div>
         </div>

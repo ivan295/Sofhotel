@@ -29,16 +29,21 @@ class alquilerController extends Controller
 
     public function store(Request $request)
     {
-        $nuevoAlquiler                   = new Alquiler;
-        $nuevoAlquiler->fecha = $request->fecha;
-        $nuevoAlquiler->hora_ingreso_habitacion = $request->hora_ingreso;
-        $nuevoAlquiler->hora_salida_habitacion = $request->hora_salida;
-        $nuevoAlquiler->tiempo_alquiler = $request->tiempo_alquiler;
-        $nuevoAlquiler->numero_personas = $request->numero_personas;
-        $nuevoAlquiler->id_usuario = $request->id_usuario;
-        $nuevoAlquiler->id_habitacion = $request->id_habitacion;
-        $nuevoAlquiler->save();
-        return redirect('/cargarinner');
+        //dd($request->all());
+        if($request->ajax()){
+            $nuevoAlquiler = new Alquiler;
+            $nuevoAlquiler->fecha = $request->ingreso;
+            $nuevoAlquiler->hora_ingreso_habitacion = $request->hora;
+            $nuevoAlquiler->hora_salida_habitacion = $request->hora;;
+            $nuevoAlquiler->tiempo_alquiler = "12:45:00";
+            $nuevoAlquiler->numero_personas = 2;
+            $nuevoAlquiler->id_usuario = 1;
+            $nuevoAlquiler->id_habitacion = $request->id;
+            $nuevoAlquiler->estado=1;
+            $nuevoAlquiler->save();
+        }
+        
+        return redirect('/alquiler');
 	}
 
 }

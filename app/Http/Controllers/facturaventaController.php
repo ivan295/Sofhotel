@@ -11,16 +11,16 @@ class facturaventaController extends Controller
 {
     public function index()
     {
-         $FacturaVenta = DB::table('factura_venta')
-       ->join('alquiler','alquiler.id','=','factura_venta.id_alquiler')
-       ->join('habitacion','habitacion.id','=','alquiler.id_habitacion')
-       ->select('factura_venta.*','alquiler.fecha as Fecha','habitacion.numero_habitacion as habitacion','habitacion.precio as Precio')
-         ->orderBy('id', 'desc')
+      //$FacturaVenta = DB::table('factura_venta')
+      //  ->join('alquiler','alquiler.id','=','factura_venta.id_alquiler')
+      //  ->join('habitacion','habitacion.id','=','alquiler.id_habitacion')
+      //  ->select('factura_venta.*','alquiler.fecha as Fecha','habitacion.numero_habitacion as habitacion','habitacion.precio as Precio')
+      //    ->orderBy('id', 'desc')
      
-         ->paginate(10);
+      //    ->paginate(10);
          //dd($FacturaVenta);
          
-        return view('vendor.adminlte.Facturaventa', compact('FacturaVenta'));
+        return view('vendor.adminlte.Facturaventa', compact('habitacion','producto'));
     }
     public function store(Request $request)
     {

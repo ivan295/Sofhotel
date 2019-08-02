@@ -41,6 +41,7 @@ class HomeController extends Controller
 
          $NuevaH = \DB::table('habitacion')->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')
         ->select('habitacion.*','estado_habitacion.estado')
+        ->where('habitacion.estado','=',1)
         ->orderBy('id', 'asc')
         ->get();
         return response()->json($NuevaH); 
