@@ -50,7 +50,10 @@ Route::get('/factura_venta/factura_venta',function(){
 Route::get('/detalle_venta/detalle_venta',function(){
     return view('/vendor/adminlte/detalleVenta');
 });
-
+//parametros
+Route::get('/parametros/parametros',function(){
+    return view('/vendor/adminlte/parametros');
+});
 
 
 //rutas index
@@ -66,6 +69,7 @@ Route::get('/alquiler','alquilerController@index');
 Route::get('/factura_venta','facturaventaController@index');
 Route::get('/cargarinner','HomeController@index');
 Route::get('/detalle_venta','detalleVentaController@index');
+Route::get('/parametros','ParametrosController@index');
 
 
 
@@ -200,8 +204,9 @@ Route::put('detalle_venta/{id}', ['as' => 'detalle_venta.update', 'uses'=>'detal
 Route::get('detalle_venta/index', ['as' => 'detalle_venta.index', 'uses'=>'detalleVentaController@index']);
 
 //Alquiler
+Route::post('alquiler/ingreso', ['as' => 'alquiler.ingreso', 'uses'=>'alquilerController@ingreso']);
 
-Route::post('alquiler/crear', ['as' => 'alquiler.create', 'uses'=>'alquilerController@store']);
+Route::post('alquiler/crear', ['as' => 'alquiler.create', 'uses'=>'alquilerController@ingresar2']);
 
 Route::delete('alquiler/{id}/eliminar', ['as'=> 'alquiler.delete', 'uses' =>'alquilerController@destroy']);
 
@@ -371,3 +376,14 @@ Route::put('deposito/{id}', ['as' => 'deposito.update', 'uses' => 'DepositoContr
 
 
 //Route::post('report_depositos', 'DepositoController@reporte');
+
+
+//parametros
+Route::post('parametros/crear', ['as' => 'parametros.create', 'uses'=>'ParametrosController@store']);
+
+Route::delete('parametros/{id}/eliminar', ['as'=> 'parametros.delete', 'uses' =>'ParametrosController@destroy']);
+
+Route::post('parametros/{id}/edit', ['as' => 'parametros.editar', 'uses' => 'ParametrosController@edit']);
+
+Route::put('parametros/{id}', ['as' => 'parametros.update', 'uses'=>'ParametrosController@update']);
+

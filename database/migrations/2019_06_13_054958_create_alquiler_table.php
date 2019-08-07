@@ -16,12 +16,13 @@ class CreateAlquilerTable extends Migration
         Schema::create('alquiler', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->datetime('fecha');
-            $table->time('hora_ingreso_habitacion');
-            $table->time('hora_salida_habitacion');
-            $table->time('tiempo_alquiler');
-            $table->integer('numero_personas');
-            $table->boolean('estado');
+            $table->datetime('fecha')->nullable();
+            $table->time('hora_ingreso_habitacion')->nullable();
+            $table->time('hora_salida_habitacion')->nullable();
+            $table->time('tiempo_alquiler')->nullable();
+            $table->integer('numero_personas')->nullable();
+            $table->boolean('estado')->nullable();
+            $table->integer('auxiliar')->nullable();
 
             $table->bigInteger('id_usuario')->unsigned()->index();
             $table->foreign('id_usuario')->references('id')->on('users');

@@ -59,6 +59,7 @@
                     
              </ul>
              </li>
+             <li><a href="{{ url('/parametros') }}"><i class='glyphicon glyphicon-wrench'></i> <span>Parámetros</span></a></li>
 
             <li><a href="{{ url('/Habitacion') }}"><i class='glyphicon glyphicon-wrench'></i> <span>crear habitación</span></a></li>
 

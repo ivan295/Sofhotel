@@ -43,6 +43,7 @@ class HabitacionController extends Controller
         $NuevaHabitacion->tiempo_limpieza   = $request->tiempo_limpieza;
         $NuevaHabitacion->id_estado   = $request->id_estado;
         $NuevaHabitacion->estado =1;
+        $NuevaHabitacion->indice =0;
         $NuevaHabitacion->save();
         $tiempo = 2 * 60 * 1000000;
         $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);

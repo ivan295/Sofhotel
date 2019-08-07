@@ -32,8 +32,6 @@ function agregar() {
     stock = datos[1];
     st=parseInt(stock);
     if (idproducto != "" && cantidad != "" && cantidad > 0 && precioventa != "") {
-        //console.log(cant);
-        //console.log(st);
         if (cant <= st) {
         subtotal[cont] = (cantidad * precioventa);
         total = total + subtotal[cont];

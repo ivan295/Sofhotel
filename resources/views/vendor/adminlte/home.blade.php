@@ -69,6 +69,5 @@
 				</div> -->
 
 
-
 <script src="{{ asset('/js/llenarhome.js') }}" defer></script>
 @endsection
