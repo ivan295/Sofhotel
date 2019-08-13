@@ -6,20 +6,35 @@ use Illuminate\Http\Request;
 use App\Factura_venta;
 use DB;
 use App\DetalleVenta;
-
+use App\Alquiler;
 class detalleVentaController extends Controller
 {
-    public function index()
-    {
+    public function index(){
+        // dd([$arreglo]);
+        
+        // $Alquiler = DB::table('alquiler')
+        // ->join('habitacion','habitacion.id','=','alquiler.id_habitacion')
+        // ->where('alquiler.auxiliar','=',$auxiliar)
+        // ->where('alquiler.id_habitacion','=',$id)
+        // ->select('alquiler.*','habitacion.numero_habitacion as habitacion','habitacion.precio as Precio')
+        // ->first();
+        //dd('asdasdasdasdhasgdha');
     $Alquiler = DB::table('alquiler')
-    ->join('habitacion','habitacion.id','=','alquiler.id_habitacion')
+    ->join('habitacion','habitacion.id','=','alquiler.auxiliar2')
+    ->where('alquiler.auxiliar','=', 0)
+    ->where('alquiler.auxiliar2', '>', 0)
     ->select('alquiler.*','habitacion.numero_habitacion as habitacion','habitacion.precio as Precio')
-      ->orderBy('id', 'desc')
-      ->first();
-         //dd($FacturaVenta);
-
+    ->first();
+    //dd($Alquiler);
+    $salida = Alquiler::find($Alquiler->id);
+            $salida->auxiliar2 = '0';      
+            $salida->update();
     return view('vendor.adminlte.detalleVenta',compact('Alquiler'));
-    //, compact('habitacion','producto'));
+    // ->get(); 
+    // $habitacion =DB::table('habitacion')
+    // ->where('habitacion.id','=',$Alquiler->id_habitacion)
+    // ->first();
+    // dd([$Alquiler,$habitacion]);
     }
 
     public function store(Request $request){
@@ -28,6 +43,7 @@ class detalleVentaController extends Controller
     		$factura->total_productos = $request->total_venta;
     		$factura->total_cobro = $request->total_c;
             $factura->id_alquiler = $request->id_alquiler;
+            $factura->total_alquiler = 12.50;
             //$factura->id_usuario = $request->id_usuario;
             $factura->estado = 1;
             $factura->save();
@@ -45,7 +61,7 @@ class detalleVentaController extends Controller
         
                 $cont = $cont + 1;
              }
-             return redirect('/detalle_venta');
+             return redirect('/home');
         }
     }
 

@@ -17,7 +17,6 @@ $(document).ready(function(){
                  }if(item.estado == 'Ocupado'){
 
                      var color = "<div class='small-box bg-red'>"
-                     //indice=1;
                      if(item.indice == 0){
                      ingresohab(item.id,item.numero_habitacion);
                      }
@@ -34,7 +33,7 @@ $(document).ready(function(){
                 <p>Hora de ingreso: "+hora+" </p>\
                 <p>Hora de salida: </p>\
                 <p>Total a pagar: </p>\
-                <button type='button'onclick='salida("+item.id+")' class='btn  btn-block btn-warning'>Imprimir</button>\
+                <button type='button'onclick='salida("+item.id+","+item.numero_habitacion+","+item.id+")' class='btn  btn-block btn-warning'>Imprimir</button>\
                 <div class='icon'>\
                 <i class='fa fa-hotel'></i>\
                 </div>\
@@ -79,11 +78,13 @@ function ingresohab(item,item2){
     });  
  }
 
-function salida(item){
+function salida(item,item2,item3){
     var f = new Date();
     var hora_salida=f.getHours()+":"+f.getMinutes()+":"+f.getSeconds();
              id =item;
+             auxiliar = item2;
              hora = hora_salida;
+             id=item3;
     // alert(id,numero_habitacion,precio,hora,fecha_ingreso);
 
            $.ajaxSetup({
@@ -96,7 +97,7 @@ function salida(item){
                 url: './alquiler/crear',
                 type:"POST",
                 dataType: 'json',
-                data:{hora,id},               // Datos enviados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
+                data:{hora,id,auxiliar},               // Datos enviados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
                 success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
                 {  
           
@@ -106,7 +107,9 @@ function salida(item){
                    mensaje = "OCURRIO UN ERROR";
                       alertify.error(mensaje);
                 }
-            });  
+
+            }); 
+              
             //window.location = "{ url('/detalle_venta') }";
     
         

@@ -23,6 +23,8 @@ class CreateAlquilerTable extends Migration
             $table->integer('numero_personas')->nullable();
             $table->boolean('estado')->nullable();
             $table->integer('auxiliar')->nullable();
+            $table->integer('auxiliar2')->nullable();
+
 
             $table->bigInteger('id_usuario')->unsigned()->index();
             $table->foreign('id_usuario')->references('id')->on('users');

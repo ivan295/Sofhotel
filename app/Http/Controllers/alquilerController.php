@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Alquiler;
 use App\Habitacion;
 use DB;
@@ -18,91 +19,90 @@ class alquilerController extends Controller
         // return view('vendor.adminlte.home', compact('NuevaH'));
 
         $nuevoAlquiler = DB::table('alquiler')
-        ->join('users','users.id','=','alquiler.id_usuario')
-        ->join('habitacion','habitacion.id','=','alquiler.id_habitacion')
-    	->select('alquiler.*','users.nombre as name','habitacion.numero_habitacion as habitacion')
-    	->orderBy('id', 'desc')
-        //dd($nuevoAlquiler);
-        ->paginate(10);
-        return view('vendor.adminlte.Alquiler',compact('nuevoAlquiler'));
+            ->join('users', 'users.id', '=', 'alquiler.id_usuario')
+            ->join('habitacion', 'habitacion.id', '=', 'alquiler.id_habitacion')
+            ->select('alquiler.*', 'users.nombre as name', 'habitacion.numero_habitacion as habitacion')
+            ->orderBy('id', 'desc')
+            //dd($nuevoAlquiler);
+            ->paginate(10);
+        return view('vendor.adminlte.Alquiler', compact('nuevoAlquiler'));
     }
-    
-    public function ingreso(Request $request){
-        if($request->ajax()){
-        $ingreso = new Alquiler; 
-        $ingreso->fecha = $request->fecha_ingreso;
-        $ingreso->hora_ingreso_habitacion = $request->hora;
-        $ingreso->numero_personas = 2;
-        $ingreso->id_usuario = 1;
-        $ingreso->id_habitacion = $request->habitacion;
-        $ingreso->estado=1;
-        $ingreso->auxiliar= $request->numero_habitacion;
-        $ingreso->save();
+
+    public function ingreso(Request $request)
+    {
+        if ($request->ajax()) {
+            $ingreso = new Alquiler;
+            $ingreso->fecha = $request->fecha_ingreso;
+            $ingreso->hora_ingreso_habitacion = $request->hora;
+            $ingreso->numero_personas = '2';
+            $ingreso->id_usuario = '1';
+            $ingreso->id_habitacion = $request->habitacion;
+            $ingreso->estado = '1';
+          //  $ingreso->auxiliar2 = '0';
+            $ingreso->auxiliar2 = $request->habitacion;
+            $ingreso->auxiliar = $request->numero_habitacion;
+            $ingreso->save();
             $habitacion = Habitacion::findOrFail($request->habitacion);
             $habitacion->indice = '1';
-            $habitacion->update(); 
+            $habitacion->update();
         }
-        return redirect('/alquiler');
-
+       // return redirect('/alquiler');
     }
     public function store(Request $request)
     {
         //$id_alquiler = $request->auxiliar;
-       
 
-        if($request->ajax()){
-            
+
+        if ($request->ajax()) {
+
             $alq = DB::table('alquiler')->join('habitacion', 'habitacion.id', '=', 'alquiler.id_habitacion')
             ->where('habitacion.id', '=', $request->id)->select('alquiler.*')->first();
-
-
-        $salida = Alquiler::find($alq->id);
+            $salida = Alquiler::find($alq->id);
             $salida->hora_salida_habitacion = $request->hora;
             $salida->tiempo_alquiler = "12:45:00";
             $salida->auxiliar = '0';
-            $salida->update(); 
-        $habitacion = Habitacion::find($request->id);
+            $salida->update();
+            $habitacion = Habitacion::find($request->id);
             $habitacion->indice = 0;
-            $habitacion->update(); 
+            $habitacion->update();
         }
-       // return redirect('/alquiler');
-        
+        // return redirect('/alquiler');
+
     }
 
     public function ingresar2(Request $request)
     {
-        //$id_alquiler = $request->auxiliar;
-       
+        if ($request->ajax()) {
 
-        if($request->ajax()){
-            
+
             $alq = DB::table('alquiler')->join('habitacion', 'habitacion.id', '=', 'alquiler.id_habitacion')
-            ->where('habitacion.id', '=', $request->id)->select('alquiler.*')->first();
+                ->where('alquiler.auxiliar', '=', $request->auxiliar)->select('alquiler.*')->first();
 
-         
-
-        $salida = Alquiler::find($alq->id);
+                $salida = Alquiler::find($alq->id);
             $salida->hora_salida_habitacion = $request->hora;
-            $salida->tiempo_alquiler = "12:45:00";
+            $tiempo= Date("H:i:s", strtotime("00:00:00") + strtotime($request->hora)- strtotime($salida->hora_ingreso_habitacion));
+            $salida->tiempo_alquiler=$tiempo;
+            //$salida->auxiliar2 = '0';      
             $salida->auxiliar = '0';
-            $salida->update(); 
-        $habitacion = Habitacion::find($request->id);
+            $salida->update();
+            $habitacion = Habitacion::find($request->id);
+            $est = DB::table('estado_habitacion')->join('habitacion', 'habitacion.id_estado', '=', 'estado_habitacion.id')
+                ->where('estado_habitacion.id', '=', $habitacion->id_estado)->select('estado_habitacion.*')->first();
 
-        $est = DB::table('estado_habitacion')->join('habitacion', 'habitacion.id_estado', '=', 'estado_habitacion.id')
-            ->where('estado_habitacion.id', '=', $habitacion->id_estado)->select('estado_habitacion.*')->first();
-            //dd($est);
-            
-        $estado = Estado_habitacion::find($est->id);    
-
+            $estado = Estado_habitacion::find($est->id);
             $habitacion->indice = 0;
             $estado->estado = "Desocupado";
-            $habitacion->update(); 
+            $habitacion->update();
             $estado->update();
+
+            //$arreglo = [
+              //  "id" =>  $request->id,
+                //"aux" => $request->auxiliar,
+            //];
+
+            //return redirect('detalle_venta/index');
+            //'.$request->auxiliar.'/'.$request->id);
+           // return redirect()->action('detalle_venta@index',[$arreglo]);
         }
-       // return redirect('/alquiler');
-        
     }
-    
-    
-    
 }

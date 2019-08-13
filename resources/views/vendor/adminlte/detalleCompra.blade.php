@@ -93,8 +93,9 @@
               </div>
               <input type="hidden" name="total_compra" id="total_compra">
 
-              
-      <div id="compra"></div>
+              <?php $prod = DB::table('producto')->where('producto.estado','=',1)->get(); ?>
+
+               <div id="compra"></div>
 
               <label>-</label>
               <div class="form-group">
@@ -120,7 +121,6 @@
                     </th>
                   </tfoot>
                   <tbody>
-
                   </tbody>
 
                 </table>
