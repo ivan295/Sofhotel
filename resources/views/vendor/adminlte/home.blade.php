@@ -67,7 +67,40 @@
 <!-- <div class="icon">
 					<i class="fa fa-hotel"></i>
 				</div> -->
+<div class="modal" tabindex="-1" role="dialog" id="ventanamodal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">
+					<center>¿EL CLIENTE CONSUMIÓ PRODUCTOS?</center>
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">X</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<center>
+				<form method="get" action="{{route('detalle_venta.index')}}">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<div class="col-md-6">
+						<button type="submit" class="btn btn-primary">SI</button>
+					</div>
+				</form>
 
+				<form method="post" action="">
+					<div class="col-md-6">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<button type="submit" class="btn btn-primary">NO</button>
+					</div>
+				</form>
+				</center>
+			</div>
+			<div class="modal-body">
+
+			</div>
+		</div>
+	</div>
+</div>
 
 <script src="{{ asset('/js/llenarhome.js') }}" defer></script>
 @endsection

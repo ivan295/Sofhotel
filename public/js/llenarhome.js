@@ -79,6 +79,7 @@ function ingresohab(item,item2){
  }
 
 function salida(item,item2,item3){
+    $('#ventanamodal').modal('show');
     var f = new Date();
     var hora_salida=f.getHours()+":"+f.getMinutes()+":"+f.getSeconds();
              id =item;

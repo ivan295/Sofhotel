@@ -91,7 +91,7 @@ class alquilerController extends Controller
 
             $estado = Estado_habitacion::find($est->id);
             $habitacion->indice = 0;
-            $estado->estado = "Desocupado";
+            $estado->estado = "Limpieza";
             $habitacion->update();
             $estado->update();
 
