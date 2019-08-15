@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Deposito;
+use App\Dinero;
 
 class DepositoController extends Controller
 {
@@ -96,12 +97,20 @@ class DepositoController extends Controller
             ]);
 
 
+
+
+        $d = obtener_dinero_disponible();;
+        $dinero = Dinero::find($d->id);
+        
         $deposito = new Deposito;
         $deposito->motivo = $request->descripcion;
         $deposito->monto = $request->monto;
         $deposito->id_usuario = $request->id_usuario;
         $deposito->id_cuenta = $request->id_cuenta;
         $deposito->estado = 1;
+        $contador = $dinero->dinero_disponible - $request->monto;
+        $dinero->dinero_disponible = $contador;
+        $dinero->save();
         $deposito->save();
 
         return redirect('/deposito')->with('success','Depósito agregado correctamente');
@@ -149,9 +158,15 @@ class DepositoController extends Controller
      */
     public function destroy($id)
     {
+        $d = obtener_dinero_disponible();
+        $dinero = Dinero::find($d->id);
+
         $deposito = Deposito::findOrFail($id);
+        $contador = $dinero->dinero_disponible + $deposito->monto;
+        $dinero->dinero_disponible = $contador;
         $deposito->estado = '0';
         $deposito->update();
+        $dinero->update();
         return redirect('/deposito');
 
     }

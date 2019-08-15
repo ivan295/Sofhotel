@@ -38,8 +38,16 @@
              <li class="treeview">
                 <a href="#"><i class='fa fa-money'></i> <span>Caja</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                 <li><a href="{{ url('/apertura') }}"><i class='fa fa-plus'></i> <span>Apertura</span></a></li>  
-                 <!-- <li><a href="{{ url('/cierre') }}"><i class='fa fa-times'></i> <span>Cierre</span></a></li>-->
+                    <?php
+                        $est = DB::table('cajas')->orderBy('id', 'desc')->first();
+                      ?>
+                    @if($est == null || $est->estado == 0 )
+                    <li ><a href="{{ url('/apertura') }}"><i class='fa fa-plus'></i> <span>Apertura</span></a></li>  
+                    <li><a href="#" style="color: red"><i class='fa fa-times'></i> <span>Cierre</span></a></li>
+                    @elseif($est->estado == 1)
+                    <li ><a href="#" style="color: red"><i class='fa fa-plus'></i> <span>Apertura</span></a></li>  
+                    <li><a href="{{ url('/cierre') }}"><i class='fa fa-times'></i> <span>Cierre</span></a></li>
+                    @endif
                 </ul>
              </li>
 

@@ -231,12 +231,14 @@ Route::put('factura_venta/{id}', ['as' => 'factura_venta.update', 'uses'=>'factu
 
 Route::get('apertura', 'CajaController@index');
 
-Route::get('/cierre', function () {
-    return view('/vendor/adminlte/cierre_caja');
-    //return view('/');
-});
-
 Route::post('crear', 'CajaController@store');
+
+Route::get('cierre', 'CajaController@cierre');
+
+Route::post('modificar_cierre', 'Cajacontroller@cerrar_caja');
+///
+
+
 
 
 //Bancos

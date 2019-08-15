@@ -15,14 +15,14 @@ class CajaController extends Controller
      */
     public function index()
     {
-        $dinero = DB::table('dinero')->orderBy('id', 'desc')->first();
-       /* foreach ($cash as $d) {
-           $dinero = $d; 
-        }*/
-        
-        //dd($dinero);
+       $dinero = obtener_dinero_disponible();
         return view('vendor.adminlte.apertura_caja', compact('dinero'));
+    }
 
+    public function cierre(){
+            $dinero = obtener_dinero_disponible();
+            $caja = DB::table('cajas')->orderBy('id', 'desc')->first();
+            return view('vendor.adminlte.cierre_caja', compact('dinero', 'caja'));
     }
 
     /**
@@ -35,6 +35,20 @@ class CajaController extends Controller
         //
     }
 
+     public function cerrar_caja(Request $request){
+        //dd($request);
+      $dinero = New Dinero;
+        $dinero->dinero_disponible = $request->dinero_disponible;
+        $caja = Caja::find($request->id_caja);
+        $caja->id_dinero_final = $request->id_dinero;
+        //$caja->id_usuario=$request->id_usuario;
+        $caja->estado = 0;
+        $dinero->save(); 
+        $caja->save();
+        return back();
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -45,9 +59,9 @@ class CajaController extends Controller
     {
         $caja = new Caja;
         $caja->numero_caja=$request->numero_caja;
-        $caja->id_usuario=$request->usuario;
-        $caja->fecha=$request->fecha;
-        $caja->id_dinero=$request->id_dinero;
+        $caja->id_usuario=$request->id_usuario;
+        $caja->dinero_inicial=$request->dinero_caja;
+        $caja->estado = 1;
         $caja->save();
         return back();
     }

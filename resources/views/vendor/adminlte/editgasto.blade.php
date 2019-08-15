@@ -29,6 +29,8 @@
           </div>
           <br>
           <div class="box-footer">
+            <input type="hidden" name="iniciar_dinero" value="<?php echo $iniciar_dinero ?>">
+            <input type="hidden" name="id_dinero" value="<?php echo $id_dinero ?>">
           <button type="submit"class="btn btn-success">Modificar</button>
           <button type="submit" class="btn btn-danger" onclick="vendor/adminlte/parametros.php">Salir</button>
         </div>

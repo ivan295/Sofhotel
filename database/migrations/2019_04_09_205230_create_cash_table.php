@@ -13,7 +13,7 @@ class CreateCashTable extends Migration
      */
     public function up()
     {
-        Schema::create('dinero', function (Blueprint $table) {
+        Schema::create('dineros', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->float('dinero_disponible');
@@ -27,6 +27,6 @@ class CreateCashTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dinero');
+        Schema::dropIfExists('dineros');
     }
 }

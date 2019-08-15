@@ -7,6 +7,7 @@ use App\Factura_venta;
 use DB;
 use App\DetalleVenta;
 use App\Alquiler;
+use App\Dinero;
 class detalleVentaController extends Controller
 {
     public function index(){
@@ -39,6 +40,9 @@ class detalleVentaController extends Controller
 
     public function store(Request $request){
          
+            $d = DB::table('dineros')->orderBy('id', 'desc')->first();
+            $dinero = Dinero::find($d->id);
+
     		$factura = new Factura_venta;
     		$factura->total_productos = $request->total_venta;
     		$factura->total_cobro = $request->total_c;
@@ -46,6 +50,10 @@ class detalleVentaController extends Controller
             $factura->total_alquiler = 12.50;
             //$factura->id_usuario = $request->id_usuario;
             $factura->estado = 1;
+
+            $contador = $dinero->dinero_disponible + $request->total_c;
+            $dinero->dinero_disponible = $contador;
+            $dinero->update();
             $factura->save();
 
              $cont = 0;

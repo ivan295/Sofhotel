@@ -7,6 +7,7 @@ use App\Factura_venta;
 use DB;
 use Habitacion;
 use Alquiler;
+use App\Dinero;
 class facturaventaController extends Controller
 {
     public function index()
@@ -24,11 +25,19 @@ class facturaventaController extends Controller
     }
     public function store(Request $request)
     {
+        $d = DB::table('dineros')->orderBy('id', 'desc')->first();
+        $dinero = Dinero::find($d->id);
+
         $FacturaVenta                  = new Factura_venta;
         $FacturaVenta->total_alquiler = $request->total_alquiler;
         $FacturaVenta->total_productos = $request->total_productos;
         $FacturaVenta->total_cobro = $request->total_cobro;
         $FacturaVenta->id_alquiler = $request->id_alquiler;
+
+        $contador = $dinero->dinero_disponible + $request->total_cobro;
+        $dinero->dinero_disponible = $contador;
+
+        $dinero->update();
         $FacturaVenta->save();
 
         return redirect('/factura_venta');
