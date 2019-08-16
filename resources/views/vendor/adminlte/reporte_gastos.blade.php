@@ -23,29 +23,23 @@
 
   <table class="table table-bordered table-striped table-sm">
     <thead>
-      <tr bgcolor="#98A8D5">
+    <tr bgcolor="#98A8D5">
+        <th>#</th>
+        <th>Descripcion</th>
+        <th>Total de Pago</th>
+        <th>Fecha y hora del Pago</th>
         <th>Usuario</th>
-        <th>Monto</th>
-        <th>Descripción</th>
-        <th>Banco</th>
-        <th>Número de cuenta</th>
-        <th>Tipo de cuenta</th>
-        <th>Fecha y hora del depósito</th>
-        <th>Propietario</th>
       </tr>
     </thead>
     <tbody>
       
-      @foreach($depositos as $dp)
+      @foreach($Nuevogasto as $Nuevogasto)
       <tr>
-        <td><?php echo $dp->nombre_usuario?></td>
-        <td><?php echo $dp->monto?></td>
-        <td><?php echo $dp->motivo?></td>
-        <td><?php echo $dp->entidad?></td>
-        <td><?php echo $dp->num_cta?></td>
-        <td><?php echo $dp->tp_descripcion?></td>
-        <td><?php echo $dp->created_at?></td>
-        <td><?php echo $dp->nombre?></td>        
+        <td>{{$Nuevogasto->id}}</td>
+        <td>{{$Nuevogasto->descripcion}}</td>
+        <td>$ {{$Nuevogasto->gasto_total}}</td>
+        <td>{{$Nuevogasto->created_at}}</td>
+        <td>{{$Nuevogasto->user}}</td>      
     </tr>
     @endforeach
 

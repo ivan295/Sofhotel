@@ -11,8 +11,8 @@
       <div class="box-header with-border">
         <h3 class="box-title">Reporte mensual</h3>
       </div>
-     		<form method="post"  action="{{ url('api/report_depositos_mensual') }}" target="blank">
-          <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
+     		<form method="post"  action="{{ route('reporte_deposito.mensual') }}" target="blank">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="box-body">
               <label for="fecha">Mes:</label>
               <input type="month" name="mes" id="fecha_inicial" class="form-control" value="<?php echo date("Y-m");?>">
