@@ -54,6 +54,10 @@ Route::get('/detalle_venta/detalle_venta',function(){
 Route::get('/parametros/parametros',function(){
     return view('/vendor/adminlte/parametros');
 });
+//consumo no
+Route::get('/consumo_no/consumo_no',function(){
+    return view('/vendor/adminlte/consumoproductoNO');
+});
 
 
 //rutas index
@@ -70,6 +74,8 @@ Route::get('/factura_venta','facturaventaController@index');
 Route::get('/cargarinner','HomeController@index');
 Route::get('/detalle_venta','detalleVentaController@index');
 Route::get('/parametros','ParametrosController@index');
+Route::get('/consumo_no','ConsumoNoController@index');
+
 
 
 
@@ -202,6 +208,11 @@ Route::post('detalle_venta/{id}/edit', ['as' => 'detalle_venta.editar', 'uses' =
 Route::put('detalle_venta/{id}', ['as' => 'detalle_venta.update', 'uses'=>'detalleVentaController@update']);
 
 Route::get('detalle_venta/index', ['as' => 'detalle_venta.index', 'uses'=>'detalleVentaController@index']);
+
+//muestra el total del alquiler si el cliente no consume productos
+Route::get('consumo_no/index', ['as' => 'consumo_no.index', 'uses'=>'ConsumoNoController@index']);
+Route::post('consumo_no/crear', ['as' => 'consumo_no.create', 'uses'=>'ConsumoNoController@store']);
+
 
 //Alquiler
 Route::post('alquiler/ingreso', ['as' => 'alquiler.ingreso', 'uses'=>'alquilerController@ingreso']);

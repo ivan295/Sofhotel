@@ -36,9 +36,9 @@
                                 <h1><span class="label label-warning">Precio de habitación : <?php echo $Alquiler->Precio ?></span></h1>
                             </div>
                         </div>
+                        <input type="hidden" class="form-control" name="id_habitacion" id="id_habitacion" value="<?php echo $Alquiler->Id ?>">
                         <input type="hidden" class="form-control" name="habitacion" id="habitacion" value="<?php echo $Alquiler->habitacion ?>">
                         <input type="hidden" class="form-control" name="precio_habitacion" id="precio_habitacion" value=" <?php echo $Alquiler->Precio ?>">
-                    
                         <input type="hidden" class="form-control" name="id_alquiler" id="id_alquiler" value="<?php echo $Alquiler->id; ?>">
 
 
