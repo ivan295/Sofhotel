@@ -87,8 +87,29 @@
             <li><a href="{{ url('/factura_compra') }}"><i class='fa fa-user-plus'></i> <span>Compras</span></a></li>  
         <!-- <li><a href="{{ url('/detalle_venta') }}"><i class='fa fa-user-plus'></i> <span>detalle venta</span></a></li>   -->
 
-            <li class="treeview">
+           <li class="treeview">
                 <a href="#"><i class='fa fa-list-alt'></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>
+
+                <ul class="treeview-menu">
+                        <li><a href="#" class="treeview"><i class='fa fa-user'></i> <span>Reportes generales</span><i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ url('/reporte_diario_general') }}"><i class='fa  fa-cubes'></i> <span>Reporte diario</span></a></li>
+                                 <li><a href="{{ url('/reporte_mensual_general') }}"><i class='fa fa-bank'></i><span>Reporte mensual</span></a></li>
+                                 <li><a href="{{ url('/reporte_especifico_general') }}"><i class='fa  fa-cubes'></i> <span>Reporte específico</span></a></li>
+                            </ul>
+                        </li>                       
+                 </ul>
+
+                 <ul class="treeview-menu">
+                        <li><a href="#" class="treeview"><i class='fa fa-user'></i> <span>Reportes por usuario</span><i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ url('/reporte_diario_usuario') }}"><i class='fa  fa-cubes'></i> <span>Reporte diario</span></a></li>
+                                 <li><a href="{{ url('/reporte_mensual_usuario') }}"><i class='fa fa-bank'></i><span>Reporte mensual</span></a></li>
+                                 <li><a href="{{ url('/reporte_especifico_usuario') }}"><i class='fa  fa-cubes'></i> <span>Reporte específico</span></a></li>
+                            </ul>
+                        </li>                       
+                 </ul>
+
                  <ul class="treeview-menu">
                         <li><a href="#" class="treeview"><i class='fa fa-user'></i> <span>Reportes de depósitos</span><i class="fa fa-angle-left pull-right"></i></a>
                             <ul class="treeview-menu">
@@ -98,6 +119,16 @@
                             </ul>
                         </li>                       
                  </ul>
+
+                <ul class="treeview-menu">
+                        <li><a href="#" class="treeview"><i class='fa fa-user'></i> <span>Reportes de gastos</span><i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ url('/reporte_diario_gasto') }}"><i class='fa  fa-cubes'></i> <span>Reporte diario</span></a></li>
+                                 <li><a href="{{ url('/reporte_mensual_gasto') }}"><i class='fa fa-bank'></i><span>Reporte mensual</span></a></li>
+                                 <li><a href="{{ url('/reporte_especifico_gasto') }}"><i class='fa  fa-cubes'></i> <span>Reporte específico</span></a></li>
+                            </ul>
+                        </li>                       
+                 </ul> 
              </li>
      </ul><!-- /.sidebar-menu -->
  </section>

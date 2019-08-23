@@ -27,49 +27,7 @@ class DepositoController extends Controller
 
           }
 
-    public function reporte_diario(Request $request){
-             $date = $request->fecha;
-
-            $depositos = DB::table('depositos')->join('users', 'users.id', '=', 'depositos.id_usuario')->join('cuentas', 'cuentas.id', '=', 'depositos.id_cuenta')->join('bancos', 'bancos.id', '=', 'cuentas.id_banco')->join('propietario_cuentas', 'propietario_cuentas.id', '=', 'cuentas.id_propietario')->join('tipo_cuentas', 'tipo_cuentas.id', '=', 'cuentas.id_tipo_cuenta')->whereDate('depositos.created_at', $date)->select('depositos.id','depositos.monto', 'depositos.motivo','depositos.created_at', 'users.usuario as nombre_usuario', 'cuentas.numero_cuenta as num_cta', 'bancos.entidad as entidad', 'propietario_cuentas.nombre as nombre', 'tipo_cuentas.descripcion as tp_descripcion' ,  'propietario_cuentas.nombre as nombre', 'bancos.entidad as entidad')->orderBy('id', 'asc')->get();
-
-          
-          $view = \View::make('vendor.adminlte.reporte_depositos', compact('depositos', 'date'))->render();
-          $pdf = \App::make('dompdf.wrapper');
-          $pdf->loadHTML($view);
-          return $pdf->stream('reporte'.'pdf');
-    }
-
-    public function reporte_especifico(Request $request){
-        $date_inicial= $request->fecha_inicial;
-        $date_final = $request->fecha_final;
-
-       /* $depositos = DB::table('depositos')->whereDate('created_at', '>=', $date_inicial)->whereDate('created_at', '<=', $date_final)->get();*/
-
-        $depositos = DB::table('depositos')->join('users', 'users.id', '=', 'depositos.id_usuario')->join('cuentas', 'cuentas.id', '=', 'depositos.id_cuenta')->join('bancos', 'bancos.id', '=', 'cuentas.id_banco')->join('propietario_cuentas', 'propietario_cuentas.id', '=', 'cuentas.id_propietario')->join('tipo_cuentas', 'tipo_cuentas.id', '=', 'cuentas.id_tipo_cuenta')->whereDate('depositos.created_at', '>=', $date_inicial)->whereDate('depositos.created_at', '<=', $date_final)->select('depositos.id','depositos.monto', 'depositos.motivo','depositos.created_at', 'users.usuario as nombre_usuario', 'cuentas.numero_cuenta as num_cta', 'bancos.entidad as entidad', 'propietario_cuentas.nombre as nombre', 'tipo_cuentas.descripcion as tp_descripcion' ,  'propietario_cuentas.nombre as nombre', 'bancos.entidad as entidad')->orderBy('id', 'asc')->get();
-
-
-        //dd($depositos);
-        $view = \View::make('vendor.adminlte.reporte_depositos', compact('depositos', 'date_inicial', 'date_final'))->render();
-          $pdf = \App::make('dompdf.wrapper');
-          $pdf->loadHTML($view);
-          return $pdf->stream('reporte'.'pdf');
-    }
-
-    public function reporte_mensual(Request $request){
-        $month = $request->mes;
-        $mes_entero=strtotime($month);
-        $mes = date('m', $mes_entero);    
-       // $depositos = DB::table('depositos')->whereMonth('created_at', $mes)->get();
-
-        $depositos = DB::table('depositos')->join('users', 'users.id', '=', 'depositos.id_usuario')->join('cuentas', 'cuentas.id', '=', 'depositos.id_cuenta')->join('bancos', 'bancos.id', '=', 'cuentas.id_banco')->join('propietario_cuentas', 'propietario_cuentas.id', '=', 'cuentas.id_propietario')->join('tipo_cuentas', 'tipo_cuentas.id', '=', 'cuentas.id_tipo_cuenta')->whereMonth('depositos.created_at', $mes)->select('depositos.id','depositos.monto', 'depositos.motivo','depositos.created_at', 'users.usuario as nombre_usuario', 'cuentas.numero_cuenta as num_cta', 'bancos.entidad as entidad', 'propietario_cuentas.nombre as nombre', 'tipo_cuentas.descripcion as tp_descripcion' ,  'propietario_cuentas.nombre as nombre', 'bancos.entidad as entidad')->orderBy('id', 'asc')->get();
-
-       // dd($depositos); 
-
-       $view = \View::make('vendor.adminlte.reporte_depositos', compact('depositos', 'month'))->render();
-          $pdf = \App::make('dompdf.wrapper');
-          $pdf->loadHTML($view);
-          return $pdf->stream('reporte'.'pdf');       
-    }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -169,5 +127,66 @@ class DepositoController extends Controller
         $dinero->update();
         return redirect('/deposito');
 
+    }
+
+    public function reporte_diario(Request $request){
+             
+            $date = $request->fecha;
+            $depositos = obtener_deposito_reporte_diario($request->fecha) ;
+   // dd($depositos);
+          
+          $view = \View::make('vendor.adminlte.reporte_depositos', compact('depositos', 'date'))->render();
+          $pdf = \App::make('dompdf.wrapper');
+          $pdf->loadHTML($view);
+          return $pdf->stream('reporte'.'pdf');
+    }
+
+    public function reporte_diario_api($fecha){
+             
+           // $date = $fecha;
+            $depositos = obtener_deposito_reporte_diario($fecha);
+            return response()->json($depositos);
+    
+    }
+
+
+    public function reporte_especifico(Request $request){
+        $date_inicial = $request->fecha_inicial;
+        $date_final = $request->fecha_final;
+
+        $depositos = obtener_deposito_reporte_especifico($request->fecha_inicial,$request->fecha_final);
+
+        $view = \View::make('vendor.adminlte.reporte_depositos', compact('depositos', 'date_inicial', 'date_final'))->render();
+          $pdf = \App::make('dompdf.wrapper');
+          $pdf->loadHTML($view);
+          return $pdf->stream('reporte'.'pdf');
+    }
+
+    public function reporte_especifico_api($fecha_inicial, $fecha_final){
+
+        $depositos = obtener_deposito_reporte_especifico($fecha_inicial, $fecha_final);
+        return response()->json($depositos);
+    }
+
+    public function reporte_mensual(Request $request){
+        $month = $request->mes;
+        $mes_entero=strtotime($month);
+        $mes = date('m', $mes_entero);    
+        $depositos = obtener_deposito_reporte_mensual($mes);
+
+        $view = \View::make('vendor.adminlte.reporte_depositos', compact('depositos', 'month'))->render();
+          $pdf = \App::make('dompdf.wrapper');
+          $pdf->loadHTML($view);
+          return $pdf->stream('reporte'.'pdf');
+          
+    }
+
+    public function reporte_mensual_api($mes){
+        $month = $mes;
+        $mes_entero=strtotime($month);
+        $mes = date('m', $mes_entero);    
+        $depositos = obtener_deposito_reporte_mensual($mes);
+
+      return response()->json($depositos);     
     }
 }

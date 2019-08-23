@@ -11,8 +11,8 @@
       <div class="box-header with-border">
         <h3 class="box-title">Reporte diario</h3>
       </div>
-     		<form method="post"  action="{{ url('api/report_depositos_diario') }}" target="blank">
-          <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
+     		<form method="post"  action="{{route('reporte_deposito.diario')}}" target="blank"  >
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="box-body">
               <label for="fecha">Día a escoger:</label>
               <input type="date" name="fecha" id="fecha" class="form-control" value="<?php echo date("Y-m-d");?>">
@@ -22,8 +22,8 @@
           </div>
         </form>
 
-    
-
+   
+        
   </div>
 </div>
 </div>

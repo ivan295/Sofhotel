@@ -103,5 +103,60 @@ class gastosController extends Controller
         return redirect('/gastos');
     }
 
+    public function reporte_diario(Request $request){
+        $date = $request->fecha;
+        $Nuevogasto = obtener_gasto_reporte_diario($request->fecha);
+        $view = \View::make('vendor.adminlte.reporte_gastos', compact('Nuevogasto', 'date'))->render();
+          $pdf = \App::make('dompdf.wrapper');
+          $pdf->loadHTML($view);
+          return $pdf->stream('reporte'.'pdf');
+     }
+
+       public function reporte_diario_api($fecha){
+        $Nuevogasto = obtener_gasto_reporte_diario($fecha);
+          return response()->json($Nuevogasto);
+     }
+
+     public function reporte_especifico(Request $request){
+        $date_inicial = $request->fecha_inicial;
+        $date_final = $request->fecha_final;
+        $Nuevogasto = $gasto = obtener_gasto_reporte_especifico($request->fecha_inicial,$request->fecha_final);
+
+        $view = \View::make('vendor.adminlte.reporte_gastos', compact('Nuevogasto', 'date_inicial', 'date_final'))->render();
+          $pdf = \App::make('dompdf.wrapper');
+          $pdf->loadHTML($view);
+          return $pdf->stream('reporte'.'pdf');
+    }
+
+    public function reporte_especifico_api($fecha_inicial, $fecha_final){
+        $Nuevogasto = $gasto = obtener_gasto_reporte_especifico($fecha_inicial, $fecha_final);
+          return response()->json($Nuevogasto);
+    }
+
+    public function reporte_mensual(Request $request){
+        $month = $request->mes;
+        $mes_entero=strtotime($month);
+        $mes = date('m', $mes_entero);
+
+        $Nuevogasto = obtener_gasto_reporte_mensual($mes);
+
+        $view = \View::make('vendor.adminlte.reporte_gastos', compact('Nuevogasto', 'month'))->render();
+          $pdf = \App::make('dompdf.wrapper');
+          $pdf->loadHTML($view);
+          return $pdf->stream('reporte'.'pdf');
+
+    }
+
+     public function reporte_mensual_api($mes){
+        $month = $mes;
+        $mes_entero=strtotime($month);
+        $mes = date('m', $mes_entero);
+
+        $Nuevogasto = obtener_gasto_reporte_mensual($mes);
+
+          return response()->json($Nuevogasto);
+
+    }
+
 
  }

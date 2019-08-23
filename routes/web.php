@@ -400,3 +400,101 @@ Route::post('parametros/{id}/edit', ['as' => 'parametros.editar', 'uses' => 'Par
 
 Route::put('parametros/{id}', ['as' => 'parametros.update', 'uses'=>'ParametrosController@update']);
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////REPORTES
+
+//reporte gastos
+
+Route::get('/reporte_diario_gasto', function () {
+    return view('/vendor/adminlte/reporte_gasto_diario');
+});
+
+Route::get('/reporte_mensual_gasto', function () {
+    return view('/vendor/adminlte/reporte_gasto_mensual');
+});
+
+Route::get('/reporte_especifico_gasto', function () {
+    return view('/vendor/adminlte/reporte_gasto_especifico');
+});
+
+Route::post('reporte_gastos_diario', ['as' => 'reporte_gasto.diario', 'uses' =>'gastosController@reporte_diario']);
+
+Route::post('reporte_gastos_especifico', ['as' => 'reporte_gasto.especifico', 'uses' =>'gastosController@reporte_especifico']);
+
+Route::post('reporte_gastos_mensual', ['as' => 'reporte_gasto.mensual', 'uses'=>'gastosController@reporte_mensual']);
+
+//reporte caja
+Route::get('reporte_cierre_caja', 'CajaController@reporte_cierre_caja');
+
+Route::get('/reporte_caja', function () {
+    return view('/vendor/adminlte/reporte_caja');
+});
+
+
+//reporte depositos
+
+Route::get('/reporte_diario_dep', function () {
+    return view('/vendor/adminlte/reporte_deposito_diario');
+});
+
+Route::get('/reporte_mensual_dep', function () {
+    return view('/vendor/adminlte/reporte_deposito_mensual');
+});
+
+Route::get('/reporte_especifico_dep', function () {
+    return view('/vendor/adminlte/reporte_deposito_especifico');
+});
+
+Route::post('reporte_depositos_diario', ['as' => 'reporte_deposito.diario', 'uses'=>'DepositoController@reporte_diario']);
+
+Route::post('reporte_depositos_especifico', ['as' => 'reporte_deposito.especifico', 'uses'=>'DepositoController@reporte_especifico']);
+
+Route::post('reporte_depositos_mensual', ['as' => 'reporte_deposito.mensual', 'uses'=>'DepositoController@reporte_mensual']);
+
+Route::get('pr/{num1}/{num2}', ['as' => 'deposito.prueba', 'uses'=>'DepositoController@prueba']);
+
+//reporte generales
+
+Route::get('/reporte_diario_general', function () {
+    return view('/vendor/adminlte/reporte_general_diario');
+});
+
+Route::get('/reporte_mensual_general', function () {
+    return view('/vendor/adminlte/reporte_general_mensual');
+});
+
+Route::get('/reporte_especifico_general', function () {
+    return view('/vendor/adminlte/reporte_general_especifico');
+});
+
+Route::post('reporte_general_diario', ['as' => 'reporte_general.diario' , 'uses' => 'ReporteGeneralController@reporte_diario']);
+
+Route::post('reporte_general_especifico', ['as' => 'reporte_general.especifico', 'uses'=>'ReporteGeneralController@reporte_especifico']);
+
+Route::post('reporte_general_mensual', ['as' => 'reporte_general.mensual' , 'uses'=>'ReporteGeneralController@reporte_mensual']);
+
+//reporte por usuario
+
+Route::get('/reporte_diario_usuario', function () {
+    return view('/vendor/adminlte/reporte_usuario_diario');
+});
+
+Route::get('/reporte_mensual_usuario', function () {
+    return view('/vendor/adminlte/reporte_usuario_mensual');
+});
+
+Route::get('/reporte_especifico_usuario', function () {
+    return view('/vendor/adminlte/reporte_usuario_especifico');
+});
+
+Route::post('consulta_caja_usuario_dia', 'ReporteGeneralController@caja_usuario_dia');
+
+Route::post('consulta_caja_usuario_mes', 'ReporteGeneralController@caja_usuario_mes');
+
+Route::post('consulta_caja_usuario_especifico', 'ReporteGeneralController@consulta_caja_usuario_especifico');
+
+Route::get('reporte_usuario_diario/{id}', ['as' => 'reporte_usuario.diario', 'uses'=>'ReporteGeneralController@reporte_diario_usuario']);
+
+Route::get('reporte_usuario_especifico/{id}/{fecha_inicial}/{fecha_final}', ['as' => 'reporte_usuario.especifico', 'uses'=>'ReporteGeneralController@reporte_especifico_usuario']);
+
+Route::get('reporte_usuario_mes/{id}/{mes}', ['as' => 'reporte_usuario.mensual', 'uses'=>'ReporteGeneralController@reporte_mensual_usuario']);

@@ -9,15 +9,13 @@
   <div class="col-md-5 col-md-offset-3" >
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">Reporte específico</h3>
+        <h3 class="box-title">Reporte general diario</h3>
       </div>
-     		<form method="post"  action="{{ route('reporte_deposito.especifico') }}" target="blank">
+     		<form method="post"  action="{{ route('reporte_general.diario') }}" target="blank">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="box-body">
-              <label for="fecha">Desde:</label>
-              <input type="date" name="fecha_inicial" id="fecha_inicial" class="form-control" value="<?php echo date("Y-m-d");?>">
-              <label for="fecha">Hasta:</label>
-              <input type="date" name="fecha_final" id="fecha_final" class="form-control" value="<?php echo date("Y-m-d");?>">
+              <label for="fecha">Día a escoger:</label>
+              <input type="date" name="fecha" id="fecha" class="form-control" value="<?php echo date("Y-m-d");?>">
             </div>  
           <div class="box-footer">
             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span>Generar</button>  
