@@ -21,13 +21,17 @@
                                 <h1><span class="label label-warning"># Habitación: <?php echo $Alquiler->habitacion ?></span></h1>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <h1><span class="label label-warning">Tiempo: <?php echo $Alquiler->tiempo_alquiler ?></span></h1>
+                            </div>
                         </div>
                         <div class="col-md-5">
                             <div class="input-group">
                                 <h1><span class="label label-success">Total a Pagar : $ <?php echo $Alquiler->Precio ?></span></h1>
                             </div>
                         </div>
-                        <input type="hidden" class="form-control" name="id_habitacion" id="id_habitacion" value="<?php echo $Alquiler->Id ?>">
+                        <input type="hidden" class="form-control" name="id_habitacion" id="id_habitacion" value="<?php echo $Alquiler->hab ?>">
                         <input type="hidden" class="form-control" name="habitacion" id="habitacion" value="<?php echo $Alquiler->habitacion ?>">
                         <input type="hidden" class="form-control" name="precio_habitacion" id="precio_habitacion" value=" <?php echo $Alquiler->Precio ?>">
                         <input type="hidden" class="form-control" name="id_alquiler" id="id_alquiler" value="<?php echo $Alquiler->id; ?>">
