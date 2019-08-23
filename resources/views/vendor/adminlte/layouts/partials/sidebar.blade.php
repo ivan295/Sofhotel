@@ -83,9 +83,9 @@
 
             <li><a href="{{ url('/alquiler') }}"><i class='fa  fa-exclamation'></i> <span>Alquiler</span></a></li>
 
-            <li><a href="{{ url('/factura_venta') }}"><i class='fa fa-user-plus'></i> <span>factura venta</span></a></li>
-            <li><a href="{{ url('/factura_compra') }}"><i class='fa fa-user-plus'></i> <span>Factura de Compra</span></a></li>  
-            <li><a href="{{ url('/detalle_venta') }}"><i class='fa fa-user-plus'></i> <span>detalle venta</span></a></li>  
+            <li><a href="{{ url('/factura_venta') }}"><i class='fa fa-user-plus'></i> <span>Ventas</span></a></li>
+            <li><a href="{{ url('/factura_compra') }}"><i class='fa fa-user-plus'></i> <span>Compras</span></a></li>  
+        <!-- <li><a href="{{ url('/detalle_venta') }}"><i class='fa fa-user-plus'></i> <span>detalle venta</span></a></li>   -->
 
            <li class="treeview">
                 <a href="#"><i class='fa fa-list-alt'></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i></a>

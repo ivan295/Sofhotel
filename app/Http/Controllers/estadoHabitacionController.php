@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Estado_habitacion;
 use DB;
 class estadoHabitacionController extends Controller
 {
- 
     public function addip($ip)
     {	
         $dato=new Estado_habitacion;

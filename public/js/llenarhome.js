@@ -12,18 +12,42 @@ $(document).ready(function(){
             var fecha = hoy.getDate()+ '/' +(hoy.getMonth()+1)+ '/' +hoy.getFullYear();
             $("#cuadro").html("");//envia vacio el #cuadro para actualizar color cada 5seg
             $.each(data, function(i, item) { 
-                 if (item.estado == 'Desocupado' ) { //consulta los datos del item.estado y retorna el color
-                     var color = "<div class='small-box bg-green'>"
-                 }if(item.estado == 'Ocupado'){
+                if (item.estado == 'Desocupado' ) { //consulta los datos del item.estado y retorna el color
+                    var color = "<div class='small-box bg-green'>"
+                    var boton="disabled";
+                    var button="hidden";
+                    var solucion="hidden";
 
-                     var color = "<div class='small-box bg-red'>"
-                     if(item.indice == 0){
-                     ingresohab(item.id,item.numero_habitacion);
-                     }
 
-                 }if (item.estado == 'Limpieza'){
-                     var color = "<div class='small-box bg-aqua'>"
-                 }
+                }else if(item.estado == 'Ocupado'){
+                    var color = "<div class='small-box bg-red'>"
+                    var button="hidden";
+                    var solucion="hidden";
+                    if(item.indice == 0){
+                    ingresohab(item.id,item.numero_habitacion);
+                    }
+
+                }else if (item.estado == 'Limpieza'){
+                    var color = "<div class='small-box bg-aqua'>"
+                    var boton ="disabled";
+                    var button="hidden";
+                    var solucion="hidden";
+
+                }
+                else if (item.estado == 'Espera'){
+                    var color = "<div class='small-box bg-yellow'>"
+                    var boton ="hidden";
+                    var button="button";
+                    var solucion="hidden";
+
+                }else if (item.estado == 'Peligro'){
+                    var color = "<div class='small-box bg-purple'>"
+                    var boton ="hidden";
+                    var button="hidden";
+                    alert("Puerta de garage de Habitación #" +item.numero_habitacion+ "necesita revisión manual");
+                    var solucion="button";
+                }
+                
              $("#cuadro").append(
                 "<div class='col-md-3 col-md-offset-0'>\
                 "+color+"\
@@ -33,13 +57,15 @@ $(document).ready(function(){
                 <p>Hora de ingreso: "+hora+" </p>\
                 <p>Hora de salida: </p>\
                 <p>Total a pagar: </p>\
-                <button type='button'onclick='salida("+item.id+","+item.numero_habitacion+","+item.id+")' class='btn  btn-block btn-warning'>Imprimir</button>\
+                <input  type="+solucion+" value='Solucionado' onclick='puerta()' class='btn  btn-block btn-success'>\
+                <input  type="+button+" value='Abrir Puerta' onclick='puerta()' class='btn  btn-block btn-success'>\
+                <input  "+boton+" type="+boton+" value='Imprimir' onclick='salida("+item.id+","+item.numero_habitacion+","+item.id+")' class='btn  btn-block btn-warning'>\
                 <div class='icon'>\
                 <i class='fa fa-hotel'></i>\
                 </div>\
                 </div>\
                 </div>"
-                );           
+                ); 
          });
         });
     
