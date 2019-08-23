@@ -50,8 +50,9 @@
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-file-o"></i></span>
                 <input type="text" class="form-control" name="total_pagar" id="total_pagar" placeholder="Total a pagar">
+                <input type="hidden" class="form-control" name="id_usuario" id="id_usuario" value="{{Auth::user()->id}}">
               </div>
-              <input type="hidden" class="form-control" name="id_usuario" id="id_usuario" value="{{Auth::user()->id}}">
+              
             </div>
            
           </div>

@@ -18,7 +18,7 @@ class ReporteGeneralController extends Controller
     	$caja = obtener_caja_reporte_diario($request->fecha);
     	$depositos = obtener_deposito_reporte_diario($request->fecha);
         $gasto = obtener_gasto_reporte_diario($request->fecha);
-        $factura_venta = obtener_facturaventa_reporte_diario($request->fecha);
+        $factura_venta = obtener_factura_venta_reporte_diario($request->fecha);
 
         $total_depositos = calcular_total_depositos($depositos);
         $total_gastos = calcular_total_gastos($gasto);
@@ -41,7 +41,7 @@ class ReporteGeneralController extends Controller
         $caja = obtener_caja_reporte_diario($fecha);
         $depositos = obtener_deposito_reporte_diario($fecha);
         $gasto = obtener_gasto_reporte_diario($fecha);
-        $factura_venta = obtener_facturaventa_reporte_diario($fecha);
+        $factura_venta = obtener_factura_venta_reporte_diario($fecha);
 
         $total_depositos = calcular_total_depositos($depositos);
         $total_gastos = calcular_total_gastos($gasto);
@@ -71,7 +71,7 @@ class ReporteGeneralController extends Controller
     	$caja = obtener_caja_reporte_especifico($request->fecha_inicial,$request->fecha_final);
     	$depositos = obtener_deposito_reporte_especifico($request->fecha_inicial,$request->fecha_final);
         $gasto = obtener_gasto_reporte_especifico($request->fecha_inicial,$request->fecha_final);
-        $factura_venta = obtener_facturaventa_reporte_especifico($request->fecha_inicial,$request->fecha_final);
+        $factura_venta = obtener_factura_venta_reporte_especifico($request->fecha_inicial,$request->fecha_final);
 
         $total_depositos = calcular_total_depositos($depositos);
         $total_gastos = calcular_total_gastos($gasto);
@@ -92,7 +92,7 @@ class ReporteGeneralController extends Controller
         $caja = obtener_caja_reporte_especifico($fecha_inicial,$fecha_final);
         $depositos = obtener_deposito_reporte_especifico($fecha_inicial,$fecha_final);
         $gasto = obtener_gasto_reporte_especifico($fecha_inicial,$fecha_final);
-        $factura_venta = obtener_facturaventa_reporte_especifico($fecha_inicial,$fecha_final);
+        $factura_venta = obtener_factura_venta_reporte_especifico($fecha_inicial,$fecha_final);
 
         $total_depositos = calcular_total_depositos($depositos);
         $total_gastos = calcular_total_gastos($gasto);
@@ -119,7 +119,7 @@ class ReporteGeneralController extends Controller
         $caja = obtener_caja_reporte_mensual($mes);
     	$depositos = obtener_deposito_reporte_mensual($mes);
         $gasto = obtener_gasto_reporte_mensual($mes);
-        $factura_venta = obtener_facturaventa_reporte_mensual($mes);
+        $factura_venta = obtener_factura_venta_reporte_mensual($mes);
     	
         $total_depositos = calcular_total_depositos($depositos);
         $total_gastos = calcular_total_gastos($gasto);
@@ -143,7 +143,7 @@ class ReporteGeneralController extends Controller
         $caja = obtener_caja_reporte_mensual($mes);
         $depositos = obtener_deposito_reporte_mensual($mes);
         $gasto = obtener_gasto_reporte_mensual($mes);
-        $factura_venta = obtener_facturaventa_reporte_mensual($mes);
+        $factura_venta = obtener_factura_venta_reporte_mensual($mes);
         
         $total_depositos = calcular_total_depositos($depositos);
         $total_gastos = calcular_total_gastos($gasto);
@@ -180,7 +180,7 @@ class ReporteGeneralController extends Controller
         $deposito = obtener_deposito_individual($caja->created_at, $caja->updated_at);
 
         $gasto = obtener_gasto_individual($caja->created_at, $caja->updated_at);
-        $FacturaVenta = obtener_facturaventa_individual($caja->created_at, $caja->updated_at);
+        $FacturaVenta = obtener_factura_venta_individual($caja->created_at, $caja->updated_at);
 
         $total_depositos = calcular_total_depositos($deposito);
         $total_gastos = calcular_total_gastos($gasto);
@@ -200,7 +200,7 @@ class ReporteGeneralController extends Controller
         $deposito = obtener_deposito_individual($caja->created_at, $caja->updated_at);
 
         $gasto = obtener_gasto_individual($caja->created_at, $caja->updated_at);
-        $FacturaVenta = obtener_facturaventa_individual($caja->created_at, $caja->updated_at);
+        $FacturaVenta = obtener_factura_venta_individual($caja->created_at, $caja->updated_at);
 
         $total_depositos = calcular_total_depositos($deposito);
         $total_gastos = calcular_total_gastos($gasto);
@@ -236,7 +236,7 @@ class ReporteGeneralController extends Controller
         $deposito = obtener_deposito_individual_especifico($id, $fecha_inicial, $fecha_final);
 
         $gasto = obtener_gasto_individual_especifico($id, $fecha_inicial, $fecha_final);
-        $FacturaVenta = obtener_facturaventa_individual_especifico($id, $fecha_inicial, $fecha_final);
+        $FacturaVenta = obtener_factura_venta_individual_especifico($id, $fecha_inicial, $fecha_final);
 
         $total_depositos = calcular_total_depositos($deposito);
         $total_gastos = calcular_total_gastos($gasto);
@@ -256,7 +256,7 @@ class ReporteGeneralController extends Controller
         $deposito = obtener_deposito_individual_especifico($id, $fecha_inicial, $fecha_final);
 
         $gasto = obtener_gasto_individual_especifico($id, $fecha_inicial, $fecha_final);
-        $FacturaVenta = obtener_facturaventa_individual_especifico($id, $fecha_inicial, $fecha_final);
+        $FacturaVenta = obtener_factura_venta_individual_especifico($id, $fecha_inicial, $fecha_final);
 
         $total_depositos = calcular_total_depositos($deposito);
         $total_gastos = calcular_total_gastos($gasto);
@@ -292,7 +292,7 @@ class ReporteGeneralController extends Controller
         $caja = obtener_caja_individual_mensual($id, $mes);
         $deposito = obtener_deposito_individual_mensual($id, $mes);
         $gasto = obtener_gasto_individual_mensual($id, $mes);
-        $FacturaVenta = obtener_facturaventa_individual_mensual($id, $mes);
+        $FacturaVenta = obtener_factura_venta_individual_mensual($id, $mes);
 
         $total_depositos = calcular_total_depositos($deposito);
         $total_gastos = calcular_total_gastos($gasto);
@@ -315,7 +315,7 @@ class ReporteGeneralController extends Controller
         $caja = obtener_caja_individual_mensual($id, $mes);
         $deposito = obtener_deposito_individual_mensual($id, $mes);
         $gasto = obtener_gasto_individual_mensual($id, $mes);
-        $FacturaVenta = obtener_facturaventa_individual_mensual($id, $mes);
+        $FacturaVenta = obtener_factura_venta_individual_mensual($id, $mes);
 
         $total_depositos = calcular_total_depositos($deposito);
         $total_gastos = calcular_total_gastos($gasto);

@@ -111,7 +111,7 @@
       
       @foreach($factura_venta as $fv)
       <tr>
-        <td>{{$fv->nombre_usuario}}</td>
+        <td>{{$fv->nombre}} {{$fv->apellido}}</td>
         <td>{{$fv->habitacion}}</td>
         <td>{{$fv->created_at}}</td>
         <td>{{$fv->precio}}</td>

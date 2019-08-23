@@ -3,8 +3,11 @@ use App\Dinero;
 use App\Caja;
 use App\Gastos;
 use App\Factura_venta;
+use App\Factura_compra;
 use App\Deposito;
-
+use App\Habitacion;
+use App\Alquiler;
+use App\Estado_habitacion;
  function obtener_dinero_disponible(){
 	$d = DB::table('dineros')->orderBy('id', 'desc')->first();
 	return $d;
@@ -35,10 +38,10 @@ function obtener_gasto_individual($fecha_inicial, $fecha_final){
 
 }
 
-function obtener_facturaventa_individual($fecha_inicial, $fecha_final){
+function obtener_factura_venta_individual($fecha_inicial, $fecha_final){
 
 	$factura_venta = DB::table('factura_venta')->join('alquiler','alquiler.id','=','factura_venta.id_alquiler')->join('habitacion','habitacion.id','=','alquiler.id_habitacion')->join('users', 'users.id', '=', 'alquiler.id_usuario')->where('factura_venta.created_at','>=', $fecha_inicial )->where('factura_venta.created_at','<=', $fecha_final )->select('factura_venta.*','users.usuario as nombre_usuario','alquiler.fecha as Fecha','habitacion.numero_habitacion as habitacion','habitacion.precio as precio')
-         ->orderBy('id', 'asc')->get();
+         ->orderBy('habitacion', 'asc')->get();
 
 	return $factura_venta;
 
@@ -73,11 +76,11 @@ function obtener_gasto_individual_especifico($id_usuario, $fecha_inicial, $fecha
 
 }
 
-function obtener_facturaventa_individual_especifico($id_usuario, $fecha_inicial, $fecha_final){
+function obtener_factura_venta_individual_especifico($id_usuario, $fecha_inicial, $fecha_final){
 
 	$factura_venta = DB::table('factura_venta')->join('alquiler','alquiler.id','=','factura_venta.id_alquiler')->join('habitacion','habitacion.id','=','alquiler.id_habitacion')->join('users', 'users.id', '=', 'alquiler.id_usuario')
        ->whereDate('factura_venta.created_at','>=', $fecha_inicial )->whereDate('factura_venta.created_at','<=', $fecha_final )->where('users.id', '=', $id_usuario)->select('factura_venta.*','users.usuario as nombre_usuario','alquiler.fecha as Fecha','habitacion.numero_habitacion as habitacion','habitacion.precio as precio')
-         ->orderBy('id', 'asc')->get();
+         ->orderBy('habitacion', 'asc')->get();
 
 	return $factura_venta;
 
@@ -111,11 +114,11 @@ function obtener_gasto_individual_mensual($id_usuario, $mes){
 
 }
 
-function obtener_facturaventa_individual_mensual($id_usuario, $mes){
+function obtener_factura_venta_individual_mensual($id_usuario, $mes){
 
 	$factura_venta = DB::table('factura_venta')->join('alquiler','alquiler.id','=','factura_venta.id_alquiler')->join('habitacion','habitacion.id','=','alquiler.id_habitacion')->join('users', 'users.id', '=', 'alquiler.id_usuario')
        ->whereMonth('factura_venta.updated_at', $mes)->where('users.id', '=', $id_usuario)->select('factura_venta.*','users.usuario as nombre_usuario','alquiler.fecha as Fecha','habitacion.numero_habitacion as habitacion','habitacion.precio as precio')
-         ->orderBy('id', 'asc')->get();
+         ->orderBy('habitacion', 'asc')->get();
 
 	return $factura_venta;
 
@@ -147,15 +150,21 @@ function obtener_gasto_reporte_diario($fecha){
 	return $gasto;
 }
 
-function obtener_facturaventa_reporte_diario($fecha){
+function obtener_factura_venta_reporte_diario($fecha){
 
 	$factura_venta = DB::table('factura_venta')
        ->join('alquiler','alquiler.id','=','factura_venta.id_alquiler')
-       ->join('habitacion','habitacion.id','=','alquiler.id_habitacion')->join('users', 'users.id', '=', 'alquiler.id_usuario')
-       ->whereDate('factura_venta.created_at', $fecha )->select('factura_venta.*','alquiler.fecha as Fecha','users.usuario as nombre_usuario','habitacion.numero_habitacion as habitacion','habitacion.precio as precio')
-         ->orderBy('id', 'asc')->get();
+       ->join('habitacion','habitacion.id','=','alquiler.id_habitacion')->join('users', 'users.id', '=', 'alquiler.id_usuario')->join('estado_habitacion', 'estado_habitacion.id', '=' , 'habitacion.id_estado')
+       ->whereDate('factura_venta.created_at', $fecha )->select('factura_venta.*','alquiler.fecha as fecha','alquiler.tiempo_alquiler as tiempo_alquiler','alquiler.numero_personas as numero_personas','users.nombre as nombre', 'users.apellido as apellido','habitacion.numero_habitacion as habitacion','habitacion.precio as precio', 'estado_habitacion.estado as estado')
+         ->orderBy('habitacion', 'asc')->get();
 
 	return $factura_venta;
+}
+
+function obtener_factura_compra_reporte_diario($fecha){
+
+	$compra = DB::table('factura_compra')->join('proveedor', 'proveedor.id', '=', 'factura_compra.id_proveedor')->join('users', 'users.id', '=', 'factura_compra.id_usuario')->whereDate('factura_compra.created_at', $fecha )->select('factura_compra.*', 'users.nombre as nombre', 'users.apellido as apellido', 'proveedor.nombres as nombre_proveedor', 'proveedor.apellidos as apellido_proveedor', 'proveedor.empresa as empresa')->orderBy('id', 'asc')->get();
+	return $compra;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -186,14 +195,20 @@ function obtener_gasto_reporte_especifico($fecha_inicial, $fecha_final){
 
 }
 
-function obtener_facturaventa_reporte_especifico($fecha_inicial, $fecha_final){
+function obtener_factura_venta_reporte_especifico($fecha_inicial, $fecha_final){
 
-	$factura_venta = DB::table('factura_venta')->join('alquiler','alquiler.id','=','factura_venta.id_alquiler')->join('habitacion','habitacion.id','=','alquiler.id_habitacion')->join('users', 'users.id', '=', 'alquiler.id_usuario')
-       ->whereDate('factura_venta.created_at','>=', $fecha_inicial )->whereDate('factura_venta.created_at','<=', $fecha_final )->select('factura_venta.*','users.usuario as nombre_usuario','alquiler.fecha as Fecha','habitacion.numero_habitacion as habitacion','habitacion.precio as precio')
-         ->orderBy('id', 'asc')->get();
+	$factura_venta = DB::table('factura_venta')->join('alquiler','alquiler.id','=','factura_venta.id_alquiler')->join('habitacion','habitacion.id','=','alquiler.id_habitacion')->join('users', 'users.id', '=', 'alquiler.id_usuario')->join('estado_habitacion', 'estado_habitacion.id', '=' , 'habitacion.id_estado')
+       ->whereDate('factura_venta.created_at','>=', $fecha_inicial )->whereDate('factura_venta.created_at','<=', $fecha_final )->select('factura_venta.*','alquiler.fecha as fecha','alquiler.tiempo_alquiler as tiempo_alquiler','alquiler.numero_personas as numero_personas','users.nombre as nombre', 'users.apellido as apellido','habitacion.numero_habitacion as habitacion','habitacion.precio as precio', 'estado_habitacion.estado as estado')
+         ->orderBy('habitacion', 'asc')->get();
 
 	return $factura_venta;
 
+}
+
+function obtener_factura_compra_reporte_especifico($fecha_inicial, $fecha_final){
+
+	$compra = DB::table('factura_compra')->join('proveedor', 'proveedor.id', '=', 'factura_compra.id_proveedor')->join('users', 'users.id', '=', 'factura_compra.id_usuario')->whereDate('factura_compra.created_at','>=', $fecha_inicial )->whereDate('factura_compra.created_at','<=', $fecha_final )->select('factura_compra.*', 'users.nombre as nombre', 'users.apellido as apellido', 'proveedor.nombres as nombre_proveedor', 'proveedor.apellidos as apellido_proveedor', 'proveedor.empresa as empresa')->orderBy('id', 'asc')->get();
+	return $compra;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -219,17 +234,22 @@ function obtener_gasto_reporte_mensual($mes){
 	return $gasto;
 }
 
-function obtener_facturaventa_reporte_mensual($mes){
+function obtener_factura_venta_reporte_mensual($mes){
 
 	$factura_venta = DB::table('factura_venta')
        ->join('alquiler','alquiler.id','=','factura_venta.id_alquiler')
-       ->join('habitacion','habitacion.id','=','alquiler.id_habitacion')->join('users', 'users.id', '=', 'alquiler.id_usuario')
-       ->whereMonth('factura_venta.created_at', $mes )->select('factura_venta.*','users.usuario as nombre_usuario','alquiler.fecha as Fecha','habitacion.numero_habitacion as habitacion','habitacion.precio as precio')
-         ->orderBy('id', 'asc')->get();
+       ->join('habitacion','habitacion.id','=','alquiler.id_habitacion')->join('users', 'users.id', '=', 'alquiler.id_usuario')->join('estado_habitacion', 'estado_habitacion.id', '=' , 'habitacion.id_estado')
+       ->whereMonth('factura_venta.created_at', $mes )->select('factura_venta.*','alquiler.fecha as fecha','alquiler.tiempo_alquiler as tiempo_alquiler','alquiler.numero_personas as numero_personas','users.nombre as nombre', 'users.apellido as apellido','habitacion.numero_habitacion as habitacion','habitacion.precio as precio', 'estado_habitacion.estado as estado')
+         ->orderBy('habitacion', 'asc')->get();
 
 	return $factura_venta;
 }
 
+function obtener_factura_compra_reporte_mensual($mes){
+
+	$compra = DB::table('factura_compra')->join('proveedor', 'proveedor.id', '=', 'factura_compra.id_proveedor')->join('users', 'users.id', '=', 'factura_compra.id_usuario')->whereMonth('factura_compra.created_at', $mes )->select('factura_compra.*', 'users.nombre as nombre', 'users.apellido as apellido', 'proveedor.nombres as nombre_proveedor', 'proveedor.apellidos as apellido_proveedor', 'proveedor.empresa as empresa')->orderBy('id', 'asc')->get();
+	return $compra;
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //calculos
 

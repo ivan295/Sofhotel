@@ -111,6 +111,26 @@
                  </ul>
 
                  <ul class="treeview-menu">
+                        <li><a href="#" class="treeview"><i class='fa fa-user'></i> <span>Reportes de ventas</span><i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ url('/reporte_diario_fac_vent') }}"><i class='fa  fa-cubes'></i> <span>Reporte diario</span></a></li>
+                                 <li><a href="{{ url('/reporte_mensual_fac_vent') }}"><i class='fa fa-bank'></i><span>Reporte mensual</span></a></li>
+                                 <li><a href="{{ url('/reporte_especifico_fac_vent') }}"><i class='fa  fa-cubes'></i> <span>Reporte específico</span></a></li>
+                            </ul>
+                        </li>                       
+                 </ul>
+
+                 <ul class="treeview-menu">
+                        <li><a href="#" class="treeview"><i class='fa fa-user'></i> <span>Reportes de compras</span><i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ url('/reporte_diario_fac_compr') }}"><i class='fa  fa-cubes'></i> <span>Reporte diario</span></a></li>
+                                 <li><a href="{{ url('/reporte_mensual_fac_compr') }}"><i class='fa fa-bank'></i><span>Reporte mensual</span></a></li>
+                                 <li><a href="{{ url('/reporte_especifico_fac_compr') }}"><i class='fa  fa-cubes'></i> <span>Reporte específico</span></a></li>
+                            </ul>
+                        </li>                       
+                 </ul>
+
+                 <ul class="treeview-menu">
                         <li><a href="#" class="treeview"><i class='fa fa-user'></i> <span>Reportes de depósitos</span><i class="fa fa-angle-left pull-right"></i></a>
                             <ul class="treeview-menu">
                                 <li><a href="{{ url('/reporte_diario_dep') }}"><i class='fa  fa-cubes'></i> <span>Reporte diario</span></a></li>

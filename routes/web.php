@@ -487,3 +487,43 @@ Route::get('reporte_usuario_diario/{id}', ['as' => 'reporte_usuario.diario', 'us
 Route::get('reporte_usuario_especifico/{id}/{fecha_inicial}/{fecha_final}', ['as' => 'reporte_usuario.especifico', 'uses'=>'ReporteGeneralController@reporte_especifico_usuario']);
 
 Route::get('reporte_usuario_mes/{id}/{mes}', ['as' => 'reporte_usuario.mensual', 'uses'=>'ReporteGeneralController@reporte_mensual_usuario']);
+
+//reporte factura venta
+
+Route::get('/reporte_diario_fac_vent', function () {
+    return view('/vendor/adminlte/reporte_factura_venta_diario');
+});
+
+Route::get('/reporte_mensual_fac_vent', function () {
+    return view('/vendor/adminlte/reporte_factura_venta_mensual');
+});
+
+Route::get('/reporte_especifico_fac_vent', function () {
+    return view('/vendor/adminlte/reporte_factura_venta_especifico');
+});
+
+Route::post('reporte_factura_venta_diario', ['as' => 'reporte_factura_venta.diario', 'uses'=>'facturaventaController@reporte_diario']);
+
+Route::post('reporte_factura_venta_especifico', ['as' => 'reporte_factura_venta.especifico', 'uses'=>'facturaventaController@reporte_especifico']);
+
+Route::post('reporte_factura_venta_mensual', ['as' => 'reporte_factura_venta.mensual', 'uses'=>'facturaventaController@reporte_mensual']);
+
+//reporte de compras
+
+Route::get('/reporte_diario_fac_compr', function () {
+    return view('/vendor/adminlte/reporte_factura_compra_diario');
+});
+
+Route::get('/reporte_mensual_fac_compr', function () {
+    return view('/vendor/adminlte/reporte_factura_compra_mensual');
+});
+
+Route::get('/reporte_especifico_fac_compr', function () {
+    return view('/vendor/adminlte/reporte_factura_compra_especifico');
+});
+
+Route::post('reporte_factura_compra_diario', ['as' => 'reporte_factura_compra.diario', 'uses'=>'facturacompraController@reporte_diario']);
+
+Route::post('reporte_factura_compra_especifico', ['as' => 'reporte_factura_compra.especifico', 'uses'=>'facturacompraController@reporte_especifico']);
+
+Route::post('reporte_factura_compra_mensual', ['as' => 'reporte_factura_compra.mensual', 'uses'=>'facturacompraController@reporte_mensual']);
