@@ -62,6 +62,33 @@
     </tbody>
   </table>
   <h4>Total de gastos: <?php echo $total_gastos ?></h4>
+  <h3>Compras</h3>
+<table>
+    <thead>
+      <tr>
+        <th>Usuario</th>
+        <th>Proveedor</th>
+        <th>Empresa</th>
+        <th>Fecha</th>
+        <th>Descripción de compra</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+       @foreach($compra as $fc)
+      <tr>
+        <td>{{$fc->nombre}} {{$fc->apellido}}</td>
+        <td>{{$fc->nombre_proveedor}} {{$fc->apellido_proveedor}}</td>
+        <td>{{$fc->empresa}}</td>
+        <td>{{$fc->created_at}}</td>
+        <td>{{$fc->descripcion}}</td>
+        <td>{{$fc->total_pagar}}</td>      
+    </tr>
+    @endforeach
+    </tbody>
+  </table>
+  <h4>Total de compras: <?php echo $total_compra ?> </h4>
   <h3>Total de egresos: <?php echo $total_egresos ?></h3>
 
   <h2>Reporte de ingresos</h2>

@@ -1,8 +1,11 @@
-@if(isset($fecha_inicial))
-<h1>Reporte de caja del <?php echo $fecha_inicial. " a " .$fecha_final; ?></h1>
-@elseif(isset($month))
-<h1>Reporte de caja del mes: <?php echo $month ?></h1>
-@endif
+@if (isset($date))
+  <h1>Reporte general del día:<?php echo $date ?></h1>
+    @elseif(isset($date_inicial))
+      <h1>Reporte desde: <?php echo $date_inicial ?> hasta: <?php echo $date_final;?> </h1>
+    @elseif(isset($month))
+    <h1>Reporte del mes: <?php echo $month ?></h1>      
+ 
+  @endif
 @foreach($caja as $c)
 
 @endforeach
@@ -91,6 +94,33 @@
     </tbody>
   </table>
   <h4>Total de gastos: <?php echo $total_gastos ?></h4>
+  <h3>Compras</h3>
+<table>
+    <thead>
+      <tr>
+        <th>Usuario</th>
+        <th>Proveedor</th>
+        <th>Empresa</th>
+        <th>Fecha</th>
+        <th>Descripción de compra</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+       @foreach($compra as $fc)
+      <tr>
+        <td>{{$fc->nombre}} {{$fc->apellido}}</td>
+        <td>{{$fc->nombre_proveedor}} {{$fc->apellido_proveedor}}</td>
+        <td>{{$fc->empresa}}</td>
+        <td>{{$fc->created_at}}</td>
+        <td>{{$fc->descripcion}}</td>
+        <td>{{$fc->total_pagar}}</td>      
+    </tr>
+    @endforeach
+    </tbody>
+  </table>
+  <h4>Total de compras: <?php echo $total_compra ?> </h4>
   <h3>Total de egresos: <?php echo $total_egresos ?></h3>
 
   <h2>Reporte de ingresos</h2>

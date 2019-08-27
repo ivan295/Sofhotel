@@ -19,17 +19,18 @@ class ReporteGeneralController extends Controller
     	$depositos = obtener_deposito_reporte_diario($request->fecha);
         $gasto = obtener_gasto_reporte_diario($request->fecha);
         $factura_venta = obtener_factura_venta_reporte_diario($request->fecha);
-
+        $compra = obtener_factura_compra_reporte_diario($request->fecha);
         $total_depositos = calcular_total_depositos($depositos);
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($factura_venta);
+        $total_compra = calcular_total_compras($compra);
         $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
         $c[] = $caja.$depositos.$gasto.$factura_venta;
         //return response()->json([$caja, $depositos, $gasto, $factura_venta]);
        // return response()->json($c);
     	//dd([$total_depositos, $total_gastos, $total_venta, $total_egresos, $utilidad]);
-        $view = \View::make('vendor.adminlte.reporte_general', compact('date','caja','depositos', 'gasto', 'factura_venta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad'))->render();
+        $view = \View::make('vendor.adminlte.reporte_general', compact('date','caja','depositos', 'gasto', 'factura_venta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad', 'compra', 'total_compra'))->render();
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view);
           return $pdf->stream('reporte'.'pdf');
@@ -42,10 +43,11 @@ class ReporteGeneralController extends Controller
         $depositos = obtener_deposito_reporte_diario($fecha);
         $gasto = obtener_gasto_reporte_diario($fecha);
         $factura_venta = obtener_factura_venta_reporte_diario($fecha);
-
+        $compra = obtener_factura_compra_reporte_diario($request->fecha);
         $total_depositos = calcular_total_depositos($depositos);
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($factura_venta);
+        $total_compra = calcular_total_compras($compra);
         $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
         $c = $caja.$depositos.$gasto.$factura_venta;
@@ -58,9 +60,10 @@ class ReporteGeneralController extends Controller
         "totalVentas" => "".$total_venta,
         "totalEgresos" => "".$total_egresos,
         "utilidad" => "".$utilidad,
+        "totalCompra" => "".$total_compra,
         ];
  
-        return response()->json([$caja, $depositos, $gasto, $factura_venta, $totales]);
+        return response()->json([$caja, $depositos, $gasto, $factura_venta, $totales, $compra]);
 
     }
 
@@ -72,15 +75,16 @@ class ReporteGeneralController extends Controller
     	$depositos = obtener_deposito_reporte_especifico($request->fecha_inicial,$request->fecha_final);
         $gasto = obtener_gasto_reporte_especifico($request->fecha_inicial,$request->fecha_final);
         $factura_venta = obtener_factura_venta_reporte_especifico($request->fecha_inicial,$request->fecha_final);
-
+        $compra = obtener_factura_compra_reporte_especifico($request->fecha_inicial,$request->fecha_final);
         $total_depositos = calcular_total_depositos($depositos);
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($factura_venta);
+        $total_compra = calcular_total_compras($compra);
         $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
 
        // dd([$caja, $depositos, $gasto, $factura_venta, $total_depositos, $total_gastos, $total_venta, $total_egresos, $utilidad]);
-        $view = \View::make('vendor.adminlte.reporte_general', compact('date_inicial', 'date_final','caja','depositos', 'gasto', 'factura_venta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad'))->render();
+        $view = \View::make('vendor.adminlte.reporte_general', compact('date_inicial', 'date_final','caja','depositos', 'gasto', 'factura_venta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad', 'compra', 'total_compra'))->render();
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view);
           return $pdf->stream('reporte'.'pdf');
@@ -93,10 +97,11 @@ class ReporteGeneralController extends Controller
         $depositos = obtener_deposito_reporte_especifico($fecha_inicial,$fecha_final);
         $gasto = obtener_gasto_reporte_especifico($fecha_inicial,$fecha_final);
         $factura_venta = obtener_factura_venta_reporte_especifico($fecha_inicial,$fecha_final);
-
+        $compra = obtener_factura_compra_reporte_especifico($request->fecha_inicial,$request->fecha_final);
         $total_depositos = calcular_total_depositos($depositos);
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($factura_venta);
+        $total_compra = calcular_total_compras($compra);
         $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
            $totales = [
@@ -105,9 +110,10 @@ class ReporteGeneralController extends Controller
         "totalVentas" => "".$total_venta,
         "totalEgresos" => "".$total_egresos,
         "utilidad" => "".$utilidad,
+        "totalCompra" => "".$total_compra
         ];
  
-        return response()->json([$caja, $depositos, $gasto, $factura_venta, $totales]);
+        return response()->json([$caja, $depositos, $gasto, $factura_venta, $totales, $compra]);
 
     }
 
@@ -120,16 +126,17 @@ class ReporteGeneralController extends Controller
     	$depositos = obtener_deposito_reporte_mensual($mes);
         $gasto = obtener_gasto_reporte_mensual($mes);
         $factura_venta = obtener_factura_venta_reporte_mensual($mes);
-    	
+    	$compra = obtener_factura_compra_reporte_mensual($mes);
         $total_depositos = calcular_total_depositos($depositos);
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($factura_venta);
+        $total_compra = calcular_total_compras($compra);
         $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
 
         //dd([$caja, $depositos, $gasto, $factura_venta, $total_depositos, $total_gastos, $total_venta, $total_egresos, $utilidad]);
 
-        $view = \View::make('vendor.adminlte.reporte_general', compact('month','caja','depositos', 'gasto', 'factura_venta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad'))->render();
+        $view = \View::make('vendor.adminlte.reporte_general', compact('month','caja','depositos', 'gasto', 'factura_venta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad', 'compra', 'total_compra'))->render();
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view);
           return $pdf->stream('reporte'.'pdf');
@@ -144,10 +151,11 @@ class ReporteGeneralController extends Controller
         $depositos = obtener_deposito_reporte_mensual($mes);
         $gasto = obtener_gasto_reporte_mensual($mes);
         $factura_venta = obtener_factura_venta_reporte_mensual($mes);
-        
+        $compra = obtener_factura_compra_reporte_mensual($mes);
         $total_depositos = calcular_total_depositos($depositos);
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($factura_venta);
+        $total_compra = calcular_total_compras($compra);
         $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
 
@@ -157,9 +165,10 @@ class ReporteGeneralController extends Controller
         "totalVentas" => "".$total_venta,
         "totalEgresos" => "".$total_egresos,
         "utilidad" => "".$utilidad,
+        "totalCompra" => "".$total_compra,
         ];
  
-        return response()->json([$caja, $depositos, $gasto, $factura_venta, $totales]);
+        return response()->json([$caja,$compra ,$depositos, $gasto, $factura_venta, $totales]);
 
         
     }
@@ -181,14 +190,15 @@ class ReporteGeneralController extends Controller
 
         $gasto = obtener_gasto_individual($caja->created_at, $caja->updated_at);
         $FacturaVenta = obtener_factura_venta_individual($caja->created_at, $caja->updated_at);
-
+        $compra = obtener_factura_compra_individual($caja->created_at, $caja->updated_at);
         $total_depositos = calcular_total_depositos($deposito);
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($FacturaVenta);
+        $total_compra = calcular_total_compras($compra);
         $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
 
-        $view = \View::make('vendor.adminlte.reporte_caja', compact('date','caja','deposito', 'gasto', 'FacturaVenta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad'))->render();
+        $view = \View::make('vendor.adminlte.reporte_caja', compact('date','caja','deposito', 'gasto', 'FacturaVenta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad', 'compra', 'total_compra'))->render();
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view);
           return $pdf->stream('reporte'.'pdf');
@@ -201,10 +211,11 @@ class ReporteGeneralController extends Controller
 
         $gasto = obtener_gasto_individual($caja->created_at, $caja->updated_at);
         $FacturaVenta = obtener_factura_venta_individual($caja->created_at, $caja->updated_at);
-
+        $compra = obtener_factura_compra_individual($caja->created_at, $caja->updated_at);
         $total_depositos = calcular_total_depositos($deposito);
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($FacturaVenta);
+        $total_compra = calcular_total_compras($compra);
         $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
         $totales = [
@@ -213,9 +224,10 @@ class ReporteGeneralController extends Controller
         "totalVentas" => "".$total_venta,
         "totalEgresos" => "".$total_egresos,
         "utilidad" => "".$utilidad,
+        "totalCompra" => "".$total_compra,
         ];
         
-          return response()->json([$caja, $deposito, $gasto, $FacturaVenta, $totales]);
+          return response()->json([$caja, $deposito, $gasto, $FacturaVenta, $totales, $compra]);
     }
 
     public function consulta_caja_usuario_especifico(Request $request){
@@ -237,14 +249,15 @@ class ReporteGeneralController extends Controller
 
         $gasto = obtener_gasto_individual_especifico($id, $fecha_inicial, $fecha_final);
         $FacturaVenta = obtener_factura_venta_individual_especifico($id, $fecha_inicial, $fecha_final);
-
+        $compra = obtener_factura_compra_individual_especifico($id, $fecha_inicial, $fecha_final);
         $total_depositos = calcular_total_depositos($deposito);
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($FacturaVenta);
+        $total_compra = calcular_total_compras($compra);
         $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
         //dd([$caja, $deposito, $gasto, $FacturaVenta]);
-        $view = \View::make('vendor.adminlte.reporte_individual', compact('caja','deposito', 'gasto', 'FacturaVenta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad','fecha_inicial', 'fecha_final'))->render();
+        $view = \View::make('vendor.adminlte.reporte_individual', compact('caja','deposito', 'gasto', 'FacturaVenta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad','fecha_inicial', 'fecha_final', 'compra', 'total_compra'))->render();
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view);
           return $pdf->stream('reporte'.'pdf');
@@ -257,10 +270,11 @@ class ReporteGeneralController extends Controller
 
         $gasto = obtener_gasto_individual_especifico($id, $fecha_inicial, $fecha_final);
         $FacturaVenta = obtener_factura_venta_individual_especifico($id, $fecha_inicial, $fecha_final);
-
+        $compra = obtener_factura_compra_individual_especifico($id, $fecha_inicial, $fecha_final);
         $total_depositos = calcular_total_depositos($deposito);
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($FacturaVenta);
+        $total_compra = calcular_total_compras($compra);
         $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
 
@@ -270,9 +284,10 @@ class ReporteGeneralController extends Controller
         "totalVentas" => "".$total_venta,
         "totalEgresos" => "".$total_egresos,
         "utilidad" => "".$utilidad,
+        "totalCompra" => "".$total_compra,
         ];
 
-        return response()->json([$caja, $deposito, $gasto, $FacturaVenta, $totales]);
+        return response()->json([$caja, $compra, $deposito, $gasto, $FacturaVenta, $totales]);
     }
 
 
@@ -293,14 +308,15 @@ class ReporteGeneralController extends Controller
         $deposito = obtener_deposito_individual_mensual($id, $mes);
         $gasto = obtener_gasto_individual_mensual($id, $mes);
         $FacturaVenta = obtener_factura_venta_individual_mensual($id, $mes);
-
+        $compra = obtener_factura_compra_individual_mensual($id, $mes);
         $total_depositos = calcular_total_depositos($deposito);
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($FacturaVenta);
+        $total_compra = calcular_total_compras($compra);
         $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
         //dd([$caja, $deposito, $gasto, $FacturaVenta]);
-        $view = \View::make('vendor.adminlte.reporte_individual', compact('month','caja','deposito', 'gasto', 'FacturaVenta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad'))->render();
+        $view = \View::make('vendor.adminlte.reporte_individual', compact('month','caja','deposito', 'gasto', 'FacturaVenta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad', 'compra', 'total_compra'))->render();
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view);
           return $pdf->stream('reporte'.'pdf');
@@ -316,10 +332,11 @@ class ReporteGeneralController extends Controller
         $deposito = obtener_deposito_individual_mensual($id, $mes);
         $gasto = obtener_gasto_individual_mensual($id, $mes);
         $FacturaVenta = obtener_factura_venta_individual_mensual($id, $mes);
-
+        $compra = obtener_factura_compra_individual_mensual($id, $mes);
         $total_depositos = calcular_total_depositos($deposito);
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($FacturaVenta);
+        $total_compra = calcular_total_compras($compra);
         $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
 
@@ -330,8 +347,9 @@ class ReporteGeneralController extends Controller
         "totalVentas" => "".$total_venta,
         "totalEgresos" => "".$total_egresos,
         "utilidad" => "".$utilidad,
+        "totalCompra" => "".$total_compra,
         ];
        
-       return response()->json([$caja, $deposito, $gasto, $FacturaVenta, $totales]);
+       return response()->json([$caja,$compra , $deposito, $gasto, $FacturaVenta, $totales]);
     }
 }

@@ -25,6 +25,7 @@
     <thead>
     <tr bgcolor="#98A8D5">
         <th>Usuario</th>
+        <th>Proveedor</th>
         <th>Empresa</th>
         <th>Fecha</th>
         <th>Descripción de compra</th>
@@ -35,6 +36,7 @@
       
       @foreach($compra as $fc)
       <tr>
+        <td>{{$fc->nombre}} {{$fc->apellido}}</td>
         <td>{{$fc->nombre_proveedor}} {{$fc->apellido_proveedor}}</td>
         <td>{{$fc->empresa}}</td>
         <td>{{$fc->created_at}}</td>

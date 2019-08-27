@@ -47,6 +47,13 @@ function obtener_factura_venta_individual($fecha_inicial, $fecha_final){
 
 }
 
+function obtener_factura_compra_individual($fecha_inicial, $fecha_final){
+
+	$compra = DB::table('factura_compra')->join('proveedor', 'proveedor.id', '=', 'factura_compra.id_proveedor')->join('users', 'users.id', '=', 'factura_compra.id_usuario')->where('factura_compra.created_at','>=', $fecha_inicial )->where('factura_compra.created_at','<=', $fecha_final )->select('factura_compra.*', 'users.nombre as nombre', 'users.apellido as apellido', 'proveedor.nombres as nombre_proveedor', 'proveedor.apellidos as apellido_proveedor', 'proveedor.empresa as empresa')->orderBy('id', 'asc')->get();
+	return $compra;
+
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //individual especifico
 
@@ -86,6 +93,13 @@ function obtener_factura_venta_individual_especifico($id_usuario, $fecha_inicial
 
 }
 
+function obtener_factura_compra_especifico($id_usuario, $fecha_inicial, $fecha_final){
+
+	$compra = DB::table('factura_compra')->join('proveedor', 'proveedor.id', '=', 'factura_compra.id_proveedor')->join('users', 'users.id', '=', 'factura_compra.id_usuario')->whereDate('factura_compra.created_at','>=', $fecha_inicial )->whereDate('factura_compra.created_at','<=', $fecha_final )->where('users.id', '=', $id_usuario)->select('factura_compra.*', 'users.nombre as nombre', 'users.apellido as apellido', 'proveedor.nombres as nombre_proveedor', 'proveedor.apellidos as apellido_proveedor', 'proveedor.empresa as empresa')->orderBy('id', 'asc')->get();
+	return $compra;
+
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //individual mensual
 
@@ -121,6 +135,13 @@ function obtener_factura_venta_individual_mensual($id_usuario, $mes){
          ->orderBy('habitacion', 'asc')->get();
 
 	return $factura_venta;
+
+}
+
+function obtener_factura_compra_mensual($id_usuario, $mes){
+
+	$compra = DB::table('factura_compra')->join('proveedor', 'proveedor.id', '=', 'factura_compra.id_proveedor')->join('users', 'users.id', '=', 'factura_compra.id_usuario')->whereMonth('factura_compra.updated_at', $mes)->where('users.id', '=', $id_usuario)->select('factura_compra.*', 'users.nombre as nombre', 'users.apellido as apellido', 'proveedor.nombres as nombre_proveedor', 'proveedor.apellidos as apellido_proveedor', 'proveedor.empresa as empresa')->orderBy('id', 'asc')->get();
+	return $compra;
 
 }
 
@@ -279,6 +300,15 @@ function calcular_total_ventas($factura_venta){
             $total_venta =  $total_venta + $fac_venta->total_cobro;
                     }
         return $total_venta;
+}
+
+function calcular_total_compras($compra){
+	$total_compra = 0;
+
+        foreach ($compra as $c) {
+            $total_compra =  $total_compra + $c->total_pagar;
+                    }
+        return $total_compra;
 }
 
 function calcular_total_egresos($total_depositos, $total_gastos){

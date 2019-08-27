@@ -80,4 +80,21 @@ class usuarioController extends Controller
         $Nuevousuario->save();
         return redirect('/nuevouser');
     }
+
+    public function usuario_api(){
+        $usuario = DB::table('users')->join('tipousuario','tipousuario.id','=','users.idtipoUsuario')
+        ->select('users.*','tipousuario.descripcion as tipo_usuario')
+        ->orderBy('id', 'desc')->get();
+        return response()->json($usuario);
+    }
+
+    
+
+    public function usuario_filtro_api($id){
+       // $usuario = Usuario::find($id);
+        $usuario = DB::table('users')->join('tipousuario','tipousuario.id','=','users.idtipoUsuario')->where('users.id', '=', $id)
+        ->select('users.*','tipousuario.descripcion as tipo_usuario')->get();
+        return response()->json($usuario);
+        //dd($usuario);
+    }
 }

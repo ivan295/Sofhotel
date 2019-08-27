@@ -72,7 +72,7 @@ class facturacompraController extends Controller
      public function reporte_especifico(Request $request){
         $date_inicial = $request->fecha_inicial;
         $date_final = $request->fecha_final;
-        $compra = $gasto = obtener_factura_compra_reporte_especifico($request->fecha_inicial,$request->fecha_final);
+        $compra = obtener_factura_compra_reporte_especifico($request->fecha_inicial,$request->fecha_final);
         $total = 0;
         foreach ($compra as $c) {
             $total = $total + $c->total_pagar;
