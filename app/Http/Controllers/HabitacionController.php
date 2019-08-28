@@ -109,4 +109,40 @@ class HabitacionController extends Controller
         return redirect('/Habitacion');
         
     }
+
+    public function reporte_habitacion_api(){
+        /*$hab_ventas = DB::table('habitacion')
+        ->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')->join('alquiler', 'alquiler.id_habitacion', '=', 'habitacion.id')->join('factura_venta', 'factura_venta.id_alquiler', '=', 'alquiler.id')
+        ->select('habitacion.*','estado_habitacion.estado as estado', 'factura_venta.total_cobro as total_cobro')
+        ->orderBy('id', 'asc')
+        ->where('habitacion.estado','=',1)
+        ->get();*/
+
+        $hab_ventas = obtener_factura_venta_reporte_diario("2019-08-22");
+
+        $habitacion = DB::table('habitacion')->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')->select('habitacion.*', 'estado_habitacion.estado as estado')->orderBy('numero_habitacion', 'asc')->get();
+
+        $cantidad_habitacion = DB::table('habitacion')->count();
+        $hab[$cantidad_habitacion-1] = array();
+       // $estado_hab[$cantidad_habitacion-1] = array();
+
+         $i = 0;
+            foreach ($habitacion as $h) {
+              $hab[$i] = 0;
+            //  $estado_hab[$i] = $h->estado;
+              $i ++ ;
+            }
+
+           foreach ($hab_ventas as $v) {
+              $cont = 0;
+              foreach ($habitacion as $ha) {
+                if ($v->habitacion == $ha->numero_habitacion) {
+                  $hab[$cont] = $hab[$cont] + $v->total_cobro;
+                }
+                $cont++;
+              }
+            } 
+       // dd([$hab, $habitacion]);
+        return response()->json([$habitacion, $hab]);
+    }
 }

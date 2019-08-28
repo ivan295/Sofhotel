@@ -51,6 +51,7 @@ class facturaventaController extends Controller
           
             $cantidad_habitacion = DB::table('habitacion')->count();
             $hab[$cantidad_habitacion-1] = array();
+            
             $habitacion = DB::table('habitacion')->orderBy('numero_habitacion', 'asc')->get();
             
             $i = 0;
@@ -97,7 +98,7 @@ class facturaventaController extends Controller
               }
             }
 
-          return response()->json($factura_venta, $hab, $habitacion);
+          return response()->json([$factura_venta, $hab, $habitacion]);
      }
 
      public function reporte_especifico(Request $request){
@@ -151,7 +152,7 @@ class facturaventaController extends Controller
               }
             }
 
-          return response()->json($factura_venta, $hab, $habitacion);
+          return response()->json([$factura_venta, $hab, $habitacion]);
     }
 
     public function reporte_mensual(Request $request){
@@ -192,7 +193,7 @@ class facturaventaController extends Controller
         $mes_entero=strtotime($month);
         $mes = date('m', $mes_entero);
 
-        $factura_venta = obtener_gasto_factura_venta_reporte_mensual($mes);
+        $factura_venta = obtener_factura_venta_reporte_mensual($mes);
         $cantidad_habitacion = DB::table('habitacion')->count();
             $hab[$cantidad_habitacion-1] = array();
             $habitacion = DB::table('habitacion')->orderBy('numero_habitacion', 'asc')->get();
@@ -212,7 +213,7 @@ class facturaventaController extends Controller
               }
             }
 
-          return response()->json($factura_venta, $habitacion, $hab);
+          return response()->json([$factura_venta, $habitacion, $hab]);
 
     }
 }

@@ -70,3 +70,23 @@ Route::get('report_usuario_especifico/{id}/{fecha_inicial}/{fecha_final}', 'Repo
 
 
 Route::get('report_usuario_mes/{id}/{mes}', 'ReporteGeneralController@reporte_mensual_usuario_api');
+
+//factura venta
+
+Route::get('report_factura_venta_diario/{fecha}', 'facturaventaController@reporte_diario_api');
+
+Route::get('report_factura_venta_especifico/{fecha_inicial}/{fecha_final}', 'facturaventaController@reporte_especifico_api');
+
+Route::get('report_factura_venta_mensual/{mes}', 'facturaventaController@reporte_mensual_api');
+
+//factura compra
+
+Route::get('report_factura_compra_diario/{fecha}', 'facturacompraController@reporte_diario_api');
+
+Route::get('report_factura_compra_especifico/{fecha_inicial}/{fecha_final}', 'facturacompraController@reporte_especifico_api');
+
+Route::get('report_factura_compra_mensual/{mes}', 'facturacompraController@reporte_mensual_api');
+
+//habitacion
+
+Route::get('report_habitacion/', 'HabitacionController@reporte_habitacion_api');
