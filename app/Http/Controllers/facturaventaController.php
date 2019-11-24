@@ -97,8 +97,13 @@ class facturaventaController extends Controller
                 $cont++;
               }
             }
+            $total = 0;
+            foreach ($factura_venta as $f) {
+              $total = $total + $f->total_cobro;
+            }
 
-          return response()->json([$factura_venta, $hab, $habitacion]);
+
+          return response()->json([$factura_venta, $hab, $habitacion, $total]);
      }
 
      public function reporte_especifico(Request $request){
@@ -152,7 +157,12 @@ class facturaventaController extends Controller
               }
             }
 
-          return response()->json([$factura_venta, $hab, $habitacion]);
+             $total = 0;
+            foreach ($factura_venta as $f) {
+              $total = $total + $f->total_cobro;
+            }
+
+          return response()->json([$factura_venta, $hab, $habitacion, $total]);
     }
 
     public function reporte_mensual(Request $request){
@@ -212,8 +222,12 @@ class facturaventaController extends Controller
                 $cont++;
               }
             }
+             $total = 0;
+            foreach ($factura_venta as $f) {
+              $total = $total + $f->total_cobro;
+            }
 
-          return response()->json([$factura_venta, $habitacion, $hab]);
+          return response()->json([$factura_venta, $habitacion, $hab, $total]);
 
     }
 }

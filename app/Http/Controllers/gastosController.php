@@ -106,7 +106,8 @@ class gastosController extends Controller
     public function reporte_diario(Request $request){
         $date = $request->fecha;
         $Nuevogasto = obtener_gasto_reporte_diario($request->fecha);
-        $view = \View::make('vendor.adminlte.reporte_gastos', compact('Nuevogasto', 'date'))->render();
+        $total_gasto = calcular_total_gastos($Nuevogasto);
+        $view = \View::make('vendor.adminlte.reporte_gastos', compact('Nuevogasto', 'date', 'total_gasto'))->render();
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view);
           return $pdf->stream('reporte'.'pdf');
@@ -120,9 +121,9 @@ class gastosController extends Controller
      public function reporte_especifico(Request $request){
         $date_inicial = $request->fecha_inicial;
         $date_final = $request->fecha_final;
-        $Nuevogasto = $gasto = obtener_gasto_reporte_especifico($request->fecha_inicial,$request->fecha_final);
-
-        $view = \View::make('vendor.adminlte.reporte_gastos', compact('Nuevogasto', 'date_inicial', 'date_final'))->render();
+        $Nuevogasto = obtener_gasto_reporte_especifico($request->fecha_inicial,$request->fecha_final);
+        $total_gasto = calcular_total_gastos($Nuevogasto);
+        $view = \View::make('vendor.adminlte.reporte_gastos', compact('Nuevogasto', 'date_inicial', 'date_final', 'total_gasto'))->render();
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view);
           return $pdf->stream('reporte'.'pdf');
@@ -139,8 +140,8 @@ class gastosController extends Controller
         $mes = date('m', $mes_entero);
 
         $Nuevogasto = obtener_gasto_reporte_mensual($mes);
-
-        $view = \View::make('vendor.adminlte.reporte_gastos', compact('Nuevogasto', 'month'))->render();
+        $total_gasto = calcular_total_gastos($Nuevogasto);
+        $view = \View::make('vendor.adminlte.reporte_gastos', compact('Nuevogasto', 'month', 'total_gasto'))->render();
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view);
           return $pdf->stream('reporte'.'pdf');

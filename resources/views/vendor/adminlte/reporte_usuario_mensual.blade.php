@@ -9,7 +9,7 @@
   <div class="col-md-5 col-md-offset-3" >
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">Reporte específico</h3>
+        <h3 class="box-title">Reporte mensual</h3>
       </div>
      		<form method="post"  action="/consulta_caja_usuario_mes">
           {{csrf_field()}}

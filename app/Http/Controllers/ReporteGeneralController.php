@@ -24,7 +24,7 @@ class ReporteGeneralController extends Controller
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($factura_venta);
         $total_compra = calcular_total_compras($compra);
-        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
+        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos, $total_compra);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
         $c[] = $caja.$depositos.$gasto.$factura_venta;
         //return response()->json([$caja, $depositos, $gasto, $factura_venta]);
@@ -48,7 +48,7 @@ class ReporteGeneralController extends Controller
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($factura_venta);
         $total_compra = calcular_total_compras($compra);
-        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
+        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos, $total_compra);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
         $c = $caja.$depositos.$gasto.$factura_venta;
         //$totales = "total_depositos:".$total_depositos. "total_gastos:".$total_gastos;
@@ -80,7 +80,7 @@ class ReporteGeneralController extends Controller
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($factura_venta);
         $total_compra = calcular_total_compras($compra);
-        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
+        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos, $total_compra);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
 
        // dd([$caja, $depositos, $gasto, $factura_venta, $total_depositos, $total_gastos, $total_venta, $total_egresos, $utilidad]);
@@ -102,7 +102,7 @@ class ReporteGeneralController extends Controller
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($factura_venta);
         $total_compra = calcular_total_compras($compra);
-        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
+        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos, $total_compra);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
            $totales = [
         "totalDepositos" => "".$total_depositos,
@@ -131,7 +131,7 @@ class ReporteGeneralController extends Controller
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($factura_venta);
         $total_compra = calcular_total_compras($compra);
-        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
+        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos, $total_compra);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
 
         //dd([$caja, $depositos, $gasto, $factura_venta, $total_depositos, $total_gastos, $total_venta, $total_egresos, $utilidad]);
@@ -156,7 +156,7 @@ class ReporteGeneralController extends Controller
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($factura_venta);
         $total_compra = calcular_total_compras($compra);
-        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
+        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos, $total_compra);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
 
         $totales = [
@@ -191,11 +191,12 @@ class ReporteGeneralController extends Controller
         $gasto = obtener_gasto_individual($caja->created_at, $caja->updated_at);
         $FacturaVenta = obtener_factura_venta_individual($caja->created_at, $caja->updated_at);
         $compra = obtener_factura_compra_individual($caja->created_at, $caja->updated_at);
+
         $total_depositos = calcular_total_depositos($deposito);
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($FacturaVenta);
         $total_compra = calcular_total_compras($compra);
-        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
+        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos, $total_compra);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
 
         $view = \View::make('vendor.adminlte.reporte_caja', compact('date','caja','deposito', 'gasto', 'FacturaVenta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad', 'compra', 'total_compra'))->render();
@@ -216,7 +217,7 @@ class ReporteGeneralController extends Controller
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($FacturaVenta);
         $total_compra = calcular_total_compras($compra);
-        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
+        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos, $total_compra);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
         $totales = [
         "totalDepositos" => "".$total_depositos,
@@ -239,7 +240,7 @@ class ReporteGeneralController extends Controller
 
      public function consulta_usuario_api(){
         $usuarios = DB::table('users')->get();
-        return compact()->json($usuarios);
+        return response()->json($usuarios);
     }
 
     public function reporte_especifico_usuario($id, $fecha_inicial, $fecha_final){
@@ -254,7 +255,7 @@ class ReporteGeneralController extends Controller
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($FacturaVenta);
         $total_compra = calcular_total_compras($compra);
-        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
+        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos, $total_compra);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
         //dd([$caja, $deposito, $gasto, $FacturaVenta]);
         $view = \View::make('vendor.adminlte.reporte_individual', compact('caja','deposito', 'gasto', 'FacturaVenta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad','fecha_inicial', 'fecha_final', 'compra', 'total_compra'))->render();
@@ -275,7 +276,7 @@ class ReporteGeneralController extends Controller
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($FacturaVenta);
         $total_compra = calcular_total_compras($compra);
-        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
+        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos, $total_compra);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
 
         $totales = [
@@ -313,7 +314,7 @@ class ReporteGeneralController extends Controller
         $total_gastos = calcular_total_gastos($gasto);
         $total_venta = calcular_total_ventas($FacturaVenta);
         $total_compra = calcular_total_compras($compra);
-        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos);
+        $total_egresos = calcular_total_egresos($total_depositos, $total_gastos, $total_compra);
         $utilidad = calcular_total_utilidad($total_venta, $total_egresos);
         //dd([$caja, $deposito, $gasto, $FacturaVenta]);
         $view = \View::make('vendor.adminlte.reporte_individual', compact('month','caja','deposito', 'gasto', 'FacturaVenta', 'total_depositos', 'total_gastos', 'total_venta', 'total_egresos', 'utilidad', 'compra', 'total_compra'))->render();

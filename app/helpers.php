@@ -138,7 +138,7 @@ function obtener_factura_venta_individual_mensual($id_usuario, $mes){
 
 }
 
-function obtener_factura_compra_mensual($id_usuario, $mes){
+function obtener_factura_compra_individual_mensual($id_usuario, $mes){
 
 	$compra = DB::table('factura_compra')->join('proveedor', 'proveedor.id', '=', 'factura_compra.id_proveedor')->join('users', 'users.id', '=', 'factura_compra.id_usuario')->whereMonth('factura_compra.updated_at', $mes)->where('users.id', '=', $id_usuario)->select('factura_compra.*', 'users.nombre as nombre', 'users.apellido as apellido', 'proveedor.nombres as nombre_proveedor', 'proveedor.apellidos as apellido_proveedor', 'proveedor.empresa as empresa')->orderBy('id', 'asc')->get();
 	return $compra;
@@ -166,7 +166,7 @@ function obtener_deposito_reporte_diario($fecha){
 
 function obtener_gasto_reporte_diario($fecha){
 
-	$gasto = DB::table('gastos')->join('users','users.id','=','gastos.id_usuario')->where('gastos.estado', '=', 1)->whereDate('gastos.created_at', $fecha)->select('gastos.*','users.usuario as user')->orderBy('id', 'asc')->get();
+	$gasto = DB::table('gastos')->join('users','users.id','=','gastos.id_usuario')->where('gastos.estado', '=', 1)->whereDate('gastos.created_at', $fecha)->select('gastos.*','users.usuario as user', 'users.nombre as nombre', 'users.apellido as apellido')->orderBy('id', 'asc')->get();
 
 	return $gasto;
 }
@@ -210,7 +210,7 @@ function obtener_caja_reporte_especifico($fecha_inicial, $fecha_final){
 
 function obtener_gasto_reporte_especifico($fecha_inicial, $fecha_final){
 
-	$gasto = DB::table('gastos')->join('users','users.id','=','gastos.id_usuario')->where('gastos.estado', '=', 1)->whereDate('gastos.created_at', '>=', $fecha_inicial)->whereDate('gastos.updated_at', '<=', $fecha_final)->select('gastos.*','users.usuario as user')->orderBy('id', 'asc')->get();
+	$gasto = DB::table('gastos')->join('users','users.id','=','gastos.id_usuario')->where('gastos.estado', '=', 1)->whereDate('gastos.created_at', '>=', $fecha_inicial)->whereDate('gastos.updated_at', '<=', $fecha_final)->select('gastos.*','users.usuario as user', 'users.nombre as nombre', 'users.apellido as apellido')->orderBy('id', 'asc')->get();
 
 	return $gasto;
 
@@ -250,7 +250,7 @@ function obtener_deposito_reporte_mensual($mes){
 
 function obtener_gasto_reporte_mensual($mes){
 
-	$gasto = DB::table('gastos')->join('users','users.id','=','gastos.id_usuario')->where('gastos.estado', '=', 1)->whereMonth('gastos.created_at', $mes)->select('gastos.*','users.usuario as user')->orderBy('id', 'asc')->get();
+	$gasto = DB::table('gastos')->join('users','users.id','=','gastos.id_usuario')->where('gastos.estado', '=', 1)->whereMonth('gastos.created_at', $mes)->select('gastos.*','users.usuario as user', 'users.nombre as nombre', 'users.apellido as apellido')->orderBy('id', 'asc')->get();
 
 	return $gasto;
 }
@@ -311,8 +311,8 @@ function calcular_total_compras($compra){
         return $total_compra;
 }
 
-function calcular_total_egresos($total_depositos, $total_gastos){
-	$total_egresos =  $total_depositos + $total_gastos;
+function calcular_total_egresos($total_depositos, $total_gastos, $total_compra){
+	$total_egresos =  $total_depositos + $total_gastos + $total_compra;
 	return $total_egresos;
 }
 

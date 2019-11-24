@@ -133,9 +133,10 @@ class DepositoController extends Controller
              
             $date = $request->fecha;
             $depositos = obtener_deposito_reporte_diario($request->fecha) ;
-   // dd($depositos);
-          
-          $view = \View::make('vendor.adminlte.reporte_depositos', compact('depositos', 'date'))->render();
+            $total_dep = calcular_total_depositos($depositos);
+   
+     
+          $view = \View::make('vendor.adminlte.reporte_depositos', compact('depositos', 'date', 'total_dep'))->render();
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view);
           return $pdf->stream('reporte'.'pdf');
@@ -155,8 +156,9 @@ class DepositoController extends Controller
         $date_final = $request->fecha_final;
 
         $depositos = obtener_deposito_reporte_especifico($request->fecha_inicial,$request->fecha_final);
+        $total_dep = calcular_total_depositos($depositos);
 
-        $view = \View::make('vendor.adminlte.reporte_depositos', compact('depositos', 'date_inicial', 'date_final'))->render();
+        $view = \View::make('vendor.adminlte.reporte_depositos', compact('depositos', 'date_inicial', 'date_final', 'total_dep'))->render();
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view);
           return $pdf->stream('reporte'.'pdf');
@@ -173,8 +175,8 @@ class DepositoController extends Controller
         $mes_entero=strtotime($month);
         $mes = date('m', $mes_entero);    
         $depositos = obtener_deposito_reporte_mensual($mes);
-
-        $view = \View::make('vendor.adminlte.reporte_depositos', compact('depositos', 'month'))->render();
+        $total_dep = calcular_total_depositos($depositos);
+        $view = \View::make('vendor.adminlte.reporte_depositos', compact('depositos', 'month', 'total_dep'))->render();
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view);
           return $pdf->stream('reporte'.'pdf');

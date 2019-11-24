@@ -117,8 +117,8 @@ class HabitacionController extends Controller
         ->orderBy('id', 'asc')
         ->where('habitacion.estado','=',1)
         ->get();*/
-
-        $hab_ventas = obtener_factura_venta_reporte_diario("2019-08-22");
+        $fecha = date("Y/m/d");
+        $hab_ventas = obtener_factura_venta_reporte_diario($fecha);
 
         $habitacion = DB::table('habitacion')->join('estado_habitacion','estado_habitacion.id','=','habitacion.id_estado')->select('habitacion.*', 'estado_habitacion.estado as estado')->orderBy('numero_habitacion', 'asc')->get();
 
