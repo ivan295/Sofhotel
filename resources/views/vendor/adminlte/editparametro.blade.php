@@ -10,24 +10,14 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Parámetros</h3>
             </div>
-            <form method="post" action="{{route('parametros.update', $parametro->id)}}">
+            <form method="post" action="{{route('iva.update', $iva->id)}}">
                 {{csrf_field()}}
                 {{ method_field('PUT') }}
                 <div class="box-body">
                 <label for="tipousuario">IVA</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                    <input type="number" class="form-control" name="iva" id="iva" value="<?php echo $parametro->iva*100; ?>">
-                </div>
-                <label for="tipousuario">Precio</label>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                    <input type="text" class="form-control" name="precio" id="precio" value="<?php echo $parametro->precio; ?>">
-                </div>
-                <label for="tipousuario">Tiempo</label>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                    <input type="text" class="form-control" name="tiempo" id="tiempo" value="<?php echo $parametro->tiempo; ?>">
+                    <input type="number" class="form-control" name="iva" id="iva" value="<?php echo $iva->valor; ?>">
                 </div>
           <br>
           <div class="box-footer">

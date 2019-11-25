@@ -22,8 +22,8 @@ class CreateHabitacionTable extends Migration
             $table->time('tiempo_limpieza');
             $table->boolean('estado');
             $table->boolean('indice');
-         
-
+            $table->float('iva');
+            $table->float('desgloce');
             $table->bigInteger('id_estado')->unsigned()->index();
             $table->foreign('id_estado')->references('id')->on('estado_habitacion');
         });

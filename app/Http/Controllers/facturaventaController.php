@@ -230,4 +230,9 @@ class facturaventaController extends Controller
           return response()->json([$factura_venta, $habitacion, $hab, $total]);
 
     }
+
+    public function calcular_alquiler(){
+      $hola = "hola";
+      return response()->json($hola);
+    }
 }

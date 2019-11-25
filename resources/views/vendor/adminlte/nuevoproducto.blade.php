@@ -10,6 +10,11 @@
     var dato = document.getElementById('consulta_proveedor').value;
     document.getElementById('proveedor').value = dato;
   }
+
+  function consultar_iva(){
+    var dato = document.getElementById('consulta_iva').value;
+    document.getElementById('iva').value = dato;
+  }
 </script>
 <!--alertas-->
 @include('adminlte::alerts.error')
@@ -59,11 +64,11 @@
                 <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" required>
               </div>
             </div>
-            <div class="col-md-6">
-              <label for="precio_venta">Precio de Venta</label>
+               <div class="col-md-6">
+              <label for="precio_compra">Precio de Compra</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                <input type="text" class="form-control" name="precio_venta" id="precio_venta" placeholder="Precio de Venta" required>
+                <input type="text" class="form-control" name="precio_compra" id="precio_compra" placeholder="Precio de Compra" required>
               </div>
             </div>
             <div class="col-md-6">
@@ -73,11 +78,12 @@
                 <input type="text" class="form-control" name="stock" id="stock" placeholder="Cantidad" required>
               </div>
             </div>
-            <div class="col-md-6">
-              <label for="precio_compra">Precio de Compra</label>
+           
+             <div class="col-md-6">
+              <label for="precio_venta">Precio de Venta</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                <input type="text" class="form-control" name="precio_compra" id="precio_compra" placeholder="Precio de Compra" required>
+                <input type="text" class="form-control" name="precio_venta" id="precio_venta" placeholder="Precio de Venta" required>
               </div>
             </div>
             <div class="col-md-6">
@@ -92,7 +98,21 @@
                 </select>
               </div>
             </div>
+            <div class="col-md-6">
+              <label>IVA</label>
+              <div class="select-group">
+                <select class="form-control selectpicker" name="id_iva" id="consulta_iva" onchange="consultar_iva()" data-live-search="true">    
+
+                  <option value="0">Seleccionar IVA</option>
+                  <?php $iva = DB::table('ivas')->get(); ?>
+                  @foreach($iva as $i)
+                  <option value="<?php  echo $i->id ; ?>"> <?php echo round($i->valor). "%"; ?>  </option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
             <input type="hidden" id="proveedor" name="proveedor" >
+            <input type="hidden" id="iva" name="iva" >
           </div>
           <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
@@ -118,12 +138,13 @@
   <table class="table table-hover table-bordered" id="tablaproductos">
     <thead>
       <tr bgcolor="#98A8D5">
-        <th class='text-center'>#</th>
         <th class='text-center'>Descripcion</th>
-        <th class='text-center'>Precio de Venta</th>
         <th class="text-center">Stock</th>
-        <th class="text-center">Precio de Compra</th>
         <th class="text-center">Proveedor</th>
+        <th class="text-center">Precio de Compra</th>
+        <th class="text-center">IVA</th>
+        <th class="text-center">Total</th>
+        <th class='text-center'>Precio de Venta</th>       
         <th class="text-center">Opciones</th>
       </tr>
     </thead>
@@ -139,12 +160,15 @@
       ?>
       <!--fin de condicional-->
       <tr class='text-center'>
-        <td>{{$NuevoProd->id}}</td>
         <td>{{$NuevoProd->descripcion}}</td>
-        <td>$ {{$NuevoProd->precio_venta}}</td>
         <td style="background-color:<?php echo $color ?>;">{{$NuevoProd->stock}}</td>
-        <td>$ {{$NuevoProd->precio_compra}}</td>
         <td>{{$NuevoProd->Empresa}}</td>
+        <td>$ {{$NuevoProd->precio_compra}}</td>
+        <td>$ {{$NuevoProd->iva}}</td>
+        <td>$ {{$NuevoProd->total}}</td>
+        <td>$ {{$NuevoProd->precio_venta}}</td>
+        
+        
         <td class="text-center">
           <div class="row">
             <div class="col-md-3 col-md-offset-2">

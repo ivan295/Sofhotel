@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Productos;
 use App\Proveedor;
+use App\Iva;
 use DB;
 
 class productosController extends Controller
@@ -30,7 +31,10 @@ class productosController extends Controller
             'stock' => 'required',
             'precio_compra' => 'required',
             'id_proveedor' => 'required',
+            'iva' => 'required'
             ]);
+
+        $iva = Iva::find($request->iva);
 
         $nuevoproducto                   = new Productos;
         $nuevoproducto->descripcion = $request->descripcion;
@@ -39,6 +43,8 @@ class productosController extends Controller
         $nuevoproducto->precio_compra = $request->precio_compra;
         $nuevoproducto->id_proveedor = $request->id_proveedor;
         $nuevoproducto->estado= 1;
+        $nuevoproducto->iva = ($iva->valor * $request->precio_compra)/100;
+        $nuevoproducto->total = $nuevoproducto->iva + $nuevoproducto->precio_compra;
         $nuevoproducto->save();
        
         return redirect('/productos')->with('success','Producto agregado correctamente');
@@ -64,12 +70,15 @@ class productosController extends Controller
 
     public function update(Request $request, $id)
     {
+        $iva = Iva::find($request->iva);
         $nuevoproducto = Productos::find($id);
         $nuevoproducto->descripcion = $request->descripcion;
         $nuevoproducto->precio_venta = $request->precio_venta;
         $nuevoproducto->stock = $request->stock;
         $nuevoproducto->precio_compra = $request->precio_compra;
         $nuevoproducto->id_proveedor = $request->id_proveedor;
+        $nuevoproducto->iva = ($iva->valor * $request->precio_compra)/100;
+        $nuevoproducto->total = $nuevoproducto->iva + $nuevoproducto->precio_compra;
         $nuevoproducto->save();
         return redirect('/productos');
     }

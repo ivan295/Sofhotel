@@ -21,7 +21,8 @@ class CreateProductoTable extends Migration
             $table->integer('stock');
             $table->float('precio_compra');
             $table->boolean('estado');
-
+            $table->float('iva');
+            $table->float('total');
             $table->bigInteger('id_proveedor')->unsigned()->index();
             $table->foreign('id_proveedor')->references('id')->on('proveedor');
         });

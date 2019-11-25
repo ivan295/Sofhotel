@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    total_alquiler();
     $('#bt_add').click(function() {
         agregar();
     });
@@ -12,6 +13,24 @@ $("#boton").hide();
 $("#id_producto").change(mostrarValores);
 $("#id_habitacion").change(preciohab);
 
+
+function total_alquiler(){
+    $.get('alquiler_total', function (data) {  //consult_estado -< nombre de la ruta
+        $("#id_total_alquiler").html("");
+        $.each(data, function(i, item) { //recorre el data 
+            cargartabla_estados(item); // carga los datos en la tabla
+        });      
+    });
+}
+
+function cargartabla_estados(data){
+  
+
+    $("#id_total_alquiler").append(
+       
+         " <h1><span class='label label-warning'></span></h1>"
+    );
+}
 
 
 function mostrarValores() {

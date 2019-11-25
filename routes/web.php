@@ -73,7 +73,7 @@ Route::get('/alquiler','alquilerController@index');
 Route::get('/factura_venta','facturaventaController@index');
 Route::get('/cargarinner','HomeController@index');
 Route::get('/detalle_venta','detalleVentaController@index');
-Route::get('/parametros','ParametrosController@index');
+Route::get('/parametros','IvaController@index');
 Route::get('/consumo_no','ConsumoNoController@index');
 
 
@@ -400,6 +400,15 @@ Route::post('parametros/{id}/edit', ['as' => 'parametros.editar', 'uses' => 'Par
 
 Route::put('parametros/{id}', ['as' => 'parametros.update', 'uses'=>'ParametrosController@update']);
 
+//IVA
+
+Route::post('iva/crear', ['as' => 'iva.create', 'uses'=>'IvaController@store']);
+
+Route::delete('iva/{id}/eliminar', ['as'=> 'iva.delete', 'uses' =>'IvaController@destroy']);
+
+Route::post('iva/{id}/edit', ['as' => 'iva.editar', 'uses' => 'IvaController@edit']);
+
+Route::put('iva/{id}', ['as' => 'iva.update', 'uses'=>'IvaController@update']);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////REPORTES
 
@@ -500,6 +509,8 @@ Route::get('reporte_usuario_especifico/{id}/{fecha_inicial}/{fecha_final}', ['as
 Route::get('reporte_usuario_mes/{id}/{mes}', ['as' => 'reporte_usuario.mensual', 'uses'=>'ReporteGeneralController@reporte_mensual_usuario']);
 
 //reporte factura venta
+
+Route::get('/alquiler_total','facturaventaController@calcular_alquiler');
 
 Route::get('/reporte_diario_fac_vent', function () {
     return view('/vendor/adminlte/reporte_factura_venta_diario');

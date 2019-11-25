@@ -9,6 +9,11 @@
     var dato = document.getElementById('consulta_proveedor').value;
     document.getElementById('id_proveedor').value = dato;
   }
+
+    function consultar_iva(){
+    var dato = document.getElementById('consulta_iva').value;
+    document.getElementById('iva').value = dato;
+  }
 </script>
 <div class="row">
   <div class="col-md-12 col-md-offset-0" >
@@ -51,6 +56,7 @@
           </div>
         </div>
         <div class="col-md-6">
+          
           <div class="form-group">
           <label>Proveedor</label>
           <select class="form-control" name="id_proveedor" id="consulta_proveedor" onchange="consultar()" required>                    
@@ -62,7 +68,22 @@
           </select>
         </div>
       </div>
+
+       <div class="col-md-6">
+        <div class="form-group">
+              <label>IVA</label>             
+              <select class="form-control" name="id_iva" id="consulta_iva" onchange="consultar_iva()" data-live-search="true">    
+                  <option value="0">Seleccionar IVA</option>
+                  <?php $iva = DB::table('ivas')->get(); ?>
+                  @foreach($iva as $i)
+                  <option value="<?php  echo $i->id ; ?>"> <?php echo round($i->valor). "%"; ?>  </option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+
         <input type="hidden" id="id_proveedor" name="id_proveedor" required>
+        <input type="hidden" id="iva" name="iva">
         </div>
       <div class="box-footer">
         <button type="submit"class="btn btn-success">Modificar</button>

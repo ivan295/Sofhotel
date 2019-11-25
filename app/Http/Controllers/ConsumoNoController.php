@@ -17,7 +17,7 @@ class ConsumoNoController extends Controller
         ->join('habitacion', 'habitacion.id', '=', 'alquiler.auxiliar2')
         ->where('alquiler.auxiliar', '=', 0)
         ->where('alquiler.auxiliar2', '>', 0)
-        ->select('alquiler.*', 'habitacion.numero_habitacion as habitacion', 'habitacion.precio as Precio','habitacion.id as hab')
+        ->select('alquiler.*', 'habitacion.numero_habitacion as habitacion', 'habitacion.precio as Precio','habitacion.id as hab', 'habitacion.iva as iva', 'habitacion.desgloce as desgloce')
         ->first();
         $salida = Alquiler::find($Alquiler->id);
         $salida->auxiliar2 = 0;

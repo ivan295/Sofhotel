@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Habitacion;
+use App\Iva;
 use DB;
 use App\Estado_habitacion;
 class HabitacionController extends Controller
@@ -36,6 +37,7 @@ class HabitacionController extends Controller
             'tiempo_limpieza' => 'required',
             ]);
             //dd($request->all());
+        $iva = Iva::find($request->iva);
         $NuevaHabitacion                    = new Habitacion;
         $NuevaHabitacion->numero_habitacion = $request->numero_habitacion;
         $NuevaHabitacion->tipo_habitacion   = $request->tipo_habitacion;
@@ -44,7 +46,12 @@ class HabitacionController extends Controller
         $NuevaHabitacion->id_estado   = $request->id_estado;
         $NuevaHabitacion->estado =1;
         $NuevaHabitacion->indice =0;
+        $aux1 = ($iva->valor/100) + 1;
+        $NuevaHabitacion->desgloce  = ($request->precio/$aux1);
+        $NuevaHabitacion->iva = $request->precio - $NuevaHabitacion->desgloce;    
         $NuevaHabitacion->save();
+
+          //  dd([$request->precio, $aux1, $NuevaHabitacion->desgloce, $NuevaHabitacion->iva]);
         $tiempo = 2 * 60 * 1000000;
         $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         $len = strlen($tiempo);

@@ -31,9 +31,21 @@
                                 <h1><span class="label label-warning"># Habitación: <?php echo $Alquiler->habitacion ?></span></h1>
                             </div>
                         </div>
+                          <div class="col-md-3">
+                            <div class="input-group">
+                                <h1><span class="label label-warning">IVA: <?php echo "$".$Alquiler->iva ?></span></h1>
+                            </div>
+                        </div>
+
+                          <div class="col-md-3">
+                            <div class="input-group">
+                                <h1><span class="label label-warning">Subtotal: <?php echo "$".$Alquiler->desgloce ?></span></h1>
+                            </div>
+                        </div>
+
                         <div class="col-md-5">
                             <div class="input-group">
-                                <h1><span class="label label-warning">Precio de habitación : <?php echo $Alquiler->Precio ?></span></h1>
+                                <h1><span class="label label-warning">Total: <?php echo "$".$Alquiler->Precio ?></span></h1>
                             </div>
                         </div>
                         <input type="hidden" class="form-control" name="id_habitacion" id="id_habitacion" value="<?php echo $Alquiler->Id ?>">
@@ -127,7 +139,7 @@
                             </div>
                         </div>
                     </div>
-
+z
                     <div class="col-md-3" id="boton">
                         <div class="box-footer">
                             <button id="guardar" type="submit" class="btn btn-success">Guardar</button>

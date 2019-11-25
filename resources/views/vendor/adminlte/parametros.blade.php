@@ -9,12 +9,12 @@
 @include('adminlte::alerts.error')
 @include('adminlte::alerts.exito')
 <label>
-    <h3>Parámetros</h3>
+    <h3>IVA</h3>
 </label>
 <div class="row">
     <div class="col-md-5">
         <div class="contenedor-modal">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Agregar Parámetros</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ventana_crear"><span class="glyphicon glyphicon-plus"></span> Agregar IVA</button>
         </div>
     </div>
 </div>
@@ -27,11 +27,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Nuevo tipo de usuario</h4>
+                <h4 class="modal-title" id="myModalLabel">Porcentajes de IVA</h4>
             </div>
             <div class="modal-body">
                 @include('adminlte::alerts.error')
-                <form method="post" action="{{route('parametros.create')}}" target="request">
+                <form method="post" action="{{route('iva.create')}}" target="request">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="box-body">
                         <label for="tipousuario">IVA</label>
@@ -39,16 +39,7 @@
                             <span class="input-group-addon"><i class="fa fa-users"></i></span>
                             <input type="number" class="form-control" name="iva" id="iva" placeholder="IVA %" required>
                         </div>
-                        <label for="tipousuario">Precio</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                            <input type="text" class="form-control" name="precio" id="precio" placeholder="Precio habitacion" required>
-                        </div>
-                        <label for="tipousuario">Tiempo</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                            <input type="text" class="form-control" name="tiempo" id="tiempo" placeholder="Tiempo" required>
-                        </div>
+                      
                     </div>
                     <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Guardar</button>
                 </form>
@@ -60,7 +51,7 @@
     <div class="box box-primary">
         <div class="box-header with-border">
             <i class="fa fa-bar-chart"></i>
-            <h3 class="box-title" align="text-center">Parámetros</h3>
+            <h3 class="box-title" align="text-center">IVA</h3>
             <div class="box-tools pull-right">
             </div>
         </div>
@@ -68,29 +59,32 @@
             <thead>
                 <tr bgcolor="#98A8D5">
                     <th class='text-center'>#</th>
-                    <th class="text-center">Iva</th>
-                    <th class="text-center">Precio</th>
-                    <th class="text-center">Tiempo</th>
-                    <th class="text-center">Opción</th>
-
+                    <th class="text-center">IVA</th>
+                    <th class="text-center">Acción</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($parametro as $paramet)
+                @foreach($iva as $i)
                 <tr></tr>
                 <tr class='text-center'>
-                    <td>{{$paramet->id}}</td>
-                    <td>{{$paramet->iva*100}}%</td>
-                    <td>$ {{$paramet->precio}}</td>
-                    <td>{{$paramet->tiempo}}</td>
+                    <td>{{$i->id}}</td>
+                    <td>{{round($i->valor)}}%</td>
                     <td class="text-center">
-
-                        <div class="col-md-3 col-md-offset-3">
-                            <form action="{{route ('parametros.editar', $paramet->id)}}" method="post">
+                         <div class="row">
+                            <div class="col-md-3 col-md-offset-3">
+                             <form action="{{route ('iva.editar', $i->id)}}" method="post">
+                              {{csrf_field()}}
+                              <button type="submit" class="btn btn-warning btn-xs">Editar</button></form>
+                            </div>
+                            <div class="col-md-6 text-left">
+                              <form action="{{route('iva.delete', $i->id)}}" method="post">
                                 {{csrf_field()}}
-                                <button type="submit" class="btn btn-warning btn-xs">Editar</button></form>
+                                {{ method_field('DELETE') }}
+                                <button type="submit" class="btn btn-danger btn-xs" onclick="return borrar()">Borrar</button>
+                              </form>
+                           
+                          </div>
                         </div>
-                        </form>
 
                     </td>
                 </tr>

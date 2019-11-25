@@ -9,10 +9,10 @@ class ParametrosController extends Controller
 {
     public function index()
     {
-        $parametro = \DB::table('parametros')
+        /*$parametro = \DB::table('parametros')
         ->get();
         
-    return view('vendor.adminlte.parametros',compact('parametro'));
+    return view('vendor.adminlte.parametros',compact('parametro'));*/
     }
 
     public function store(Request $request){
