@@ -21,8 +21,26 @@ class ConsumoNoController extends Controller
         ->first();
         $salida = Alquiler::find($Alquiler->id);
         $salida->auxiliar2 = 0;
+
+        $tarifa = $Alquiler->Precio;
+        $subtotal = $Alquiler->desgloce;
+        $iva = $Alquiler->iva;
+        if($Alquiler->tiempo_alquiler > '03:00:00'){
+            $tarifa = $Alquiler->Precio * 2;
+            $subtotal = $Alquiler->desgloce * 2;
+            $iva = $Alquiler->iva * 2;
+        } elseif($Alquiler->tiempo_alquiler > '06:00:00'){
+            $tarifa = $Alquiler->Precio * 3;
+            $subtotal = $Alquiler->desgloce * 3;
+            $iva = $Alquiler->iva * 3;
+        } elseif ($Alquiler->tiempo_alquiler > '09:00:00'){
+            $tarifa = $Alquiler->Precio * 4;
+            $subtotal = $Alquiler->desgloce * 4;
+            $iva = $Alquiler->iva * 4;
+        }
+
         $salida->update();
-    return view('vendor.adminlte.consumoproductoNO', compact('Alquiler'));
+    return view('vendor.adminlte.consumoproductoNO', compact('Alquiler', 'tarifa', 'subtotal', 'iva'));
     }
 
     public function store(Request $request){
@@ -31,13 +49,13 @@ class ConsumoNoController extends Controller
 
         $factura = new Factura_venta;
         $factura->total_productos =0;
-        $factura->total_cobro = $request->precio_habitacion;
         $factura->id_alquiler = $request->id_alquiler;
-        $factura->total_alquiler = 12.50;
+        $factura->total_alquiler = $request->tarifa;
+        $factura->total_cobro = $request->tarifa + $factura->total_productos;
         //$factura->id_usuario = $request->id_usuario;
         $factura->estado = 1;
 
-        $contador = $dinero->dinero_disponible + $request->precio_habitacion;
+        $contador = $dinero->dinero_disponible + $factura->total_cobro;
         $dinero->dinero_disponible = $contador;
         $dinero->update();
         $factura->save();
