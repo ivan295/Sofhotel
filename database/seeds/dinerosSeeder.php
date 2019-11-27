@@ -12,7 +12,7 @@ class dinerosSeeder extends Seeder
     public function run()
     {
         DB::table('dineros')->insert([
-            'dinero_disponible'=>1000,
+            'dinero_disponible'=>'1000',
             
         ]);
           }
