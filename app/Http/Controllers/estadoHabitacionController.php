@@ -35,6 +35,10 @@ class estadoHabitacionController extends Controller
               $data = Estado_habitacion::Find($cont->id);
               $data->estado = "Ocupado";
               $data->save();
+          }elseif ($t==2) {
+              $data = Estado_habitacion::Find($cont->id);
+              $data->estado = "Peligro";
+              $data->save();
           }
     
         

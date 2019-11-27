@@ -40,7 +40,7 @@ Route::get('/detalle_compra/detalle_compra',function(){
 	return view('/vendor/adminlte/detalleCompra');
 });
 //alquiler
-Route::get('/alquiler/alquiler',function(){
+Route::get('/alquiler',function(){
     return view('/vendor/adminlte/Alquiler');
 });
 Route::get('/factura_venta/factura_venta',function(){
@@ -225,8 +225,11 @@ Route::post('alquiler/{id}/edit', ['as' => 'alquiler.editar', 'uses' => 'alquile
 
 Route::put('alquiler/{id}', ['as' => 'alquiler.update', 'uses'=>'alquilerController@update']);
 
+Route::post('alquiler/estado', ['as' => 'alquiler.estado', 'uses'=>'alquilerController@cambio_estado']);
 
+Route::post('alquiler/garaje', ['as' => 'alquiler.garaje', 'uses'=>'alquilerController@garaje']);
 
+Route::post('alquiler/finalizar', ['as' => 'alquiler.finalizar', 'uses'=>'alquilerController@finalizar']);
 //factura venta
 Route::post('factura_venta/crear', ['as' => 'factura_venta.create', 'uses'=>'facturaventaController@store']);
 

@@ -58,7 +58,7 @@
               <option value="0">Seleccionar IVA</option>
               <?php $iva = DB::table('ivas')->get(); ?>
               @foreach($iva as $i)
-              <option value="<?php  echo $i->id ; ?>"> <?php echo round($i->valor); ?>  </option>
+              <option value="<?php  echo $i->id ; ?>"> <?php echo "%".round($i->valor); ?>  </option>
               @endforeach
             </select>
           </div>

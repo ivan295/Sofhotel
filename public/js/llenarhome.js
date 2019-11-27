@@ -23,15 +23,18 @@ $(document).ready(function(){
                     var color = "<div class='small-box bg-red'>"
                     var button="hidden";
                     var solucion="hidden";
+                    var solu="hidden";
                     if(item.indice == 0){
                     ingresohab(item.id,item.numero_habitacion);
                     }
 
                 }else if (item.estado == 'Limpieza'){
                     var color = "<div class='small-box bg-aqua'>"
-                    var boton ="disabled";
+                    var boton ="hidden";
                     var button="hidden";
+                    var solu="button";
                     var solucion="hidden";
+                    finalizar(item.id);
 
                 }
                 else if (item.estado == 'Espera'){
@@ -39,6 +42,7 @@ $(document).ready(function(){
                     var boton ="hidden";
                     var button="button";
                     var solucion="hidden";
+                    garaje(item.id);
 
                 }else if (item.estado == 'Peligro'){
                     var color = "<div class='small-box bg-purple'>"
@@ -46,6 +50,8 @@ $(document).ready(function(){
                     var button="hidden";
                     alert("Puerta de garage de Habitación #" +item.numero_habitacion+ "necesita revisión manual");
                     var solucion="button";
+                    var solu="hidden";
+                    soluc(item.id);
                 }
                 
              $("#cuadro").append(
@@ -58,6 +64,7 @@ $(document).ready(function(){
                 <p>Hora de salida: </p>\
                 <p>Total a pagar: </p>\
                 <input  type="+solucion+" value='Solucionado' onclick='puerta()' class='btn  btn-block btn-success'>\
+                <input  type="+solu+" value='Finalizar' onclick='puerta()' class='btn  btn-block btn-success'>\
                 <input  type="+button+" value='Abrir Puerta' onclick='puerta()' class='btn  btn-block btn-success'>\
                 <input  "+boton+" type="+boton+" value='Imprimir' onclick='salida("+item.id+","+item.numero_habitacion+","+item.id+")' class='btn  btn-block btn-warning'>\
                 <div class='icon'>\
@@ -69,6 +76,81 @@ $(document).ready(function(){
          });
         });
     
+}
+
+function soluc(item){
+    var habitacion = item;
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: './alquiler/estado',
+        type:"POST",
+        dataType: 'json',
+        data:{habitacion},               // Datos enviados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
+        success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
+        {  
+           
+
+        },
+        error: function () {     
+           mensaje = "OCURRIO UN ERROR";
+              alertify.error(mensaje);
+        }
+    });  
+}
+
+function garaje(item){
+    var habitacion = item;
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: './alquiler/garaje',
+        type:"POST",
+        dataType: 'json',
+        data:{habitacion},               // Datos enviados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
+        success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
+        {  
+           
+
+        },
+        error: function () {     
+           mensaje = "OCURRIO UN ERROR";
+              alertify.error(mensaje);
+        }
+    });  
+}
+
+function finalizar(item){
+    var habitacion = item;
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: './alquiler/garaje',
+        type:"POST",
+        dataType: 'json',
+        data:{habitacion},               // Datos enviados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
+        success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
+        {  
+           
+
+        },
+        error: function () {     
+           mensaje = "OCURRIO UN ERROR";
+              alertify.error(mensaje);
+        }
+    });  
 }
 
 function ingresohab(item,item2){

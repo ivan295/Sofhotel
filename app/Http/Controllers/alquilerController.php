@@ -100,4 +100,43 @@ class alquilerController extends Controller
 
         }
     }
+
+    public function cambio_estado(Request $request){
+        if ($request->ajax()) {
+            $id_habitacion = $request->habitacion;
+            $habitacion = Habitacion::find($id_habitacion);
+            $est= Estado_habitacion::find($habitacion->id_estado);
+            $est->estado = "Ocupado";
+            $est->save();
+        }
+    }
+
+    public function garaje(Request $request){
+
+        if ($request->ajax()) {
+            $id_habitacion = $request->habitacion;
+            $habitacion = Habitacion::find($id_habitacion);
+            $est= Estado_habitacion::find($habitacion->id_estado);
+            $est->estado = "Limpieza";
+            
+            $mensaje = "Abriendo puerta";
+            $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+
+        $len = strlen($mensaje);
+
+        socket_sendto($sock, $mensaje, $len, 0, $est->ip, 8888);
+        socket_close($sock);
+        $est->save();
+    }
+    }
+
+     public function finalizar(Request $request){
+        if ($request->ajax()) {
+            $id_habitacion = $request->habitacion;
+            $habitacion = Habitacion::find($id_habitacion);
+            $est= Estado_habitacion::find($habitacion->id_estado);
+            $est->estado = "Desocupado";
+            $est->save();
+        }
+    }
 }
