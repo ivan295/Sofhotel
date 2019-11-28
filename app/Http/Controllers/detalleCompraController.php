@@ -11,7 +11,7 @@ use App\DetalleCompra;
 use App\Dinero;
 use DB;
 use App\Factura_Compra;
-
+use App\Productos;
 class detalleCompraController extends Controller
 {
     public function index()
@@ -41,16 +41,18 @@ class detalleCompraController extends Controller
              $cont = 0;
     		 while($cont < count($request->productoid))
     		 {
+                $produc = Productos::find($request->productoid[$cont]);
+
     		 	$detalle = new DetalleCompra;
     		 	$detalle->id_factura = $factura->id;//$factura->id  factura que recien se guardó
-    		 	$detalle->id_producto = $request->productoid[$cont];//id_articulo de la posición cero
+    		 	$detalle->id_producto = $request->productoid[$cont];//id_articulo  posición cero
                 $detalle->cantidad = $request->cant[$cont];
                 $detalle->precio_compra = $request->precioco[$cont];
                 $detalle->subtotal = $request->precioco[$cont]*$request->cant[$cont];
                 $detalle->total = 0;
-
+                $produc->stock = $produc->stock + $request->cant[$cont];
                 $detalle->save();
-        
+                $produc->save();
                 $cont = $cont + 1;
              }
              return redirect('/detalle_compra');

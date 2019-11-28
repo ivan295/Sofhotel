@@ -10,7 +10,7 @@ use App\Alquiler;
 use App\Dinero;
 use App\Estado_habitacion;
 use App\Habitacion;
-
+use App\Productos;
 class detalleVentaController extends Controller
 {
     public function index()
@@ -68,12 +68,15 @@ class detalleVentaController extends Controller
 
         $cont = 0;
         while ($cont < count($request->productoid)) {
+            $produc = Productos::find($request->productoid[$cont]);
             $detalle = new DetalleVenta;
             $detalle->id_factura_venta = $factura->id; //$factura->id  factura que recien se guardó
             $detalle->id_producto = $request->productoid[$cont]; //id_articulo de la posición cero
             $detalle->cantidad = $request->cantidad[$cont];
             $detalle->total_venta = $request->precioventa[$cont] * $request->cant[$cont];
+            $produc->stock = $produc->stock - $request->cantidad[$cont];
             $detalle->save();
+            $produc->update();
             $cont = $cont + 1;
         }
         $habitacion = Habitacion::find($request->id_habitacion);

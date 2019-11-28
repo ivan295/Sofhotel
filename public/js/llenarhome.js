@@ -17,13 +17,15 @@ $(document).ready(function(){
                     var boton="disabled";
                     var button="hidden";
                     var solucion="hidden";
-
+                    var solu="hidden";
+                    var s="hidden";
 
                 }else if(item.estado == 'Ocupado'){
                     var color = "<div class='small-box bg-red'>"
                     var button="hidden";
                     var solucion="hidden";
                     var solu="hidden";
+                    var s="hidden";
                     if(item.indice == 0){
                     ingresohab(item.id,item.numero_habitacion);
                     }
@@ -34,25 +36,37 @@ $(document).ready(function(){
                     var button="hidden";
                     var solu="button";
                     var solucion="hidden";
-                    finalizar(item.id);
+                    var s="hidden";
+                    //finalizar(item.id);
 
                 }
                 else if (item.estado == 'Espera'){
                     var color = "<div class='small-box bg-yellow'>"
                     var boton ="hidden";
                     var button="button";
+                    var s="hidden";
                     var solucion="hidden";
-                    garaje(item.id);
+                    var solu="hidden";
+                    //garaje(item.id);
 
                 }else if (item.estado == 'Peligro'){
                     var color = "<div class='small-box bg-purple'>"
                     var boton ="hidden";
                     var button="hidden";
+                    var s="hidden";
                     alert("Puerta de garage de Habitación #" +item.numero_habitacion+ "necesita revisión manual");
                     var solucion="button";
                     var solu="hidden";
-                    soluc(item.id);
-                }
+                    //soluc(item.id);
+                }else if (item.estado == 'Alerta'){
+                    var color = "<div class='small-box bg-brown'>"
+                    var boton ="hidden";
+                    var button="hidden";
+                    alert("Puerta de garage de Habitación #" +item.numero_habitacion+ "necesita revisión manual");
+                    var solucion="hidden";
+                    var solu="hidden";
+                    var s="button";
+                    //soluc(item.id);
                 
              $("#cuadro").append(
                 "<div class='col-md-3 col-md-offset-0'>\
@@ -63,10 +77,11 @@ $(document).ready(function(){
                 <p>Hora de ingreso: "+hora+" </p>\
                 <p>Hora de salida: </p>\
                 <p>Total a pagar: </p>\
-                <input  type="+solucion+" value='Solucionado' onclick='puerta()' class='btn  btn-block btn-success'>\
-                <input  type="+solu+" value='Finalizar' onclick='puerta()' class='btn  btn-block btn-success'>\
-                <input  type="+button+" value='Abrir Puerta' onclick='puerta()' class='btn  btn-block btn-success'>\
+                <input  type="+solucion+" value='Solucionado' onclick='soluc("+item.id+");' class='btn  btn-block btn-success'>\
+                <input  type="+solu+" value='Finalizar' onclick='finalizar("+item.id+")' class='btn  btn-block btn-success'>\
+                <input  type="+button+" value='Abrir Puerta' onclick='garaje("+item.id+");' class='btn  btn-block btn-success'>\
                 <input  "+boton+" type="+boton+" value='Imprimir' onclick='salida("+item.id+","+item.numero_habitacion+","+item.id+")' class='btn  btn-block btn-warning'>\
+                <input  type="+button+" value='Solucionado' onclick='personas("+item.id+");' class='btn  btn-block btn-success'>\
                 <div class='icon'>\
                 <i class='fa fa-hotel'></i>\
                 </div>\
@@ -137,7 +152,7 @@ function finalizar(item){
         }
     });
     $.ajax({
-        url: './alquiler/garaje',
+        url: './alquiler/finalizar',
         type:"POST",
         dataType: 'json',
         data:{habitacion},               // Datos enviados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)

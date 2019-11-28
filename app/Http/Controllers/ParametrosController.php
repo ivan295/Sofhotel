@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Parametros;
+use App\Dinero;
 
 class ParametrosController extends Controller
 {
@@ -40,5 +41,19 @@ class ParametrosController extends Controller
             $parametro->tiempo = $request->tiempo;
             $parametro->save();
             return redirect('/parametros');
+        }
+
+        public function ingresar(Request $request){
+            $dine = new Dinero;
+            $dine->dinero_disponible = $request->dinero_caja + $request->dinero_ingresar;
+            $dine->save();
+            return view('vendor.adminlte.ingresar_caja');
+        }
+
+        public function retirar(Request $request){
+            $dine = new Dinero;
+            $dine->dinero_disponible = $request->dinero_caja - $request->dinero_ingresar;
+            $dine->save();
+            return view('vendor.adminlte.ingresar_caja');
         }
 }

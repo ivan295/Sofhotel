@@ -76,8 +76,7 @@ class alquilerController extends Controller
             $alq = DB::table('alquiler')
             ->join('habitacion', 'habitacion.id', '=', 'alquiler.id_habitacion')
             ->where('alquiler.auxiliar', '=', $request->auxiliar)
-            ->select('alquiler.*', 'habitacion.numero_habitacion as habitacion', 'habitacion.precio as Precio', 'habitacion.id as Id', 'habitacion.iva as iva', 'habitacion.desgloce as desgloce')
-            ->first();
+            ->select('alquiler.*', 'habitacion.numero_habitacion as habitacion', 'habitacion.precio as Precio', 'habitacion.id as Id', 'habitacion.iva as iva', 'habitacion.desgloce as desgloce')->first();
             $salida = Alquiler::find($alq->id);
             $salida->hora_salida_habitacion = $request->hora;
             $tiempo= Date("H:i:s", strtotime("00:00:00") + strtotime($request->hora)- strtotime($salida->hora_ingreso_habitacion));//obtener la diferencia de tiempos

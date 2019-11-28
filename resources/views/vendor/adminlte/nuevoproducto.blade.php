@@ -71,14 +71,14 @@
                 <input type="text" class="form-control" name="precio_compra" id="precio_compra" placeholder="Precio de Compra" required>
               </div>
             </div>
-            <div class="col-md-6">
+           <!--  <div class="col-md-6">
               <label for="stock">Cantidad</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-database"></i></span>
                 <input type="text" class="form-control" name="stock" id="stock" placeholder="Cantidad" required>
               </div>
-            </div>
-           
+            </div> -->
+           <input type="hidden" name="stock" value="0">
              <div class="col-md-6">
               <label for="precio_venta">Precio de Venta</label>
               <div class="input-group">

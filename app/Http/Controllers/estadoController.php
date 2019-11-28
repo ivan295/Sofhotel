@@ -36,15 +36,15 @@ class estadoController extends Controller
 
     }
 
-    public function actualizar(Request $request){
+    public function actualizar(){
 
-        
-    	$mensaje = $request->campo;
+        $i = "1";
+    	$mensaje = $i;
  		$sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
 
     	$len = strlen($mensaje);
 
-   		socket_sendto($sock, $mensaje, $len, 0, '192.168.0.108', 8888);
+   		socket_sendto($sock, $mensaje, $len, 0, '192.168.1.23', 8888);
     	socket_close($sock);
     	return view('vendor.adminlte.iniciarestado');
     	//dd($mensaje);

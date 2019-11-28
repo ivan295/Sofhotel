@@ -52,11 +52,11 @@ class HabitacionController extends Controller
         $NuevaHabitacion->save();
 
           //  dd([$request->precio, $aux1, $NuevaHabitacion->desgloce, $NuevaHabitacion->iva]);
-        $tiempo = 2 * 60 * 1000000;
+        /*$tiempo = 2 * 60 * 1000000;
         $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         $len = strlen($tiempo);
         socket_sendto($sock, $tiempo, $len, 0, '192.168.0.108', 8888);
-        socket_close($sock);
+        socket_close($sock);*/
 
         return redirect('/Habitacion')->with('success','Habitacion creada correctamente');
     }

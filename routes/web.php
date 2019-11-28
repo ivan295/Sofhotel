@@ -51,6 +51,14 @@ Route::get('/detalle_venta/detalle_venta',function(){
     return view('/vendor/adminlte/detalleVenta');
 });
 //parametros
+Route::get('/ingresar_caja',function(){
+    return view('/vendor/adminlte/ingresar_caja');
+});
+
+Route::get('/retirar_caja',function(){
+    return view('/vendor/adminlte/retirar_caja');
+});
+
 Route::get('/parametros/parametros',function(){
     return view('/vendor/adminlte/parametros');
 });
@@ -74,6 +82,8 @@ Route::get('/factura_venta','facturaventaController@index');
 Route::get('/cargarinner','HomeController@index');
 Route::get('/detalle_venta','detalleVentaController@index');
 Route::get('/parametros','IvaController@index');
+//Route::get('/ingresar_caja','IvaController@mostrar_ingresar');
+//Route::get('/retirar_caja','IvaController@mostrar_retiro');
 Route::get('/consumo_no','ConsumoNoController@index');
 
 
@@ -154,6 +164,11 @@ Route::get('/iniciarestado', function () {
     return view('/vendor/adminlte/iniciarestado');
 });
 
+Route::get('/iniciarestado', function () {
+    return view('/vendor/adminlte/iniciarestado');
+});
+
+
 Route::get('/estado/{t}', 'estadoController@add');
 Route::get('/consult_estado','estadoController@mostrar');
 Route::get('/modificar_estado/{t}/{ip}', 'estadoHabitacionController@mod');
@@ -216,6 +231,7 @@ Route::post('consumo_no/crear', ['as' => 'consumo_no.create', 'uses'=>'ConsumoNo
 
 //Alquiler
 Route::post('alquiler/ingreso', ['as' => 'alquiler.ingreso', 'uses'=>'alquilerController@ingreso']);
+
 
 Route::post('alquiler/crear', ['as' => 'alquiler.create', 'uses'=>'alquilerController@ingresar2']);
 
@@ -396,6 +412,10 @@ Route::put('deposito/{id}', ['as' => 'deposito.update', 'uses' => 'DepositoContr
 
 //parametros
 Route::post('parametros/crear', ['as' => 'parametros.create', 'uses'=>'ParametrosController@store']);
+
+Route::post('ingresar_dinero/crear', ['as' => 'ingresar.create', 'uses'=>'ParametrosController@ingresar']);
+
+Route::post('retirar_dinero/crear', ['as' => 'retirar.create', 'uses'=>'ParametrosController@retirar']);
 
 Route::delete('parametros/{id}/eliminar', ['as'=> 'parametros.delete', 'uses' =>'ParametrosController@destroy']);
 

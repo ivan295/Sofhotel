@@ -47,7 +47,10 @@
         </div class="input-group">
       <div class="box-footer">
         <?php $est = DB::table('cajas')->orderBy('id', 'desc')->first();?>
-        @if($est == null)
+        @if($dinero->dinero_disponible < 1)
+        <button type="submit"class="btn btn-success" disabled="true">Abrir caja</button>
+
+        @elseif($est == null)
         <button type="submit"class="btn btn-success">Abrir caja</button>
         @elseif($est->estado == 0)
         <button type="submit"class="btn btn-success">Abrir caja</button>

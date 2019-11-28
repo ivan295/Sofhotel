@@ -67,11 +67,11 @@ class ConsumoNoController extends Controller
             ->select('estado_habitacion.*')
             ->first();
 
-        $estado = Estado_habitacion::find($est->id);
+        $estad = Estado_habitacion::find($est->id);
         $habitacion->indice = "0";
-        $estado->estado = "Espera";
+        $estad->estado = "Espera";
         $habitacion->update();
-        $estado->update();
+        $estad->save();
 
         return redirect('/home');
 

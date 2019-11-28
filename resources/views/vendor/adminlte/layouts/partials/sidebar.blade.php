@@ -79,6 +79,8 @@ $usuario = DB::table('users')->where('users.id', '=', $logeado)->first();
                 <li class="treeview">
                     <a href="#"><i class='fa fa-list-alt'></i> <span>Parámetros</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
+                            <li><a href="{{ url('/ingresar_caja') }}"><i class='glyphicon glyphicon-usd'></i> <span>Agregar dinero</span></a></li>
+                            <li><a href="{{ url('/retirar_caja') }}"><i class='glyphicon glyphicon-usd'></i> <span>Retirar dinero</span></a></li>
                             <li><a href="{{ url('/parametros') }}"><i class='glyphicon glyphicon-wrench'></i> <span>Iva</span></a></li>
                         </ul>
                 </li>

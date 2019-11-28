@@ -28,5 +28,9 @@ class DatabaseSeeder extends Seeder
             'idtipoUsuario'=>'1',
             'estado'=>'1',
         ]);
+
+        DB::table('dineros')->insert([
+          'dinero_disponible' => 0 ,
+        ]);
     }
 }
