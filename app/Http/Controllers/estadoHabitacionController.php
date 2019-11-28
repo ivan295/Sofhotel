@@ -41,10 +41,23 @@ class estadoHabitacionController extends Controller
               $data->save();
           }
     
-        
-
-        //dd($t, $ip);
+      
     }
+
+    public function contador_personas($t, $ip){
+
+
+        $cont = DB::table('estado_habitacion')->where('ip_arduino', $ip)->first();
+        //dd($cont->ip_arduino);
+          if ($t > 2) {
+              $data = Estado_habitacion::Find($cont->id);
+              $data->estado = "Alerta";
+              $data->save();
+              dd("hecho");
+          }        
+    }
+
+
 
 
 

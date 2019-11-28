@@ -59,15 +59,15 @@ $(document).ready(function(){
                     var solu="hidden";
                     //soluc(item.id);
                 }else if (item.estado == 'Alerta'){
-                    var color = "<div class='small-box bg-brown'>"
+                    var color = "<div class='small-box bg-purple'>"
                     var boton ="hidden";
                     var button="hidden";
-                    alert("Puerta de garage de Habitación #" +item.numero_habitacion+ "necesita revisión manual");
                     var solucion="hidden";
                     var solu="hidden";
+                    alert("Habitación #" +item.numero_habitacion+ "Excede número de personas");
                     var s="button";
                     //soluc(item.id);
-                
+                }
              $("#cuadro").append(
                 "<div class='col-md-3 col-md-offset-0'>\
                 "+color+"\
@@ -81,7 +81,7 @@ $(document).ready(function(){
                 <input  type="+solu+" value='Finalizar' onclick='finalizar("+item.id+")' class='btn  btn-block btn-success'>\
                 <input  type="+button+" value='Abrir Puerta' onclick='garaje("+item.id+");' class='btn  btn-block btn-success'>\
                 <input  "+boton+" type="+boton+" value='Imprimir' onclick='salida("+item.id+","+item.numero_habitacion+","+item.id+")' class='btn  btn-block btn-warning'>\
-                <input  type="+button+" value='Solucionado' onclick='personas("+item.id+");' class='btn  btn-block btn-success'>\
+                <input  type="+s+" value='Solucionado' onclick='soluc("+item.id+");' class='btn  btn-block btn-success'>\
                 <div class='icon'>\
                 <i class='fa fa-hotel'></i>\
                 </div>\

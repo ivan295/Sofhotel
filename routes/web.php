@@ -172,6 +172,7 @@ Route::get('/iniciarestado', function () {
 Route::get('/estado/{t}', 'estadoController@add');
 Route::get('/consult_estado','estadoController@mostrar');
 Route::get('/modificar_estado/{t}/{ip}', 'estadoHabitacionController@mod');
+Route::get('/modificar_contador/{t}/{ip}', 'estadoHabitacionController@contador_personas');
 Route::get('modestados', 'estadoController@actualizar');
 Route::get('direccion_ip/{ip}','estadoHabitacionController@addip');
 Route::post('alquiler','alquilerController@store');
